@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class AnlægLeaf implements Produkt {
+public class AnlægLeaf extends Produkt{
 	
 	private double pris; 
 	private boolean afleveret; 

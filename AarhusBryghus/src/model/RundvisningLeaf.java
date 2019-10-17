@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 
-public class RundvisningLeaf {
+public class RundvisningLeaf extends Produkt {
 	
 	private LocalDate dato; 
 	private LocalTime tid; 

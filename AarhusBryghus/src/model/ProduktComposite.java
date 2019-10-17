@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class ProduktComposite {
+public class ProduktComposite extends Produkt {
 
 	private double samletPris; 
 	private LocalDate dato; 
