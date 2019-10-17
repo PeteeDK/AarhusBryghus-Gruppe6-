@@ -1,5 +1,5 @@
 package model;
 
-public class Produkt {
+public interface Produkt {
 
 }
