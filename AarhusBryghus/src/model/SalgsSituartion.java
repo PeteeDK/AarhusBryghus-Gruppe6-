@@ -11,4 +11,13 @@ public class SalgsSituartion {
 	private double procentvisRabat; 
 	private String kunde; 
 
+	public void aftaltPris() {
+		
+	}
+	
+	public void skiftMellemFredagsbarOgButik() {
+		
+	}
+	
+	
 }

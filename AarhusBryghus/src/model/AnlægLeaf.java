@@ -7,6 +7,13 @@ public class AnlægLeaf {
 	private double brugtFustageMængde; 
 	private double brugtKulsyreMængde; 
 	
+	public void fustageAfleveret() {
+		
+	}
+	
+	public void beregnPris() {
+		
+	}
 	
 
 }
