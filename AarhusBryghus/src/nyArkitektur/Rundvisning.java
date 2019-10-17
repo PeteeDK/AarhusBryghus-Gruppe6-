@@ -17,6 +17,13 @@ public class Rundvisning {
 	private ArrayList<Kunde> kunder = new ArrayList<>();
 	
 	
+	public Rundvisning(double aftenPris, double dagsPris, double studierabat) {
+		this.studierabat = studierabat;
+		this.aftenPris = aftenPris;
+		this.dagsPris = dagsPris;
+		tidspunkt = LocalTime.now();
+	}
+
 	
 	public double beregnPris() {
 		if(tidspunkt.isAfter(LocalTime.of(18, 00)) && tidspunkt.isBefore(LocalTime.of(22, 00))) {
@@ -80,7 +87,9 @@ public class Rundvisning {
 		this.studierabat = studierabat;
 	}
 	
-	
+	public void addKunde(Kunde k) {
+		kunder.add(k);
+	}
 	
 	
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Anlæg {
 
+	private String produktNavn;
 	private double pris;
 	private boolean afleveret;
 	private double brugtFustagemængde;
@@ -12,7 +13,9 @@ public class Anlæg {
 	private ArrayList<Produktgruppe> tilbehør = new ArrayList<>();
 	
 	
-	public Anlæg(boolean afleveret, double brugtFustagemængde, double brugtKulsyremængde, int antal) {
+	public Anlæg(String produktNavn, double pris, boolean afleveret, double brugtFustagemængde, double brugtKulsyremængde, int antal) {
+		this.produktNavn = produktNavn;
+		this.pris = pris;
 		this.afleveret = afleveret;
 		this.brugtFustagemængde = brugtFustagemængde;
 		this.brugtKulsyremængde = brugtKulsyremængde;
@@ -67,6 +70,10 @@ public class Anlæg {
 	}
 	public void setAntal(int antal) {
 		this.antal = antal;
+	}
+	
+	public void addProduktgruppe(Produktgruppe p) {
+		tilbehør.add(p);
 	}
 		
 	

@@ -35,4 +35,15 @@ public class Salg {
 	}
 	
 	
+	public void addProduktgruppe(Produktgruppe p) {
+		produktgruppeEnheder.add(p);
+	}
+	
+	public void addAnlægEnheder(Anlæg a) {
+		anlægEnheder.add(a);
+	}
+	
+	public void addRundvisning(Rundvisning r) {
+		rundvisninger.add(r);
+	}
 }
