@@ -1,4 +1,4 @@
-package kasseapperat;
+package model;
 
 public class AnlægLeaf {
 	

@@ -1,4 +1,4 @@
-package kasseapperat;
+package model;
 
 import java.time.LocalDate;
 
