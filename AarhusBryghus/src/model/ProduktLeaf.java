@@ -10,5 +10,9 @@ public class ProduktLeaf {
 	private double ølStørrelse; 
 	private double pant; 
 	private String pakketIndhold;
+	
+	public void beregnPris() {
+		
+	}
 
 }

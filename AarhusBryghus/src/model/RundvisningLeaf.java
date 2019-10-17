@@ -13,5 +13,22 @@ public class RundvisningLeaf {
 	private double aftenPris; 
 	private double dagsPris; 
 	private int studieRabat; 
-
+	
+	
+	public void bestiltTidspunkt() {
+		
+	}
+	
+	public void påbegyndtSalg() {
+		
+	}
+	
+	public void betaltRundvisning() {
+	
+	}
+	
+	public void beregnPris() {
+		
+	}
+	
 }
