@@ -2,6 +2,8 @@ package nyArkitektur;
 
 import java.util.ArrayList;
 
+import kasseret.Produktgruppe;
+
 public class Salg {
 
 	private int id;

@@ -2,6 +2,8 @@ package nyArkitektur;
 
 import java.util.ArrayList;
 
+import kasseret.Produktgruppe;
+
 public class Anlæg {
 
 	private String produktNavn;
@@ -9,17 +11,15 @@ public class Anlæg {
 	private boolean afleveret;
 	private double brugtFustagemængde;
 	private double brugtKulsyremængde;
-	private int antal;
 	private ArrayList<Produktgruppe> tilbehør = new ArrayList<>();
 	
 	
-	public Anlæg(String produktNavn, double pris, boolean afleveret, double brugtFustagemængde, double brugtKulsyremængde, int antal) {
+	public Anlæg(String produktNavn, double pris, boolean afleveret, double brugtFustagemængde, double brugtKulsyremængde) {
 		this.produktNavn = produktNavn;
 		this.pris = pris;
 		this.afleveret = afleveret;
 		this.brugtFustagemængde = brugtFustagemængde;
 		this.brugtKulsyremængde = brugtKulsyremængde;
-		this.antal = antal;
 	}
 
 
@@ -64,12 +64,6 @@ public class Anlæg {
 	}
 	public void setBrugtKulsyremængde(double brugtKulsyremængde) {
 		this.brugtKulsyremængde = brugtKulsyremængde;
-	}
-	public int getAntal() {
-		return antal;
-	}
-	public void setAntal(int antal) {
-		this.antal = antal;
 	}
 	
 	public void addProduktgruppe(Produktgruppe p) {

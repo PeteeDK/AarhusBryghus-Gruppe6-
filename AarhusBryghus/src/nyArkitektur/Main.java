@@ -1,5 +1,7 @@
 package nyArkitektur;
 
+import kasseret.Produktgruppe;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -14,12 +16,12 @@ public class Main {
 		Produktgruppe p3 = new Produktgruppe("fustage","klosterbryg",20,0,775,200,0,"");
 		
 		//registrer Anlæg
-		//boolean afleveret, double brugtFustagemængde, double brugtKulsyremængde, int antal, pris
-		Anlæg a1 = new Anlæg("1-hane",250,true, 100, 0, 1);
+		//String produktNavn, double pris, boolean afleveret, double brugtFustagemængde, double brugtKulsyremængde
+		Anlæg a1 = new Anlæg("1-hane",250,true, 100, 0);
 		a1.addProduktgruppe(p3);
 		System.out.println(a1.beregnPris());
 
-		Anlæg a2 = new Anlæg("1-hane",250,false, 100, 0, 1);
+		Anlæg a2 = new Anlæg("1-hane",250,false, 100, 0);
 		System.out.println(a2.beregnPris());
 		
 		//registrer Rundvisning

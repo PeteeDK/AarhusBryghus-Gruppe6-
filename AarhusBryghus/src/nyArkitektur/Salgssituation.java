@@ -5,10 +5,10 @@ import java.util.Calendar;
 
 public class Salgssituation {
 
-	private LocalDate dato;
 	private double aftaltPris;
 	private int procentviseRabat;
 	private String kunde;
+	private LocalDate dato;
 	
 	public Salgssituation() {
 		this.dato = LocalDate.now();

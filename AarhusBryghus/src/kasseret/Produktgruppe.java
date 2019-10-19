@@ -1,4 +1,4 @@
-package nyArkitektur;
+package kasseret;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
