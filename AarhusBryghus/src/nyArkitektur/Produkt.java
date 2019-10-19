@@ -19,11 +19,13 @@ public class Produkt {
 		this.ugedag = LocalDate.now().getDayOfWeek();
 	}
 	
+	//for produkter med enten fredagsbarpriser eller butikspriser. Om man kan vælge produkterne den
+	//pågældende dag, må evt. placeres under salgssituation
 	public Produkt(String kategori, String produktNavn, double pris) {
 		this.kategori = kategori;
 		this.produktNavn = produktNavn;
-		setPris(pris);
 		this.ugedag = LocalDate.now().getDayOfWeek();
+		setPris(pris);
 	}
 	
 
@@ -55,4 +57,20 @@ public class Produkt {
 		return butiksPris;
 	}
 
+	public String getKategori() {
+		return kategori;
+	}
+
+	public String getProduktNavn() {
+		return produktNavn;
+	}
+
+	@Override
+	public String toString() {
+		return "Produkt [kategori=" + kategori + ", produktNavn=" + produktNavn + ", ugedag=" + ugedag
+				+ ", fredagsbarPris=" + fredagsbarPris + ", butiksPris=" + butiksPris + "]";
+	}
+
+	
+	
 }

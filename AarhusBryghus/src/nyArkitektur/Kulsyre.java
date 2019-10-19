@@ -8,5 +8,10 @@ public class Kulsyre extends Produkt {
 		super(kategori, produktNavn, fredagsbarPris, butiksPris);
 		this.mængde = mængde;
 	}
+
+	public double getMængde() {
+		return mængde;
+	}
+	
 	
 }
