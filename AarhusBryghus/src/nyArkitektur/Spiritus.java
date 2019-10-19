@@ -4,9 +4,26 @@ import java.time.DayOfWeek;
 
 public class Spiritus extends Produkt {
 
-	public Spiritus(String kategori, String produktNavn, double fredagsbarPris, double butiksPris) {
-		super(kategori, produktNavn, fredagsbarPris, butiksPris);
-		// TODO Auto-generated constructor stub
+	private double butiksPris;
+	private double fredagsbarPris;
+	
+	public Spiritus(String kategori, String produktNavn, double butiksPris, double fredagsbarPris) {
+		super(kategori, produktNavn);
+		this.butiksPris = butiksPris;
+		this.fredagsbarPris = fredagsbarPris;
 	}
+
+	@Override
+	public double getPris() {
+		if(getUgedag().equals(DayOfWeek.FRIDAY)) {
+			return fredagsbarPris;
+		}else {
+			return butiksPris;
+		}
+	}
+	
+	
+	
+	
 	
 }

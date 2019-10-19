@@ -23,7 +23,12 @@ public class Salg {
 		}
 		return samletPris;
 	} 
-	 
+	
+	
+	
+	public double getSamletPris() {
+		return samletPris;
+	}
 	
 	public void addProdukt(Produkt p) {
 		produkter.add(p);

@@ -26,7 +26,7 @@ public class Produktgruppe {
 		this.pant = pant;
 		this.pakkeindhold = pakkeindhold.trim();
 		this.ugedag = LocalDate.now().getDayOfWeek();
-	}
+	} 
 
 	//nogle af produkterne har kun en enkelt pris. Muligvis kan man gruppere dem efter og evt. bruge adapter pattern
 	public double beregnPris() {

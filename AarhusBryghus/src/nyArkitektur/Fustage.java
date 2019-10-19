@@ -2,23 +2,43 @@ package nyArkitektur;
 
 public class Fustage extends Produkt {
 
-	private double mængde;
+	private double liter;
+	private double butiksPris;
+	private double pant;
 	
-	public Fustage(String kategori, String produktNavn, double pris, double mængde) {
-		super(kategori, produktNavn, pris);
-		// TODO Auto-generated constructor stub
-		this.mængde = mængde;
-	}
-	
-	
-	
-	
-	public double getPrisPrLiter() {
-		return (getButiksPris()/getMængde());
+	//fustage har egentlig ikke et produktNavn, men der taget højde for det ved at angive produktnavn med
+	//" ",  når varen registreres
+	public Fustage(String kategori, String produktNavn, double liter, double butiksPris, double pant) {
+		super(kategori, produktNavn);
+		this.liter = liter;
+		this.butiksPris = butiksPris;
+		this.pant = pant;
 	}
 
-	public double getMængde() {
-		return mængde;
+	
+	public double getLiter() {
+		return liter;
+	}
+
+	public void setLiter(double liter) {
+		this.liter = liter;
+	}
+
+	public double getButiksPris() {
+		return butiksPris;
+	}
+
+	public double getPant() {
+		return pant;
+	}
+
+	public double getPrisPrLiter() {
+		return (getPris()/getLiter());
+	}
+
+	@Override
+	public double getPris() {
+		return butiksPris;
 	}
 	
 }

@@ -4,50 +4,74 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public class Rundvisning {
+public class Rundvisning extends Produkt {
 
-	private double samletPris;	
 	private LocalDate dato;
 	private LocalTime tidspunkt;
 	private double aftenPris;
 	private double dagsPris;
-	private boolean påbegyndtSalg;
 	private boolean betalt;
-	private double studierabat;		//Hvis kunde er studerende: Kunde skal være en klasse
+	//Hvis kunde er studerende: Kunde skal være en klasse. Det antages at studierabat er en procentsats
+	//af det hele beløb for prisen pr. person
+	private double studierabat;		
 	private ArrayList<Kunde> kunder = new ArrayList<>();
+	private double rundvisningsPris;
 	
 	
-	public Rundvisning(double aftenPris, double dagsPris, double studierabat) {
-		this.studierabat = studierabat;
+	public Rundvisning(String kategori, String produktNavn, LocalDate dato, LocalTime tidspunkt, double aftenPris,
+			double dagsPris, double studierabat) {
+		super(kategori, produktNavn);
+		this.dato = dato;	//TODO Skal det være muligt at booke rundvisning i weekenden og juleaften
+		validerTidspunkt(tidspunkt);
 		this.aftenPris = aftenPris;
 		this.dagsPris = dagsPris;
-		tidspunkt = LocalTime.now();
+		this.studierabat = studierabat;
 	}
 
+	//Det antages at der kun kan bookes rundvisning i tidsrummet: 18-22 og 8-15
+	public void validerTidspunkt(LocalTime tidspunkt) {
+		if((tidspunkt.isAfter(LocalTime.of(8, 00)) && tidspunkt.isBefore(LocalTime.of(15, 00))) ||
+			(tidspunkt.isAfter(LocalTime.of(18, 00)) && tidspunkt.isBefore(LocalTime.of(22, 00)))){
+			this.tidspunkt = tidspunkt;
+		}else {
+			this.tidspunkt = LocalTime.of(00, 00);
+		}
+	}
+	
+	public void setBetalt(boolean betalt) {
+		if(tidspunkt!=LocalTime.of(00, 00)) {
+			this.betalt = betalt;
+		}
+	}
+	
 	
 	public double beregnPris() {
-		if(tidspunkt.isAfter(LocalTime.of(18, 00)) && tidspunkt.isBefore(LocalTime.of(22, 00))) {
+		if(tidspunkt.isAfter(LocalTime.of(18, 00)) && tidspunkt.isBefore(LocalTime.of(22, 00)) && betalt) {
 			for(Kunde k : kunder) {
 				if(k.isStuderende()) {
-					samletPris += kunder.size() * aftenPris * studierabat; 
+					rundvisningsPris += aftenPris * studierabat; 
 				}
 				else {
-					samletPris += kunder.size() * aftenPris;
+					rundvisningsPris += aftenPris;
 				}
 			}
 		}
-		else if(tidspunkt.isAfter(LocalTime.of(8, 00)) && tidspunkt.isBefore(LocalTime.of(15, 00))) {
+		else if(tidspunkt.isAfter(LocalTime.of(8, 00)) && tidspunkt.isBefore(LocalTime.of(15, 00)) && betalt) {
 			for(Kunde k : kunder) {
 				if(k.isStuderende()) {
-					samletPris += kunder.size() * aftenPris * studierabat; 
+					rundvisningsPris += dagsPris * studierabat; 
 				}
 				else {
-					samletPris += kunder.size() * aftenPris;
+					rundvisningsPris += dagsPris;
 				}
 			}
 		}
-		return samletPris;
-		
+		return rundvisningsPris;
+	}
+	
+	@Override
+	public double getPris() {
+		return rundvisningsPris;
 	}
 	
 	public LocalDate getDato() {
@@ -68,17 +92,8 @@ public class Rundvisning {
 	public void setDagsPris(double dagsPris) {
 		this.dagsPris = dagsPris;
 	}
-	public boolean isPåbegyndSalg() {
-		return påbegyndtSalg;
-	}
-	public void setPåbegyndSalg(boolean påbegyndSalg) {
-		this.påbegyndtSalg = påbegyndSalg;
-	}
 	public boolean isBetalt() {
 		return betalt;
-	}
-	public void setBetalt(boolean betalt) {
-		this.betalt = betalt;
 	}
 	public double getStudierabat() {
 		return studierabat;
@@ -88,7 +103,9 @@ public class Rundvisning {
 	}
 	
 	public void addKunde(Kunde k) {
-		kunder.add(k);
+		if(!kunder.contains(k)) {
+			kunder.add(k);
+		}
 	}
 	
 	
