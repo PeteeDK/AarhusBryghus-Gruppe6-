@@ -10,9 +10,15 @@ public class Fustage extends Produkt {
 		this.mængde = mængde;
 	}
 	
-	@Override
-	public double getPris() {
-		return getButiksPris();
+	
+	
+	
+	public double getPrisPrLiter() {
+		return (getButiksPris()/getMængde());
+	}
+
+	public double getMængde() {
+		return mængde;
 	}
 	
 }
