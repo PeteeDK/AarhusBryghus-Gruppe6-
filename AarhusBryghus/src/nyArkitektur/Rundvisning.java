@@ -107,6 +107,23 @@ public class Rundvisning extends Produkt {
 			kunder.add(k);
 		}
 	}
+
+	public LocalTime getTidspunkt() {
+		return tidspunkt;
+	}
+
+	public void setTidspunkt(LocalTime tidspunkt) {
+		this.tidspunkt = tidspunkt;
+	}
+
+	public double getRundvisningsPris() {
+		return rundvisningsPris;
+	}
+
+	public void setRundvisningsPris(double rundvisningsPris) {
+		this.rundvisningsPris = rundvisningsPris;
+	}
+	
 	
 	
 }

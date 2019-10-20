@@ -19,5 +19,19 @@ public class Malt extends Produkt {
 	public double getKg() {
 		return kg;
 	}
+
+	public double getButiksPris() {
+		return butiksPris;
+	}
+
+	public void setButiksPris(double butiksPris) {
+		this.butiksPris = butiksPris;
+	}
+
+	public void setKg(double kg) {
+		this.kg = kg;
+	}
+	
+	
 	
 }

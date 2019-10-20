@@ -1,5 +1,6 @@
 package nyArkitektur;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Calendar;
 
@@ -9,14 +10,27 @@ public class Salgssituation {
 	private int procentviseRabat;
 	private String kunde;
 	private LocalDate dato;
+	private static boolean fredagsbarMode;
 	
 	public Salgssituation() {
-		this.dato = LocalDate.now();
+		dato = LocalDate.now();
+		fredagsbarModeAuto();		//TODO hvordan kan systemet selv holde øje med at det skifter fra torsdag til fredag
 	}
-
 	
 	
 
+	private void fredagsbarModeAuto() {
+		if(dato.getDayOfWeek().equals(DayOfWeek.FRIDAY)) {
+			fredagsbarMode = true;
+		}else{
+			fredagsbarMode = false;
+		}
+	}
+	
+	public void setFredagsbarMode(boolean fredagsbarMode) {
+		this.fredagsbarMode = fredagsbarMode;
+	}
+	
 	public LocalDate getDato() {
 		return dato;
 	}
@@ -49,12 +63,11 @@ public class Salgssituation {
 		this.kunde = kunde;
 	}
 
-	//	public void method() {
-//
-//		LocalDate today = this.dato.now();
-//		
-//		today.getDayOfWeek().equals(Calendar.FRIDAY);
-//		
-//	}
+	//TODO Dette hack gør det muligt for subklasserne under Produkt at tilgå isFredagsbarMode uden en
+	//association. Vi ser om vi løber ind i problemer eller om Peter vender tomlen nedad
+	public static boolean isFredagsbarMode() {
+		return fredagsbarMode;
+	}
+
 	
 }

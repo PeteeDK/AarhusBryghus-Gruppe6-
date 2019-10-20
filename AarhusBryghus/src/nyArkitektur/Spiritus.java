@@ -15,11 +15,32 @@ public class Spiritus extends Produkt {
 
 	@Override
 	public double getPris() {
-		if(getUgedag().equals(DayOfWeek.FRIDAY)) {
+		if(Salgssituation.isFredagsbarMode()) {
 			return fredagsbarPris;
 		}else {
 			return butiksPris;
 		}
+	}
+
+	public double getButiksPris() {
+		return butiksPris;
+	}
+
+	public void setButiksPris(double butiksPris) {
+		this.butiksPris = butiksPris;
+	}
+
+	public double getFredagsbarPris() {
+		return fredagsbarPris;
+	}
+
+	public void setFredagsbarPris(double fredagsbarPris) {
+		this.fredagsbarPris = fredagsbarPris;
+	}
+
+	@Override
+	public String toString() {
+		return "Spiritus [butiksPris=" + butiksPris + ", fredagsbarPris=" + fredagsbarPris + "]";
 	}
 	
 	

@@ -7,21 +7,14 @@ public abstract class Produkt {
 
 	private String kategori;
 	private String produktNavn;
-	private DayOfWeek ugedag;
 	
 	public Produkt(String kategori, String produktNavn) {
-		this.kategori = kategori;
-		this.produktNavn = produktNavn;
-		this.ugedag = LocalDate.now().getDayOfWeek();
+		this.kategori = kategori.toLowerCase();
+		this.produktNavn = produktNavn.toLowerCase();
 	}
-
-	
 	
 	public abstract double getPris();
 
-	public DayOfWeek getUgedag() {
-		return ugedag;
-	}
 
 	public String getKategori() {
 		return kategori;
@@ -30,6 +23,14 @@ public abstract class Produkt {
 	public String getProduktNavn() {
 		return produktNavn;
 	}
-	
+
+	public void setKategori(String kategori) {
+		this.kategori = kategori;
+	}
+
+	public void setProduktNavn(String produktNavn) {
+		this.produktNavn = produktNavn;
+	}
+
 	
 }

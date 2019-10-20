@@ -13,5 +13,14 @@ public class Glas extends Produkt {
 	public double getPris() {
 		return butiksPris;
 	}
+
+	public double getButiksPris() {
+		return butiksPris;
+	}
+
+	public void setButiksPris(double butiksPris) {
+		this.butiksPris = butiksPris;
+	}
+	
 	
 }

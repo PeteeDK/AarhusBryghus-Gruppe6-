@@ -20,11 +20,44 @@ public class Sampakninger extends Produkt {
 
 	@Override
 	public double getPris() {
-		if(getUgedag().equals(DayOfWeek.FRIDAY)) {
+		if(Salgssituation.isFredagsbarMode()) {
 			return fredagsbarPris;
 		}else {
 			return butiksPris;
 		}
 	}
+
+	public int getAntalØl() {
+		return antalØl;
+	}
+
+	public void setAntalØl(int antalØl) {
+		this.antalØl = antalØl;
+	}
+
+	public int getAntalGlas() {
+		return antalGlas;
+	}
+
+	public void setAntalGlas(int antalGlas) {
+		this.antalGlas = antalGlas;
+	}
+
+	public double getFredagsbarPris() {
+		return fredagsbarPris;
+	}
+
+	public void setFredagsbarPris(double fredagsbarPris) {
+		this.fredagsbarPris = fredagsbarPris;
+	}
+
+	public double getButiksPris() {
+		return butiksPris;
+	}
+
+	public void setButiksPris(double butiksPris) {
+		this.butiksPris = butiksPris;
+	}
+	
 	
 }

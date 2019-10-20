@@ -65,6 +65,10 @@ public class Anlæg extends Produkt {
 	public void addProdukt(Produkt p) {
 		tilbehør.add(p);
 	}
+
+	public void setPris(double pris) {
+		this.pris = pris;
+	}
 		
 	
 }

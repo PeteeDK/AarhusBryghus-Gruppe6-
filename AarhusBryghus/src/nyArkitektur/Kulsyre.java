@@ -20,7 +20,7 @@ public class Kulsyre extends Produkt {
 
 	@Override
 	public double getPris() {
-		if(getUgedag().equals(DayOfWeek.FRIDAY)) {
+		if(Salgssituation.isFredagsbarMode()) {
 			return fredagsbarPris;
 		}else {
 			return butiksPris;
@@ -34,5 +34,34 @@ public class Kulsyre extends Produkt {
 	public double getKg() {
 		return kg;
 	}
-		
+
+	public double getFredagsbarPris() {
+		return fredagsbarPris;
+	}
+
+	public void setFredagsbarPris(double fredagsbarPris) {
+		this.fredagsbarPris = fredagsbarPris;
+	}
+
+	public double getButiksPris() {
+		return butiksPris;
+	}
+
+	public void setButiksPris(double butiksPris) {
+		this.butiksPris = butiksPris;
+	}
+
+	public double getPant() {
+		return pant;
+	}
+
+	public void setPant(double pant) {
+		this.pant = pant;
+	}
+
+	public void setKg(double kg) {
+		this.kg = kg;
+	}
+	
+	
 }

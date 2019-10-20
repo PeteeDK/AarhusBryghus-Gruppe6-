@@ -15,11 +15,28 @@ public class Beklædning extends Produkt {
 
 	@Override
 	public double getPris() {
-		if(getUgedag().equals(DayOfWeek.FRIDAY)) {
+		if(Salgssituation.isFredagsbarMode()) {
 			return fredagsbarPris;
 		}else {
 			return butiksPris;
 		}
 	}
+
+	public double getFredagsbarPris() {
+		return fredagsbarPris;
+	}
+
+	public void setFredagsbarPris(double fredagsbarPris) {
+		this.fredagsbarPris = fredagsbarPris;
+	}
+
+	public double getButiksPris() {
+		return butiksPris;
+	}
+
+	public void setButiksPris(double butiksPris) {
+		this.butiksPris = butiksPris;
+	}
+	
 	
 }

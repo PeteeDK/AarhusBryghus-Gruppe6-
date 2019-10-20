@@ -3,7 +3,7 @@ package nyArkitektur;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Main {
+public class TestBeregnSamletPris {
 
 	public static void main(String[] args) {
 
@@ -83,7 +83,13 @@ public class Main {
 //		
 //		System.out.println(s3.getSamletPris());
 //		
-//		
+
+//		Salg s = new Salg(3);
+//		//String kategori, String produktNavn, double fredagsbarPris, double butiksPris
+//		Produkt p1 = new Flaske("flaske","klosterbryg",50,36);
+//		s.addProdukt(p1);
+	
+		
 		
 	}
 
