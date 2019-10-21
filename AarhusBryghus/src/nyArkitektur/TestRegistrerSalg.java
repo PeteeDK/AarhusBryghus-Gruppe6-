@@ -33,8 +33,7 @@ public class TestRegistrerSalg {
 		s.beregnSamletPris();
 		
 		//Testen viser fejl, da den regner fadøl med. I controlleren 
-		System.out.println(s.getSamletPris());
-		
+		System.out.println(s.getSamletPris() + " kr. \n" + s.getBetalingsform().registrerBetaling());
 	
 	}
 }

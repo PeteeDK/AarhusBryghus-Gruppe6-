@@ -419,6 +419,43 @@ public class Controller {
 
       
       
+    //-------Klippekort---------------------------------------------------
+      
+      
+  	//create
+  	public static Produkt createKlippekort(String kategori, String produktNavn, double fredagsbarPris, double butiksPris) {
+  		if(Salgssituation.isFredagsbarMode()) {
+  			return null;
+  		}else {
+  	  		Produkt klippekort = new Klippekort(kategori, produktNavn, fredagsbarPris, butiksPris);
+  	  		Storage.addProdukt(klippekort);
+  	  		return klippekort;
+  		}
+  	}
+  	
+  	//update
+      public static void updateKlippekort(Klippekort klippekort, String kategori, String produktNavn, double fredagsbarPris, double butiksPris) {
+    	  klippekort.setKategori(kategori);
+    	  klippekort.setProduktNavn(produktNavn);
+    	  klippekort.setFredagsbarPris(fredagsbarPris);
+    	  klippekort.setButiksPris(butiksPris);
+      }
+  	
+  	//get
+      public static ArrayList<Produkt> getKlippekortEnheder() {
+      	ArrayList<Produkt> klippekortEnheder = new ArrayList<>();
+      	for(Produkt p : Storage.getProdukter()) {
+      		if(p.getKategori().equals("klippekort")) {
+      			klippekortEnheder.add(p);
+      		}
+      	}
+          return klippekortEnheder;
+      }
+
+
+      
+      
+      
       /**
        * Registrer og hent alle salgsenheder
        */
@@ -426,6 +463,7 @@ public class Controller {
       //create
       public static Salg createSalg(Salgssituation salgssituation, Betalingsform betalingsform) {
     	Salg salg = new Salg(salgssituation, betalingsform);
+    	Storage.addSalg(salg);
     	return salg;
       }
           	

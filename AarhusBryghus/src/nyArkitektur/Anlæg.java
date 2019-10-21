@@ -11,6 +11,7 @@ public class Anlæg extends Produkt {
 	private double brugtKulsyremængde;
 	private ArrayList<Produkt> tilbehør = new ArrayList<>();
 	private double pris;
+	private String status;
 	
 	public Anlæg(String kategori, String produktNavn, boolean afleveret, double brugtFustagemængde,
 			double brugtKulsyremængde, double anlægsPris) {
@@ -19,6 +20,7 @@ public class Anlæg extends Produkt {
 		this.brugtFustagemængde = brugtFustagemængde;
 		this.brugtKulsyremængde = brugtKulsyremængde;
 		this.pris = anlægsPris;
+		status = "anlæg er udlejet";
 	}
 
 	public double beregnPris() {
@@ -26,10 +28,10 @@ public class Anlæg extends Produkt {
 			for(Produkt p : tilbehør) {
 				if(p.getKategori().equals("fustage")) {
 					pris += brugtFustagemængde * ((Fustage)p).getPrisPrLiter();
-					System.out.println("Anlæg:" + pris);
+					System.out.println("[Anlæg] anlæg + fustage:" + pris);
 				}else if(p.getKategori().equals("kulsyre")) {
 					pris += brugtKulsyremængde * ((Kulsyre)p).getPrisPrKg();
-					System.out.println("Anlæg:" + pris);
+					System.out.println("[Anlæg] anlæg + fustage + kulsyre (total):" + pris);
 				}
 			}
 		}else{
@@ -68,6 +70,19 @@ public class Anlæg extends Produkt {
 
 	public void setPris(double pris) {
 		this.pris = pris;
+	}
+
+	public String getStatus() {
+		if(afleveret) {
+			status = "anlæg er afleveret";
+		}
+		return status;
+	}
+
+	@Override
+	public String toString() {
+		return "Anlæg [afleveret=" + afleveret + ", brugtFustagemængde=" + brugtFustagemængde + ", brugtKulsyremængde="
+				+ brugtKulsyremængde + ", tilbehør=" + tilbehør + ", pris=" + pris + ", status=" + status + "]";
 	}
 		
 	

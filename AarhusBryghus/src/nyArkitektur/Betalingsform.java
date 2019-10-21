@@ -1,13 +1,13 @@
 package nyArkitektur;
 
-public class Betalingsform {
+public class Betalingsform implements IBetalingsform {
 
-	private Betalingsform betalingsform;
+	private IBetalingsform betalingsform;
 	
 	public Betalingsform() {
 	}
 	
-	public void setBetalingsform(Betalingsform betalingsform) {
+	public void setBetalingsform(IBetalingsform betalingsform) {
 		this.betalingsform = betalingsform;
 	}
 	

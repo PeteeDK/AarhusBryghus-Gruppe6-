@@ -59,5 +59,4 @@ public class Sampakninger extends Produkt {
 		this.butiksPris = butiksPris;
 	}
 	
-	
 }

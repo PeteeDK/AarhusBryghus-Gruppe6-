@@ -17,6 +17,11 @@ public class Kunde {
 	public boolean isStuderende() {
 		return studerende;
 	}
+
+	@Override
+	public String toString() {
+		return "Kunde [navn=" + navn + ", studerende=" + studerende + "]";
+	}
 	
 	
 }

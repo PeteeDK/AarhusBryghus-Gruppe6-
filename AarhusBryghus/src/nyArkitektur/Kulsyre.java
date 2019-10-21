@@ -63,5 +63,4 @@ public class Kulsyre extends Produkt {
 		this.kg = kg;
 	}
 	
-	
 }

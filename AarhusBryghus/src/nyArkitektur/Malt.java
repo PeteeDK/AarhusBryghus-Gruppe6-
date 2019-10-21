@@ -33,5 +33,4 @@ public class Malt extends Produkt {
 	}
 	
 	
-	
 }

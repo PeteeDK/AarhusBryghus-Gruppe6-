@@ -11,12 +11,12 @@ public class Salg {
 	private int id = 1;
 	private double samletPris;
 	private ArrayList<Produkt> produkter = new ArrayList<>();
-	private Betalingsform betalingsform;
+	private IBetalingsform betalingsform;
 	private Salgssituation salgssituation;
 	private LocalDate salgsdato;
 	private boolean godkendAftaltPris;
 	
-	public Salg(Salgssituation salgssituation, Betalingsform betalingsform) {
+	public Salg(Salgssituation salgssituation, IBetalingsform betalingsform) {
 		id += Controller.getSalgsEnheder().size();	//TODO Tjek om salgs-id stemmer
 		this.salgssituation = salgssituation;
 		this.betalingsform = betalingsform;
@@ -57,7 +57,7 @@ public class Salg {
 		produkter.add(p);
 	}
 
-	public Betalingsform getBetalingsform() {
+	public IBetalingsform getBetalingsform() {
 		return betalingsform;
 	}
 
@@ -71,6 +71,21 @@ public class Salg {
 
 	public void setSalgssituation(Salgssituation salgssituation) {
 		this.salgssituation = salgssituation;
+	}
+	
+	public LocalDate getSalgsdato() {
+		return salgsdato;
+	}
+
+	public void setSalgsdato(LocalDate salgsdato) {
+		this.salgsdato = salgsdato;
+	}
+
+	@Override
+	public String toString() {
+		return "Salg [id=" + id + ", samletPris=" + samletPris + ", produkter=" + produkter + ", betalingsform="
+				+ betalingsform + ", salgssituation=" + salgssituation + ", salgsdato=" + salgsdato
+				+ ", godkendAftaltPris=" + godkendAftaltPris + "]";
 	}
 	
 	
