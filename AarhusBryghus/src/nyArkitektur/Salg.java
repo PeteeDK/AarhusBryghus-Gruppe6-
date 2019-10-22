@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import controller.Controller;
-import kasseret.Produktgruppe;
 
 public class Salg {
 
