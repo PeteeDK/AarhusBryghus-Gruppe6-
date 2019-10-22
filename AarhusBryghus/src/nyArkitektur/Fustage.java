@@ -15,7 +15,7 @@ public class Fustage extends Produkt {
 		this.pant = pant;
 	}
 
-	
+	 
 	public double getLiter() {
 		return liter;
 	}

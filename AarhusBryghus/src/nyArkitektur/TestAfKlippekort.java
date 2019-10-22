@@ -32,6 +32,8 @@ public class TestAfKlippekort {
 		
 		System.out.println(s2.getBetalingsform().registrerBetaling());
 		
+		
+		
 	}
 
 }

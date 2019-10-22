@@ -116,7 +116,7 @@ public class TestBeregnSamletPris {
 				System.out.println(s.toString());
 			}
 		}
-		
+		 
 		
 	}
 

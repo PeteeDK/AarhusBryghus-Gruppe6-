@@ -32,7 +32,7 @@ public class Salg {
 		for(Produkt p : produkter) {
 			samletPris += p.getPris();
 		}
-		
+		 
 		if(salgssituation.getProcentviseRabat() > 0) {
 			samletPris = samletPris - (samletPris * salgssituation.getProcentviseRabat()/100.0);
 		}

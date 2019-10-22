@@ -12,7 +12,7 @@ public class Beklædning extends Produkt {
 		this.fredagsbarPris = fredagsbarPris;
 		this.butiksPris = butiksPris;
 	}
-
+ 
 	@Override
 	public double getPris() {
 		if(Salgssituation.isFredagsbarMode()) {

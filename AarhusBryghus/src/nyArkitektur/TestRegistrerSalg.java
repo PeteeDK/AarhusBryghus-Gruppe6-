@@ -4,7 +4,7 @@ import controller.Controller;
 
 public class TestRegistrerSalg {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) { 
 
 		//Salgssituation: procentvisRabat & aftaltPris
 		Salgssituation situation = new Salgssituation();
