@@ -15,7 +15,7 @@ public class TestRegistrerRundvisning {
 		//String kategori, String produktNavn, LocalDate dato, LocalTime tidspunkt, double aftenPris,
 		//double dagsPris, double studierabat
 		Rundvisning r1 = new Rundvisning("Rundvisnig","Rundvining 1", LocalDate.now(), LocalTime.of(12, 00), 100, 80, 0.9);
-		
+		 
 		r1.addKunde(k1);
 		r1.addKunde(k2);
 		

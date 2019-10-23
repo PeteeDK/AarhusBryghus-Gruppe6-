@@ -23,7 +23,7 @@ public class TestRegistrerSalg {
 		//Salg
 		Salg s = Controller.createSalg(situation, b);
 		
-		//Tilføj Produkter til Salg
+		//Tilføj Produkter til Salg 
 		s.setSalgssituation(situation);
 
 		s.addProdukt(flaske);

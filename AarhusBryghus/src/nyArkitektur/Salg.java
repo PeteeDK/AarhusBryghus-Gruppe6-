@@ -21,7 +21,7 @@ public class Salg {
 		this.betalingsform = betalingsform;
 		salgsdato = LocalDate.now();
 	}
-	
+	 
 	public double beregnSamletPris() {
 		
 		//remove all nulls

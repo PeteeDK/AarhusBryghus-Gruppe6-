@@ -306,7 +306,7 @@ public class Controller {
       		}
       	}
           return anlægsEnheder;
-      }
+      } 
 
       
     

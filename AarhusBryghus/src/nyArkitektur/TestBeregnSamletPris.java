@@ -8,7 +8,7 @@ import controller.Controller;
 
 public class TestBeregnSamletPris {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) { 
 
 		
 		//----Registrer anlæg-------------------------------------------------------------------
