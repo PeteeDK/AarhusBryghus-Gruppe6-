@@ -1,17 +1,15 @@
-package nyArkitektur;
+package model;
 
 public class Fustage extends Produkt {
 
 	private double liter;
-	private double butiksPris;
 	private double pant;
 	
 	//fustage har egentlig ikke et produktNavn, men der taget højde for det ved at angive produktnavn med
 	//" ",  når varen registreres
-	public Fustage(String kategori, String produktNavn, double liter, double butiksPris, double pant) {
+	public Fustage(String kategori, String produktNavn, double liter, double pant) {
 		super(kategori, produktNavn);
 		this.liter = liter;
-		this.butiksPris = butiksPris;
 		this.pant = pant;
 	}
 
@@ -24,26 +22,8 @@ public class Fustage extends Produkt {
 		this.liter = liter;
 	}
 
-	public double getButiksPris() {
-		return butiksPris;
-	}
-
 	public double getPant() {
 		return pant;
-	}
-
-	public double getPrisPrLiter() {
-		return (getPris()/getLiter());
-	}
-
-	@Override
-	public double getPris() {
-		return butiksPris;
-	}
-
-
-	public void setButiksPris(double butiksPris) {
-		this.butiksPris = butiksPris;
 	}
 
 

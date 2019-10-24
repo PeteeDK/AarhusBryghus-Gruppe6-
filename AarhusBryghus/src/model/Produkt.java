@@ -1,21 +1,17 @@
-package nyArkitektur;
+package model;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
+import java.util.ArrayList;
 
-public abstract class Produkt {
+public class Produkt {
 
 	private String kategori;
 	private String produktNavn;
 	
 	public Produkt(String kategori, String produktNavn) {
-		this.kategori = kategori.toLowerCase();
-		this.produktNavn = produktNavn.toLowerCase();
-	}
+		this.kategori = kategori.toLowerCase().trim();
+		this.produktNavn = produktNavn.toLowerCase().trim();
+	} 
 	
-	public abstract double getPris();
-
-
 	public String getKategori() {
 		return kategori;
 	}
@@ -32,5 +28,11 @@ public abstract class Produkt {
 		this.produktNavn = produktNavn;
 	}
 
+	@Override
+	public String toString() {
+		return "Produkt [kategori=" + kategori + ", produktNavn=" + produktNavn + "]";
+	}
+
+	
 	
 }

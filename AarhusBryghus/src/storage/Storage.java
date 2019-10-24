@@ -2,8 +2,8 @@ package storage;
 
 import java.util.ArrayList;
 
-import nyArkitektur.Produkt;
-import nyArkitektur.Salg;
+import model.*;
+import model.rabat.*;
 
 public class Storage {
 
@@ -11,6 +11,8 @@ public class Storage {
 	//TODO Er det en god idé at opbevare alle produktkategorierne i én liste
 	private static ArrayList<Produkt> produkter = new ArrayList<>();
 	private static ArrayList<Salg> salgsEnheder = new ArrayList<>();
+	private static ArrayList<PrisListe> prislister = new ArrayList<>();
+	private static ArrayList<Rabat> rabatter = new ArrayList<>();
 
 	
 	// -------Produkt---------------------------------------------
@@ -42,5 +44,34 @@ public class Storage {
 		salgsEnheder.remove(salg);
 	}
 
+
+	// -------PrisListe---------------------------------------------
+
+	public static ArrayList<PrisListe> getPrislister() {
+		return new ArrayList<PrisListe>(prislister);
+	}
+
+	public static void addPrisliste(PrisListe prisliste) {
+		prislister.add(prisliste);
+	}
+
+	public static void removePrisliste(PrisListe prisliste) {
+		prislister.remove(prisliste);
+	}
+
 	
+	// -------ProcentvisRabat---------------------------------------------
+
+	public static ArrayList<Rabat> getRabatter() {
+		return new ArrayList<Rabat>(rabatter);
+	}
+
+	public static void addRabat(Rabat rabat) {
+		rabatter.add(rabat);
+	}
+
+	public static void removeRabat(Rabat rabat) {
+		rabatter.remove(rabatter);
+	}
+
 }
