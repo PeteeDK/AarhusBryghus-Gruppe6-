@@ -1,4 +1,4 @@
-package nyArkitektur;
+package model;
 
 public class Kunde {
 

@@ -1,4 +1,4 @@
-package nyArkitektur;
+package model.betalingsform;
 
 public class Dankort extends Betalingsform {
 

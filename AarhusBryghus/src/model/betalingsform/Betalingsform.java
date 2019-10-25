@@ -1,4 +1,4 @@
-package nyArkitektur;
+package model.betalingsform;
 
 public class Betalingsform implements IBetalingsform {
 
@@ -15,4 +15,4 @@ public class Betalingsform implements IBetalingsform {
 		return betalingsform.registrerBetaling();
 	}
 	
-}
+} 
