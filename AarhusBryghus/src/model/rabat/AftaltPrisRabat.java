@@ -10,7 +10,10 @@ public class AftaltPrisRabat extends Rabat {
 	
 	@Override
 	public double tildelRabat(double pris) {
-		return pris - this.fratrukketPris;
+		if(pris < fratrukketPris) {
+			throw new IllegalArgumentException("Fratrukket pris kan ikke overstige prisen på bestillingen");
+		}
+		return pris - fratrukketPris;
 	}
 
 	

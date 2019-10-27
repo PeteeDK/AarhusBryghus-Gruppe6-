@@ -26,8 +26,8 @@ public class Salg {
 		for(ProduktLinje pl : produktLinjer) {
 			samletPris += pl.getPris();
 		}
-		
-		return samletPris;
+		//display only two decimals
+		return Math.round(samletPris * 100.0) / 100.0;
 	} 
 	
     public double getPris() {
@@ -59,7 +59,7 @@ public class Salg {
 
 	public void setBetalingsform(Betalingsform betalingsform) {
 		if(betalingsform == null) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Betalingsform kan ikke være null");
 		}
 		this.betalingsform = betalingsform;
 	}
@@ -74,7 +74,7 @@ public class Salg {
 	
 	public ProduktLinje createProduktLinje(Pris pris, int antal) {
 		if(pris == null || antal < 0) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("prisen kan ikke være null eller antallet kan ikke være negativ");
 		}
 		ProduktLinje produktLinje = new ProduktLinje(pris, antal);
 		produktLinjer.add(produktLinje);
@@ -83,7 +83,7 @@ public class Salg {
 
 	public void addProduktLinje(ProduktLinje produktlinje) {
 		if(produktlinje == null) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Produktlinje kan ikke være null");
 		}
 		if(!produktLinjer.contains(produktlinje)) {
 			produktLinjer.add(produktlinje);
@@ -92,7 +92,7 @@ public class Salg {
 
 	public void removeProduktLinje(ProduktLinje produktlinje) {
 		if(produktlinje == null) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Produktlinje kan ikke være null");
 		}
 		if(produktLinjer.contains(produktlinje)) {
 			produktLinjer.remove(produktlinje);

@@ -61,7 +61,7 @@ public class Klippekort extends Produkt implements IBetalingsform {
 
 	public void setAntalKlip(int antalKlip) {
 		if(antalKlip < 0 && antalKlip > 4) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Antal klip kan ikke være negativ eller overstige 4");
 		}
 		this.antalKlip = antalKlip;
 	}

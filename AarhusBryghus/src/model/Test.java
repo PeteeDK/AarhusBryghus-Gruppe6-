@@ -70,8 +70,11 @@ public class Test {
 		Salg s1 = Controller.createSalg();
 		ProduktLinje produktlinje1 = s1.createProduktLinje(pris1, 1);
 		
+		//Tilføj til salget
+		s1.addProduktLinje(produktlinje1);
+		
 		//beregn prisen i produktlinje - 250 kr.
-		System.out.println("\n1 anlæg uden tilbehør:\n"+produktlinje1.getPris());
+		System.out.println("\n1 anlæg uden tilbehør:\n"+s1.getPris());
 
 		
 		//2.del - beregn pris af anlæg med tilbehør uden forbrug (beregning af pant)
@@ -97,8 +100,11 @@ public class Test {
 		Salg s2 = Controller.createSalg();
 		ProduktLinje produktlinje2 = s2.createProduktLinje(pris1, 1);
 		
+		//tilføj produktlinje til salget
+		s2.addProduktLinje(produktlinje2);
+		
 		//beregn prisen i produktlinjen - 250 + 200 + 1000 = 1450
-		System.out.println("\nAnlæg med tilbehør(1 fustage og 1 kulsyre): 1450\n"+produktlinje2.getPris());
+		System.out.println("\nAnlæg med tilbehør(1 fustage og 1 kulsyre): 1450\n"+s2.getPris());
 		
 		
 		//3.del - beregn pris af anlæg med tilbehør med forbrug 
@@ -118,8 +124,11 @@ public class Test {
 		Salg s3 = Controller.createSalg();
 		ProduktLinje produktlinje3 = s3.createProduktLinje(pris1,1);
 		
+		//Tilføj produktlinje til salget
+		s3.addProduktLinje(produktlinje3);
+		
 		//beregn prisen i produktlinjen - 387,5 + 266,67 + 250 - 1200(pant) = -295,83	TODO kig på decimaler i Pris
-		System.out.println("\nForbrug(fustage og kulsyre) + anlæg - pant: (387,5 + 266,67) + 250 - 1200 = -295,83\n"+produktlinje3.getPris());
+		System.out.println("\nForbrug(fustage og kulsyre) + anlæg - pant: (387,5 + 266,67) + 250 - 1200 = -295,83\n"+s3.getPris());
 
 		System.out.println("\n---------------------------------------------------------------\n");
 
@@ -201,8 +210,6 @@ public class Test {
 		//kør beregnSamletPris() i salget - 3 x 36 = 108
 		System.out.println("Et salg med opretter tre produktlinjer hver med 1 flaske til 36, 3 x 36 = 108\n"+s1.getPris());
 	
-		//TODO Hvis Salg også skal tilgå rabat skal det også testes og implementeres
-
 		System.out.println("\n---------------------------------------------------------------\n");
 
 		

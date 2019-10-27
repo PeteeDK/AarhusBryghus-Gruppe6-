@@ -17,7 +17,7 @@ public class Flaske extends Produkt {
 
 	public void setFlaskeStørrelse(double flaskeStørrelse) {
 		if(flaskeStørrelse < 0) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Flaskestørrelsen kan ikke være negativ");
 		}
 		this.flaskeStørrelse = flaskeStørrelse;
 	}

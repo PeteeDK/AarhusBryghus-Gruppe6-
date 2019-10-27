@@ -7,7 +7,7 @@ public class Pris {
 	
 	public Pris(Produkt produkt, double pris) {
 		if(produkt == null || pris < 0) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Produkt kan ikke være null eller prisen kan ikke være negativ");
 		}
 		this.produkt = produkt;
 		setPris(pris);
@@ -19,7 +19,7 @@ public class Pris {
 
 	public void setPris(double pris) {
 		if(pris < 0) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("prisen kan ikke være negativ");
 		}
 		this.pris = pris;
 	}

@@ -19,7 +19,7 @@ public class Sampakninger extends Produkt {
 
 	public void setAntalØl(int antalØl) {
 		if(antalØl < 0) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Antal øl kan ikke være negativ");
 		}
 		this.antalØl = antalØl;
 	}

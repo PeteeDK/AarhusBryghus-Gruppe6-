@@ -19,8 +19,8 @@ public class ProcentvisRabat extends Rabat {
 	}
 
 	public void setProcent(double procent) {
-		if(procent < 0) {
-			throw new IllegalArgumentException();
+		if(procent < 0 || procent > 100) {
+			throw new IllegalArgumentException("Rabatprocenten kan ikke være negativ eller overstige 100%");
 		}
 		this.procent = procent;
 	}

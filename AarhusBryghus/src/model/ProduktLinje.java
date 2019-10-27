@@ -46,14 +46,14 @@ public class ProduktLinje {
 	
 	public void setAntal(int antal) {
 		if(antal < 0) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Antallet kan ikke være negativ");
 		}
 		this.antal = antal;
 	}
 
 	public void setPris(Pris pris) {
 		if(pris == null) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("prisen kan ikke være null");
 		}
 		this.pris = pris;
 	}

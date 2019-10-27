@@ -13,7 +13,7 @@ public class PrisListe {
 
 	public Pris createPris(Produkt produkt, double pris) {
 		if(produkt == null || pris < 0) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Produktet kan ikke være null eller prisen kan ikke være negativ");
 		}
 		Pris p = new Pris(produkt,pris);
 		priser.add(p);
