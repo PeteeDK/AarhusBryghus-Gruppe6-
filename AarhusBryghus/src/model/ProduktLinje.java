@@ -26,7 +26,7 @@ public class ProduktLinje {
     }
     
     //TODO Man kan måske refakturere lidt her
-    private double beregnPris() {
+    public double getPris() {
     	if(pris.getProdukt().getKategori().equals("anlæg")) {
     		return antal * pris.getPris() + ((Anlæg)pris.getProdukt()).beregnForbrug();
     	}
@@ -40,18 +40,6 @@ public class ProduktLinje {
     	return pris.getPris() * antal;
     }
     
-    private double prisMedRabat(double prisUdenRabat) {
-    	return rabat.tildelRabat(prisUdenRabat);
-    }
-    
-    public double getPris() {
-    	if(rabat == null) {
-    		return beregnPris();
-    	}else {
-    		return prisMedRabat(beregnPris());
-    	}
-    } 
-
 	public int getAntal() {
 		return antal;
 	}

@@ -8,64 +8,68 @@ import model.*;
 import model.betalingsform.*;
 import model.rabat.*;
 import storage.Storage;
+import model.produkter.*;
 
 public class Controller {
 
-	
-	
-    //-------Tilbehør---------------------------------------------------
 
-	//create
-  	public static Produkt createTilbehør(String kategori, String produktNavn, double mængde, double pant) {
-  		//TODO Fejlhåndtering
-  		Produkt tilbehør = new Tilbehør(kategori, produktNavn, mængde, pant);
-  		Storage.addProdukt(tilbehør);
-  		return tilbehør;
-  	}
-  	
-  	//update
-  	public static void updateTilbehør(Tilbehør tilbehør, String kategori, String produktNavn, double mængde, double pant) {
-  		tilbehør.setKategori(kategori);
-    	tilbehør.setProduktNavn(produktNavn);
-    	tilbehør.setMængde(mængde);
-    	tilbehør.setPant(pant);
-      }
-  	
-  	//get	TODO Skal tilbehør gemmes i sin egen ArrayList i storage
-    public static ArrayList<Produkt> getTilbehør() {
-    	ArrayList<Produkt> tilbehør = new ArrayList<>();
-      	for(Produkt p : Storage.getProdukter()) {
-      		if(p.getKategori().equals("fustage") || p.getKategori().equals("kulsyre")) {
-      			tilbehør.add(p);
-      		}
-      	}
-          return tilbehør;
-      } 
-
+	//-------Produkter---------------------------------------------------
     
 	
-	
-    //-------Produkt---------------------------------------------------
-
 	//create
-  	public static Produkt createProdukt(String kategori, String produktNavn) {
+  	public static Beklædning createBeklædning(String kategori, String produktNavn) {
   		//TODO Fejlhåndtering
-  		Produkt produkt = new Produkt(kategori, produktNavn);
-  		Storage.addProdukt(produkt);
-  		return produkt;
+  		Beklædning beklædning = new Beklædning(kategori, produktNavn);
+  		Storage.addProdukt(beklædning);
+  		return beklædning;
   	}
   	
-  	//update
-  	public static void updateProdukt(Produkt produkt, String kategori, String produktNavn) {
-  		produkt.setKategori(kategori);
-  		produkt.setProduktNavn(produktNavn);
+  	public static Fadøl createFadøl(String kategori, String produktNavn) {
+  		//TODO Fejlhåndtering
+  		Fadøl fadøl = new Fadøl(kategori, produktNavn);
+  		Storage.addProdukt(fadøl);
+  		return fadøl;
   	}
-  	
-  	//get	TODO Skal tilbehør gemmes i sin egen ArrayList i storage
-    public static ArrayList<Produkt> getProdukter() {
-    	return Storage.getProdukter();
-    } 
+  		
+  	public static Flaske createFlaske(String kategori, String produktNavn) {
+  		//TODO Fejlhåndtering
+  		Flaske flaske = new Flaske(kategori, produktNavn);
+  		Storage.addProdukt(flaske);
+  		return flaske;
+  	}
 	
+  	public static Fustage createFustage(String kategori, String produktNavn, double mængde, double pant) {
+  		//TODO Fejlhåndtering
+  		Fustage fustage = new Fustage(kategori, produktNavn, mængde, pant);
+  		Storage.addProdukt(fustage);
+  		return fustage;
+  	}
+
+  	public static Kulsyre createKulsyre(String kategori, String produktNavn, double mængde, double pant) {
+  		//TODO Fejlhåndtering
+  		Kulsyre kulsyre = new Kulsyre(kategori, produktNavn, mængde, pant);
+  		Storage.addProdukt(kulsyre);
+  		return kulsyre;
+  	}
+
+	public static Malt createMalt(String kategori, String produktNavn) {
+		Malt malt = new Malt(kategori, produktNavn);
+		Storage.addProdukt(malt);
+		return malt;
+	}
+	
+	public static Sampakninger createSampaktninger(String kategori, String produktNavn) {
+		Sampakninger sampakning = new Sampakninger(kategori, produktNavn);
+		Storage.addProdukt(sampakning);
+		return sampakning;
+	}
+	
+	public static Spiritus createSpiritus(String kategori, String produktNavn) {
+		Spiritus spiritus = new Spiritus(kategori, produktNavn);
+		Storage.addProdukt(spiritus);
+		return spiritus;
+	}
+		
     
     
     //-------Anlæg---------------------------------------------------
@@ -78,11 +82,6 @@ public class Controller {
   		return anlæg;
   	}
   	
-  	//update	TODO Overvej om der skal flere enheder på i contructoren. umiddelbart er det fint
-    public static void updateAnlæg(Anlæg anlæg, String kategori, String produktNavn) {
-  	    anlæg.setKategori(kategori);
-  	    anlæg.setProduktNavn(produktNavn);
-    }
   	
   	//get
     public static ArrayList<Produkt> getAnlægsEnheder() {
@@ -96,36 +95,6 @@ public class Controller {
     } 
       
     
-    //-------Sampakninger---------------------------------------------------
-      
-      
-  	//create	TODO Overvej helt at fjerne den, da den kan blive oprette under Produkt og antalØl og antalGlas gør ikke godt for noget 
-  	public static Produkt createSampakning(String kategori, String produktNavn, int antalØl, int antalGlas) {
-  		Produkt sampakning = new Sampakninger(kategori,produktNavn,antalØl,antalGlas);
-  		Storage.addProdukt(sampakning);
-  		return sampakning;
-  	}
-  	
-  	//update
-    public static void updateSampakning(Sampakninger sampakning, String kategori, String produktNavn, int antalØl, int antalGlas) {
-    	sampakning.setKategori(kategori);
-    	sampakning.setProduktNavn(produktNavn);
-    	sampakning.setAntalØl(antalØl);
-    	sampakning.setAntalGlas(antalGlas);
-    }
-  	
-  	//get
-    public static ArrayList<Produkt> getSampakninger() {
-      ArrayList<Produkt> sampakninger = new ArrayList<>();
-      for(Produkt p : Storage.getProdukter()) {
-    	  if(p.getKategori().equals("sampakninger")) {
-      		sampakninger.add(p);
-      	  }
-      }
-      return sampakninger;
-    }
-
-    
       
     //-------Rundvisning---------------------------------------------------
       
@@ -137,13 +106,6 @@ public class Controller {
   	  	return rundvisning;
   	}
   	
-  	//update
-    public static void updateRundvisning(Rundvisning rundvisning, String kategori, String produktNavn, LocalDate dato, LocalTime tidspunkt) {
-    	rundvisning.setKategori(kategori);
-    	rundvisning.setProduktNavn(produktNavn);
-    	rundvisning.setDato(dato);
-    	rundvisning.setTidspunkt(tidspunkt);
-    }
   	
   	//get
     public static ArrayList<Produkt> getRundvisninger() {
@@ -162,20 +124,16 @@ public class Controller {
       
       
   	//create
-  	public static Produkt createKlippekort(String kategori, String produktNavn) {
-  	  	Produkt klippekort = new Klippekort(kategori, produktNavn);
+  	public static Klippekort createKlippekort(String kategori, String produktNavn) {
+  	  	Klippekort klippekort = new Klippekort(kategori, produktNavn);
   	  	Storage.addProdukt(klippekort);
+  	  	Storage.addBetalingsform((IBetalingsform)klippekort);	//TODO Overvej om klippekort skal tilføjes til begge lister
   	  	return klippekort;
   	}
   	
-  	//update
-    public static void updateKlippekort(Klippekort klippekort, String kategori, String produktNavn) {
-    	klippekort.setKategori(kategori);
-    	klippekort.setProduktNavn(produktNavn);
-    }
   	
   	//get
-    public static ArrayList<Produkt> getKlippekortEnheder() {
+   public static ArrayList<Produkt> getKlippekortEnheder() {
       ArrayList<Produkt> klippekortEnheder = new ArrayList<>();
       for(Produkt p : Storage.getProdukter()) {
     	  if(p.getKategori().equals("klippekort")) {
@@ -183,7 +141,7 @@ public class Controller {
       	  }
       }
       return klippekortEnheder;
-    }
+   }
 
     
     
@@ -196,11 +154,6 @@ public class Controller {
 	  	Storage.addPrisliste(prisliste);
 	  	return prisliste;
 	}
-	
-	//update
-    public static void updatePrisliste(PrisListe prisliste, String arrangement) {
-  	    prisliste.setArrangement(arrangement);
-    }
 	
 	//get
     public static ArrayList<PrisListe> getPrislister() {
@@ -217,11 +170,6 @@ public class Controller {
   	  	Storage.addRabat(procentvisRabat);
   	  	return procentvisRabat;
   	}
-  	
-  	//update
-    public static void updateProcentvisRabat(ProcentvisRabat procentvisRabat, double procent) {
-        procentvisRabat.setProcent(procent);;
-    }
   	
   	//get
     public static ArrayList<Rabat> getRabatter() {
@@ -240,15 +188,30 @@ public class Controller {
   	  	return studieRabat;
   	}
   	
-  	//update
-    public static void updateStudieRabat(StudieRabat studierabat, ProduktLinje produktlinje, int antalStuderende, double rabatProcent) {
-    	studierabat.setProduktlinje(produktlinje);
-    	studierabat.setAntalStuderende(antalStuderende);
-    	studierabat.setRabatProcent(rabatProcent);
-    }
   	
   	//get TODO Er det nødvendigt at lave en get-metode for alle rabatter eller er det nok med én
     
+    
+    //-------Betalingsform---------------------------------------------------
+    
+    
+    //TODO Hav styr på hvornår der skal bruges Betalingsform og IBetalingsform
+    
+  	//create
+  	public static Betalingsform createBetalingsform() {
+  		Betalingsform betalingsform = new Betalingsform();
+  	  	Storage.addBetalingsform(betalingsform);
+  	  	return betalingsform;
+  	}
+  	
+  	//update TODO ingen attributter i contructoren for Betalingsform
+  	
+  	
+  	//get
+    public static ArrayList<IBetalingsform> getBetalingsformer() {
+      	return Storage.getBetalingsformer();
+    }
+
       
       
       

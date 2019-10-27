@@ -1,9 +1,12 @@
 package model;
 
+import java.time.LocalDate;
+
 public class Klip {
 
 	private int nr;
 	private boolean brugt;
+	private LocalDate transaktionsdato;
 	
 	public Klip(int nr) {
 		this.nr = nr;
@@ -23,7 +26,20 @@ public class Klip {
 
 	public void setBrugt(boolean brugt) {
 		this.brugt = brugt;
+		if(this.brugt) {
+			setTransaktionsdato(LocalDate.now());
+		}
 	}
+
+	public LocalDate getTransaktionsdato() {
+		return transaktionsdato;
+	}
+
+	public void setTransaktionsdato(LocalDate købsdato) {
+		this.transaktionsdato = købsdato;
+	}
+	
+	
 
 	
 	

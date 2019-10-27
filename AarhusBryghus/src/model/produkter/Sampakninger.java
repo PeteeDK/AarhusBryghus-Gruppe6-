@@ -1,18 +1,18 @@
-package model;
+package model.produkter;
 
-import java.time.DayOfWeek;
+import model.Produkt;
 
 public class Sampakninger extends Produkt {
 
 	private int antalØl;
 	private int antalGlas;
 	
-	public Sampakninger(String kategori, String produktNavn, int antalØl, int antalGlas) {
+	public Sampakninger(String kategori, String produktNavn) {
 		super(kategori, produktNavn);
-		this.antalØl = antalØl;
-		this.antalGlas = antalGlas;
-	} 
+		// TODO Auto-generated constructor stub
+	}
 
+	
 	public int getAntalØl() {
 		return antalØl;
 	}
@@ -29,4 +29,5 @@ public class Sampakninger extends Produkt {
 		this.antalGlas = antalGlas;
 	}
 
+	
 }
