@@ -18,6 +18,9 @@ public class Sampakninger extends Produkt {
 	}
 
 	public void setAntalØl(int antalØl) {
+		if(antalØl < 0) {
+			throw new IllegalArgumentException();
+		}
 		this.antalØl = antalØl;
 	}
 
@@ -26,6 +29,9 @@ public class Sampakninger extends Produkt {
 	}
 
 	public void setAntalGlas(int antalGlas) {
+		if(antalGlas < 0) {
+			throw new IllegalArgumentException();
+		}
 		this.antalGlas = antalGlas;
 	}
 

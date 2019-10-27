@@ -16,6 +16,9 @@ public class Malt extends Produkt {
 	}
 
 	public void setMængde(double mængde) {
+		if(mængde < 0) {
+			throw new IllegalArgumentException();
+		}
 		this.mængde = mængde;
 	}
 	

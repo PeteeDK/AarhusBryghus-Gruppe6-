@@ -16,6 +16,9 @@ public class Fadøl extends Produkt {
 	}
 
 	public void setØlstørrelse(double ølstørrelse) {
+		if(ølstørrelse < 0) {
+			throw new IllegalArgumentException();
+		}
 		this.ølstørrelse = ølstørrelse;
 	}
 	

@@ -16,6 +16,9 @@ public class Flaske extends Produkt {
 	}
 
 	public void setFlaskeStørrelse(double flaskeStørrelse) {
+		if(flaskeStørrelse < 0) {
+			throw new IllegalArgumentException();
+		}
 		this.flaskeStørrelse = flaskeStørrelse;
 	}
 

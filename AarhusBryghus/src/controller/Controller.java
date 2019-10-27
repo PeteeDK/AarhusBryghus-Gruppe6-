@@ -18,21 +18,18 @@ public class Controller {
 	
 	//create
   	public static Beklædning createBeklædning(String kategori, String produktNavn) {
-  		//TODO Fejlhåndtering
   		Beklædning beklædning = new Beklædning(kategori, produktNavn);
   		Storage.addProdukt(beklædning);
   		return beklædning;
   	}
   	
   	public static Fadøl createFadøl(String kategori, String produktNavn) {
-  		//TODO Fejlhåndtering
   		Fadøl fadøl = new Fadøl(kategori, produktNavn);
   		Storage.addProdukt(fadøl);
   		return fadøl;
   	}
   		
   	public static Flaske createFlaske(String kategori, String produktNavn) {
-  		//TODO Fejlhåndtering
   		Flaske flaske = new Flaske(kategori, produktNavn);
   		Storage.addProdukt(flaske);
   		return flaske;
@@ -46,7 +43,6 @@ public class Controller {
   	}
 
   	public static Kulsyre createKulsyre(String kategori, String produktNavn, double mængde, double pant) {
-  		//TODO Fejlhåndtering
   		Kulsyre kulsyre = new Kulsyre(kategori, produktNavn, mængde, pant);
   		Storage.addProdukt(kulsyre);
   		return kulsyre;

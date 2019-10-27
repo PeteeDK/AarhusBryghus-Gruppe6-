@@ -13,8 +13,8 @@ public class ProduktLinje {
     private Pris pris;
 
     public ProduktLinje(Pris pris, int antal) {
-		this.antal = antal;
-		this.pris = pris;
+		setAntal(antal);
+		setPris(pris);
 	}
     
     public void setRabat(Rabat rabat) {
@@ -42,6 +42,20 @@ public class ProduktLinje {
     
 	public int getAntal() {
 		return antal;
+	}
+	
+	public void setAntal(int antal) {
+		if(antal < 0) {
+			throw new IllegalArgumentException();
+		}
+		this.antal = antal;
+	}
+
+	public void setPris(Pris pris) {
+		if(pris == null) {
+			throw new IllegalArgumentException();
+		}
+		this.pris = pris;
 	}
 
 	@Override

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class PrisListe {
 
-	//TODO skal der være mulighed for at oprette andre priser
 	private String arrangement;
 	private ArrayList<Pris> priser = new ArrayList<>();
 	
@@ -13,6 +12,9 @@ public class PrisListe {
 	}
 
 	public Pris createPris(Produkt produkt, double pris) {
+		if(produkt == null || pris < 0) {
+			throw new IllegalArgumentException();
+		}
 		Pris p = new Pris(produkt,pris);
 		priser.add(p);
 		return p;

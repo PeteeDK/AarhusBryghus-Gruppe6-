@@ -6,7 +6,7 @@ public class ProcentvisRabat extends Rabat {
 	
 	
 	public ProcentvisRabat(double procent) {
-		this.procent = procent;
+		setProcent(procent);
 	}
 	
 	public double tildelRabat(double pris) {
@@ -19,6 +19,9 @@ public class ProcentvisRabat extends Rabat {
 	}
 
 	public void setProcent(double procent) {
+		if(procent < 0) {
+			throw new IllegalArgumentException();
+		}
 		this.procent = procent;
 	}
 	
