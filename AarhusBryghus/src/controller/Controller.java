@@ -232,12 +232,13 @@ public class Controller {
     
     
     public static ArrayList<String> getPriser(){
-    	ArrayList<String> priser;
+    	ArrayList<String> priser = new ArrayList<>;
     	for(PrisListe pl : Controller.getPrislister()) {
     		for(Pris p : pl.getPriser()) {
-    			priser.add(p.toString())
+    			priser.add(p.toString());
     		}
     	}
+    	return priser;
     }
       
 	
