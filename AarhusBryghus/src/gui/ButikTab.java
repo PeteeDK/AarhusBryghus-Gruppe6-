@@ -24,7 +24,7 @@ public class ButikTab {
 	TextField txf1 = new TextField();
 	txf1.setPromptText("Antal");
 	txf1.setEditable(true);
-	Button bnt1 = new Button("Tilføj produkt"); 
+	Button bnt1 = new Button("Tilføj produkt");
 	Button bnt2 = new Button("Slet produkt"); 
 	Button bnt3 = new Button("Betal");
 	Button bnt4 = new Button("Tøm Kurv");
