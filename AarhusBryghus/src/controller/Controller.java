@@ -233,7 +233,25 @@ public class Controller {
 	
 	
 	//Init storage
-
+    public static void initStorage() {
+    	
+    	Flaske f1 = Controller.createFlaske("flaske", "Klosterbryg");
+    	Flaske f2 = Controller.createFlaske("flaske", "sweet georgia brown");
+    	Flaske f3 = Controller.createFlaske("flaske", "ekstra pilsner");
+    	
+    	
+    	PrisListe fredagsbar = Controller.createPrisliste("fredagsbar");
+    	Pris p1 = fredagsbar.createPris(f1, 50);
+    	Pris p2 = fredagsbar.createPris(f2, 50);
+    	Pris p3 = fredagsbar.createPris(f3, 50);
+    	
+    	
+    	PrisListe butikspris = Controller.createPrisliste("butik");
+    	Pris p4 = butikspris.createPris(f1, 36);
+    	Pris p5 = butikspris.createPris(f2, 36);
+    	Pris p6 = butikspris.createPris(f3, 36);
+    	
+    }
       
       
       

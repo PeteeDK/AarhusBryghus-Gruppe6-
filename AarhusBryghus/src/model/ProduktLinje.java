@@ -8,17 +8,12 @@ import model.rabat.StudieRabat;
 public class ProduktLinje {
 
     private int antal;
-    private Rabat rabat;
     private Produkt produkt;
     private Pris pris;
 
     public ProduktLinje(Pris pris, int antal) {
-		setAntal(antal);
 		setPris(pris);
-	}
-    
-    public void setRabat(Rabat rabat) {
-    	this.rabat = rabat;
+		setAntal(antal);
     }
     
     public void addPris(Pris pris) {
@@ -60,7 +55,7 @@ public class ProduktLinje {
 
 	@Override
 	public String toString() {
-		return "ProduktLinje [antal=" + antal + ", rabat=" + rabat + ", produkt=" + produkt + ", pris=" + pris + "]";
+		return "ProduktLinje [antal=" + antal + ", produkt=" + produkt + ", pris=" + pris + "]";
 	}
     
 	

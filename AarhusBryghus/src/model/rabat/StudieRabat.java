@@ -9,8 +9,8 @@ public class StudieRabat extends Rabat {
 	private ProduktLinje produktlinje;
 	
 	public StudieRabat(ProduktLinje produktlinje, int antalStuderende, double rabatProcent) {
-		this.produktlinje = produktlinje;
-		this.antalStuderende = antalStuderende;
+		setProduktlinje(produktlinje);
+		setAntalStuderende(antalStuderende);
 		setRabatProcent(rabatProcent);
 	}
 	
