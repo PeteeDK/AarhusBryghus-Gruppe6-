@@ -28,7 +28,9 @@ public class PrisListe {
 		this.arrangement = arrangement;
 	}
 	
-	
+	public ArrayList<Pris> getPriser(){
+		return new ArrayList<>(priser);
+	}
 	
 	
 }

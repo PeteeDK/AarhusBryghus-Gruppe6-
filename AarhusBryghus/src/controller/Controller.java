@@ -229,6 +229,16 @@ public class Controller {
     public static ArrayList<Salg> getSalgsEnheder() {
     	return Storage.getSalgsenheder();
     }
+    
+    
+    public static ArrayList<String> getPriser(){
+    	ArrayList<String> priser;
+    	for(PrisListe pl : Controller.getPrislister()) {
+    		for(Pris p : pl.getPriser()) {
+    			priser.add(p.toString())
+    		}
+    	}
+    }
       
 	
 	
