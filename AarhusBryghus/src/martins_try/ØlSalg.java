@@ -46,7 +46,7 @@ public class ØlSalg extends GridPane {
 	}
 	
 	public void tilføjTilKurv() {
-	
+		System.out.println("Test");
 		String valgtØl = oversigt.getSelectionModel().getSelectedItem();
 		int antalValgt = Integer.parseInt(antal.getText()); // skal flyttes lidt rundt og gemmes i produktlinje tror jeg
 		kurv.add(valgtØl + antalValgt);

@@ -26,7 +26,7 @@ public class MainApp extends Application {
 // ------------------------------------------------------------------------
 	private void initContent(BorderPane pane) {
 		TabPane tabpane = new TabPane(); 
-		Tab salg = new Tab("Salg");
+		Tab salg = new Tab("Fredagsbar Salg");
 		tabpane.getTabs().add(salg); 
 		salg.setContent(new ØlSalg());
 		pane.setCenter(tabpane);
