@@ -34,7 +34,7 @@ public class FredagsSalgPane extends Stage {
 		
 		Scene scene = new Scene(pane);
 		this.setScene(scene);
-		GridPane pane = new GridPane(); 
+		 
 		
 		pane.setGridLinesVisible(true);
 		pane.setPadding(new Insets(20));
