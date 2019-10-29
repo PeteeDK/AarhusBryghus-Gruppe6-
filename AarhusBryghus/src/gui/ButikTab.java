@@ -27,6 +27,7 @@ public class ButikTab {
 		Button bnt1 = new Button("Tilføj produkt");
 		Button bnt2 = new Button("Slet produkt"); 
 		Button bnt3 = new Button("Betal");
+		bnt3.setOnAction(event -> this.betal());
 		Button bnt4 = new Button("Tøm Kurv");
 		Label lb2 = new Label("Kurv");
 		ListView<String> kurv = new ListView<>();
@@ -53,7 +54,11 @@ public class ButikTab {
 		vb4.getChildren().addAll(lb2,kurv,lb3,txf2);
 		
 		tab.setContent(bgHbox);
-		
-	
 	}
+	
+	private void betal() {
+		Betalingsforms bf = new Betalingsforms("Betalingsform"); 
+		bf.showAndWait();
+	}
+	
 }
