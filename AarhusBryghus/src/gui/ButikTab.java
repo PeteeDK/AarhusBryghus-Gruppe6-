@@ -9,6 +9,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import model.PrisListe;
 
 public class ButikTab {
 
@@ -19,10 +20,14 @@ public class ButikTab {
 	}
 	
 	public void open() {
+		
+		Controller.initStorage();
 	
 		Label lb1 = new Label("Produkter"); 
 		ListView<String> produkter = new ListView<>();
 		produkter.getItems().setAll(Controller.getButiksPrisliste());
+		
+		
 		TextField txf1 = new TextField();
 		txf1.setPromptText("Antal");
 		txf1.setEditable(true);
