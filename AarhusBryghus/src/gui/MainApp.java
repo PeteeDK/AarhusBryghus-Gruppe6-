@@ -40,6 +40,7 @@ public class MainApp extends Application {
 		//------- calls the tabs inside 
 		
 		new ButikTab(butikTb).open();
+		new FredagsbarTab(fredagsbarTb).open();
 		new DataTab(dataTb).open();
 		
 		
