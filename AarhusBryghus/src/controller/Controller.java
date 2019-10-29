@@ -191,48 +191,21 @@ public class Controller {
     
     
 	//create
-	public static PrisListe createButiksPrisliste(String arrangement) {
-		PrisListe butiksPrisliste = new PrisListe(arrangement);
-	  	Storage.addButiksPrisliste(butiksPrisliste);
-	  	return butiksPrisliste;
+	public static PrisListe createPrisliste(String arrangement) {
+		PrisListe prisliste = new PrisListe(arrangement);
+	  	Storage.addPrisliste(prisliste);
+	  	return prisliste;
 	}
 	
 	//update
-  // public static void updatePrisliste(PrisListe prisliste, String arrangement) {
-  //	    prisliste.setArrangement(arrangement);
-  //  }
+    public static void updatePrisliste(PrisListe prisliste, String arrangement) {
+  	    prisliste.setArrangement(arrangement);
+    }
 	
 	//get
-    public static ArrayList<PrisListe> getButiksPrisliste() {
-    	return Storage.getButiksPrisliste();
-    	
+    public static ArrayList<PrisListe> getPrislister() {
+    	return Storage.getPrislister();
     }
-    
-    
-  //-------fredagsBarsPrisliste---------------------------------------------------
-    
-    
-  	//create
-  	public static PrisListe createFredagsBarsPrisliste(String arrangement) {
-  		PrisListe fredagsBarsPrisliste = new PrisListe(arrangement);
-  	  	Storage.addButiksPrisliste(fredagsBarsPrisliste);
-  	  	return fredagsBarsPrisliste;
-  	}
-  	
-  	//update
-      public static void updatePrisliste(PrisListe prisliste, String arrangement) {
-    	    prisliste.setArrangement(arrangement);
-      }
-  	
-  	//get
- //     public static ArrayList<PrisListe> getPrislister() {
- //     	return Storage.getPrislister();
-  //    }
-    
-    
-    
-    
-    
 
     
     //-------ProcentvisRabat---------------------------------------------------
@@ -298,15 +271,15 @@ public class Controller {
     	return Storage.getSalgsenheder();
     }
    
-   public static ArrayList<Pris> getButiksPriser(){
+    public static ArrayList<Pris> getPriser(){
     	ArrayList<Pris> priser = new ArrayList<>();
-    	for(PrisListe pl : Controller.getButiksPrisliste()) {
+    	for(PrisListe pl : Controller.getPrislister()) {
     		for(Pris p : pl.getPriser()) {
     			priser.add(p);
     		}
     	}
     	return priser;
-    } 
+    }
     
     public static void initStorage() {
     	
@@ -326,7 +299,7 @@ public class Controller {
     	Produkt f14 = Controller.createProdukt("Flaske", "Black Monster");
     	
     	
-    	PrisListe fredagsbar = Controller.createFredagsBarsPrisliste("Fredagsbar");
+    	PrisListe fredagsbar = Controller.createPrisliste("Fredagsbar");
     	Pris fp1 = fredagsbar.createPris(f1, 50);
     	Pris fp2 = fredagsbar.createPris(f2, 50);
     	Pris fp3 = fredagsbar.createPris(f3, 50);
@@ -344,7 +317,7 @@ public class Controller {
     	
     	
     	
-    	PrisListe butiksPris = Controller.createButiksPrisliste("Butikspris");
+    	PrisListe butiksPris = Controller.createPrisliste("Butikspris");
     	Pris bp1 = butiksPris.createPris(f1, 36);
     	Pris bp2 = butiksPris.createPris(f2, 36);
     	Pris bp3 = butiksPris.createPris(f3, 36);
