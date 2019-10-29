@@ -11,8 +11,7 @@ public class Storage {
 	//TODO Er det en god idé at opbevare alle produktkategorierne i én liste
 	private static ArrayList<Produkt> produkter = new ArrayList<>();
 	private static ArrayList<Salg> salgsEnheder = new ArrayList<>();
-	private static ArrayList<PrisListe> butiksPrisListe = new ArrayList<>();
-	private static ArrayList<PrisListe> fredagsBarsPrisListe = new ArrayList<>();
+	private static ArrayList<PrisListe> prislister = new ArrayList<>();
 	private static ArrayList<Rabat> rabatter = new ArrayList<>();
 
 	
@@ -46,34 +45,19 @@ public class Storage {
 	}
 
 
-	// -------butiksPrisListe---------------------------------------------
+	// -------PrisListe---------------------------------------------
 
-	public static ArrayList<PrisListe> getButiksPrisliste() {
-		return new ArrayList<PrisListe>(butiksPrisListe);
+	public static ArrayList<PrisListe> getPrislister() {
+		return new ArrayList<PrisListe>(prislister);
 	}
 
-	public static void addButiksPrisliste(PrisListe butiksPrisliste) {
-		butiksPrisListe.add(butiksPrisliste);
+	public static void addPrisliste(PrisListe prisliste) {
+		prislister.add(prisliste);
 	}
 
-	public static void removeButiksPrisliste(PrisListe butiksPrisliste) {
-		butiksPrisListe.remove(butiksPrisliste);
+	public static void removePrisliste(PrisListe prisliste) {
+		prislister.remove(prisliste);
 	}
-	
-	
-	// -------fredagsBarPrisListe---------------------------------------------
-
-		public static ArrayList<PrisListe> getFredagsBarsPrisliste() {
-			return new ArrayList<PrisListe>(fredagsBarsPrisListe);
-		}
-
-		public static void addFredagsBarsPrisliste(PrisListe getFredagsBarsPrisliste) {
-			fredagsBarsPrisListe.add(getFredagsBarsPrisliste);
-		}
-
-		public static void removeFredagsBarsPrisliste(PrisListe getFredagsBarsPrisliste) {
-			fredagsBarsPrisListe.remove(getFredagsBarsPrisliste);
-		}
 
 	
 	// -------ProcentvisRabat---------------------------------------------
