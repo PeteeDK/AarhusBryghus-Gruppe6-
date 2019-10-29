@@ -270,11 +270,70 @@ public class Controller {
     public static ArrayList<Salg> getSalgsEnheder() {
     	return Storage.getSalgsenheder();
     }
+<<<<<<< Updated upstream
+=======
+    
+    
+    public static ArrayList<Pris> getPriser(){
+    	ArrayList<Pris> priser = new ArrayList<>();
+    	for(PrisListe pl : Controller.getPrislister()) {
+    		for(Pris p : pl.getPriser()) {
+    			priser.add(p);
+    		}
+    	}
+    	return priser;
+    }
+>>>>>>> Stashed changes
       
 	
 	
 	//Init storage
+<<<<<<< Updated upstream
 
+=======
+    public static void initStorage() {
+    	
+    	Flaske f1 = Controller.createFlaske("flaske", "Klosterbryg");
+    	Flaske f2 = Controller.createFlaske("flaske", "Sweet Georgia Brown");
+    	Flaske f3 = Controller.createFlaske("flaske", "Celebration");
+    	Flaske f4 = Controller.createFlaske("flaske", "Blondie");
+    	Flaske f5 = Controller.createFlaske("flaske", "Forårsbryg");
+    	Flaske f6 = Controller.createFlaske("flaske", "Ekstra Pilsner");
+    	Flaske f7 = Controller.createFlaske("flaske", "India Pale Ale");
+    	Flaske f8 = Controller.createFlaske("flaske", "Julebryg");
+    	Flaske f9 = Controller.createFlaske("flaske", "Juletønden");
+    	Flaske f10 = Controller.createFlaske("flaske", "Old Strong Ale");
+    	Flaske f11 = Controller.createFlaske("flaske", "Fregatten Jylland");
+    	Flaske f12 = Controller.createFlaske("flaske", "Imperial Stout");
+    	Flaske f13 = Controller.createFlaske("flaske", "Tribute");
+    	Flaske f14 = Controller.createFlaske("flaske", "Black Monster");
+    	
+    	
+    	PrisListe fredagsbar = Controller.createPrisliste("Fredagsbar");
+    	Pris p1 = fredagsbar.createPris(f1, 50);
+    	Pris p2 = fredagsbar.createPris(f2, 50);
+    	Pris p3 = fredagsbar.createPris(f3, 50);
+    	Pris p4 = fredagsbar.createPris(f4, 50);
+    	Pris p5 = fredagsbar.createPris(f5, 50);
+    	Pris p6 = fredagsbar.createPris(f6, 50);
+    	Pris p7 = fredagsbar.createPris(f7, 50);
+    	Pris p8 = fredagsbar.createPris(f8, 50);
+    	Pris p9 = fredagsbar.createPris(f9, 50);
+    	Pris p10 = fredagsbar.createPris(f10, 50);
+    	Pris p11 = fredagsbar.createPris(f11, 50);
+    	Pris p12 = fredagsbar.createPris(f12, 50);
+    	Pris p13 = fredagsbar.createPris(f13, 50);
+    	Pris p14 = fredagsbar.createPris(f14, 50);
+    	
+    	
+    	
+    	PrisListe butikspris = Controller.createPrisliste("butik");
+    	Pris p4 = butikspris.createPris(f1, 36);
+    	Pris p5 = butikspris.createPris(f2, 36);
+    	Pris p6 = butikspris.createPris(f3, 36);
+    	
+    }
+>>>>>>> Stashed changes
       
       
       

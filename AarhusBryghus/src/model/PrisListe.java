@@ -25,6 +25,21 @@ public class PrisListe {
 	public void setArrangement(String arrangement) {
 		this.arrangement = arrangement;
 	}
+<<<<<<< Updated upstream
+=======
+
+	@Override
+	public String toString() {
+		return "PrisListe [arrangement=" + arrangement + ", priser=" + priser + "]";
+	}
+
+	public ArrayList<Pris> getPriser() {
+		
+		return new ArrayList<>(priser);
+	}
+>>>>>>> Stashed changes
+	
+	
 	
 	
 }
