@@ -8,8 +8,8 @@ public class Produkt {
 	private String produktNavn;
 	
 	public Produkt(String kategori, String produktNavn) {
-		this.kategori = kategori.toLowerCase().trim();
-		this.produktNavn = produktNavn.toLowerCase().trim();
+		this.kategori = kategori.trim();
+		this.produktNavn = produktNavn.trim();
 	} 
 	
 	public String getKategori() {
@@ -30,7 +30,7 @@ public class Produkt {
 
 	@Override
 	public String toString() {
-		return "Produkt [kategori=" + kategori + ", produktNavn=" + produktNavn + "]";
+		return produktNavn +  ", " +  kategori;
 	}
 
 	

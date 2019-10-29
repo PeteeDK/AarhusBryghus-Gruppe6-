@@ -271,9 +271,10 @@ public class Controller {
     	return Storage.getSalgsenheder();
     }
    
-    public static ArrayList<Pris> getPriser(){
+    public static ArrayList<Pris> getPriser(String arge){
     	ArrayList<Pris> priser = new ArrayList<>();
     	for(PrisListe pl : Controller.getPrislister()) {
+    		if(pl.getArrangement().equals(arge))
     		for(Pris p : pl.getPriser()) {
     			priser.add(p);
     		}

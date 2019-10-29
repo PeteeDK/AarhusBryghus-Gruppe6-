@@ -25,7 +25,7 @@ public class Pris {
 	
 	@Override
 	public String toString() {
-		return "Pris [pris=" + pris + ", produkt=" + produkt + "]";
+		return produkt + " " + "Pris: " + pris;
 	}
 
 	
