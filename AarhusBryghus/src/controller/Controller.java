@@ -284,43 +284,54 @@ public class Controller {
     public static void initStorage() {
     	
     	Produkt f1 = Controller.createProdukt("Flaske", "Klosterbryg");
-    	Flaske f2 = Controller.createFlaske("flaske", "Sweet Georgia Brown");
-    	Flaske f3 = Controller.createFlaske("flaske", "Celebration");
-    	Flaske f4 = Controller.createFlaske("flaske", "Blondie");
-    	Flaske f5 = Controller.createFlaske("flaske", "Forårsbryg");
-    	Flaske f6 = Controller.createFlaske("flaske", "Ekstra Pilsner");
-    	Flaske f7 = Controller.createFlaske("flaske", "India Pale Ale");
-    	Flaske f8 = Controller.createFlaske("flaske", "Julebryg");
-    	Flaske f9 = Controller.createFlaske("flaske", "Juletønden");
-    	Flaske f10 = Controller.createFlaske("flaske", "Old Strong Ale");
-    	Flaske f11 = Controller.createFlaske("flaske", "Fregatten Jylland");
-    	Flaske f12 = Controller.createFlaske("flaske", "Imperial Stout");
-    	Flaske f13 = Controller.createFlaske("flaske", "Tribute");
-    	Flaske f14 = Controller.createFlaske("flaske", "Black Monster");
+    	Produkt f2 = Controller.createProdukt("Flaske", "Sweet Georgia Brown");
+    	Produkt f3 = Controller.createProdukt("Flaske", "Celebration");
+    	Produkt f4 = Controller.createProdukt("Flaske", "Blondie");
+    	Produkt f5 = Controller.createProdukt("Flaske", "Forårsbryg");
+    	Produkt f6 = Controller.createProdukt("Flaske", "Ekstra Pilsner");
+    	Produkt f7 = Controller.createProdukt("Flaske", "India Pale Ale");
+    	Produkt f8 = Controller.createProdukt("Flaske", "Julebryg");
+    	Produkt f9 = Controller.createProdukt("Flaske", "Juletønden");
+    	Produkt f10 = Controller.createProdukt("Flaske", "Old Strong Ale");
+    	Produkt f11 = Controller.createProdukt("Flaske", "Fregatten Jylland");
+    	Produkt f12 = Controller.createProdukt("Flaske", "Imperial Stout");
+    	Produkt f13 = Controller.createProdukt("Flaske", "Tribute");
+    	Produkt f14 = Controller.createProdukt("Flaske", "Black Monster");
     	
     	
     	PrisListe fredagsbar = Controller.createPrisliste("Fredagsbar");
-    	Pris p1 = fredagsbar.createPris(f1, 50);
-    	Pris p2 = fredagsbar.createPris(f2, 50);
-    	Pris p3 = fredagsbar.createPris(f3, 50);
-    	Pris p4 = fredagsbar.createPris(f4, 50);
-    	Pris p5 = fredagsbar.createPris(f5, 50);
-    	Pris p6 = fredagsbar.createPris(f6, 50);
-    	Pris p7 = fredagsbar.createPris(f7, 50);
-    	Pris p8 = fredagsbar.createPris(f8, 50);
-    	Pris p9 = fredagsbar.createPris(f9, 50);
-    	Pris p10 = fredagsbar.createPris(f10, 50);
-    	Pris p11 = fredagsbar.createPris(f11, 50);
-    	Pris p12 = fredagsbar.createPris(f12, 50);
-    	Pris p13 = fredagsbar.createPris(f13, 50);
-    	Pris p14 = fredagsbar.createPris(f14, 50);
+    	Pris fp1 = fredagsbar.createPris(f1, 50);
+    	Pris fp2 = fredagsbar.createPris(f2, 50);
+    	Pris fp3 = fredagsbar.createPris(f3, 50);
+    	Pris fp4 = fredagsbar.createPris(f4, 50);
+    	Pris fp5 = fredagsbar.createPris(f5, 50);
+    	Pris fp6 = fredagsbar.createPris(f6, 50);
+    	Pris fp7 = fredagsbar.createPris(f7, 50);
+    	Pris fp8 = fredagsbar.createPris(f8, 50);
+    	Pris fp9 = fredagsbar.createPris(f9, 50);
+    	Pris fp10 = fredagsbar.createPris(f10, 50);
+    	Pris fp11 = fredagsbar.createPris(f11, 50);
+    	Pris fp12 = fredagsbar.createPris(f12, 50);
+    	Pris fp13 = fredagsbar.createPris(f13, 50);
+    	Pris fp14 = fredagsbar.createPris(f14, 50);
     	
     	
     	
-    	PrisListe butikspris = Controller.createPrisliste("butik");
-    	Pris p4 = butikspris.createPris(f1, 36);
-    	Pris p5 = butikspris.createPris(f2, 36);
-    	Pris p6 = butikspris.createPris(f3, 36);
+    	PrisListe ButiksPris = Controller.createPrisliste("Butikspris");
+    	Pris bp1 = butikspris.createPris(f1, 36);
+    	Pris bp2 = butikspris.createPris(f2, 36);
+    	Pris bp3 = butikspris.createPris(f3, 36);
+    	Pris bp4 = butikspris.createPris(f4, 36);
+    	Pris bp5 = butikspris.createPris(f5, 36);
+    	Pris bp6 = butikspris.createPris(f6, 36);
+    	Pris bp7 = butikspris.createPris(f7, 36);
+    	Pris bp8 = butikspris.createPris(f8, 36);
+    	Pris bp9 = butikspris.createPris(f9, 36);
+    	Pris bp10 = butikspris.createPris(f10, 36);
+    	Pris bp11 = butikspris.createPris(f11, 36);
+    	Pris bp12 = butikspris.createPris(f12, 36);
+    	Pris bp13 = butikspris.createPris(f13, 36);
+    	Pris bp14 = butikspris.createPris(f14, 50);
     	
     }
 
