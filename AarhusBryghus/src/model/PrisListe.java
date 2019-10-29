@@ -25,8 +25,7 @@ public class PrisListe {
 	public void setArrangement(String arrangement) {
 		this.arrangement = arrangement;
 	}
-<<<<<<< Updated upstream
-=======
+
 
 	@Override
 	public String toString() {
@@ -37,7 +36,7 @@ public class PrisListe {
 		
 		return new ArrayList<>(priser);
 	}
->>>>>>> Stashed changes
+
 	
 	
 	

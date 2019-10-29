@@ -270,10 +270,7 @@ public class Controller {
     public static ArrayList<Salg> getSalgsEnheder() {
     	return Storage.getSalgsenheder();
     }
-<<<<<<< Updated upstream
-=======
-    
-    
+   
     public static ArrayList<Pris> getPriser(){
     	ArrayList<Pris> priser = new ArrayList<>();
     	for(PrisListe pl : Controller.getPrislister()) {
@@ -283,17 +280,10 @@ public class Controller {
     	}
     	return priser;
     }
->>>>>>> Stashed changes
-      
-	
-	
-	//Init storage
-<<<<<<< Updated upstream
-
-=======
+    
     public static void initStorage() {
     	
-    	Flaske f1 = Controller.createFlaske("flaske", "Klosterbryg");
+    	Produkt f1 = Controller.createProdukt("Flaske", "Klosterbryg");
     	Flaske f2 = Controller.createFlaske("flaske", "Sweet Georgia Brown");
     	Flaske f3 = Controller.createFlaske("flaske", "Celebration");
     	Flaske f4 = Controller.createFlaske("flaske", "Blondie");
@@ -333,7 +323,7 @@ public class Controller {
     	Pris p6 = butikspris.createPris(f3, 36);
     	
     }
->>>>>>> Stashed changes
+
       
       
       
