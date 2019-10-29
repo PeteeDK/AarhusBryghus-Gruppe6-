@@ -3,6 +3,7 @@ package storage;
 import java.util.ArrayList;
 
 import model.*;
+import model.betalingsform.*;
 import model.rabat.*;
 
 public class Storage {
@@ -13,6 +14,7 @@ public class Storage {
 	private static ArrayList<Salg> salgsEnheder = new ArrayList<>();
 	private static ArrayList<PrisListe> prislister = new ArrayList<>();
 	private static ArrayList<Rabat> rabatter = new ArrayList<>();
+	private static ArrayList<IBetalingsform> betalingsformer = new ArrayList<>();
 
 	
 	// -------Produkt---------------------------------------------
@@ -73,5 +75,21 @@ public class Storage {
 	public static void removeRabat(Rabat rabat) {
 		rabatter.remove(rabatter);
 	}
+	
+	
+	// -------Betalingsform---------------------------------------------
+
+	public static ArrayList<IBetalingsform> getBetalingsformer() {
+		return new ArrayList<IBetalingsform>(betalingsformer);
+	}
+
+	public static void addBetalingsform(IBetalingsform Ibetalingsform) {
+		betalingsformer.add(Ibetalingsform);
+	}
+
+	public static void removeBetalingsform(IBetalingsform Ibetalingsform) {
+		betalingsformer.remove(Ibetalingsform);
+	}
+
 
 }

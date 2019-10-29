@@ -56,6 +56,9 @@ public class Anlæg extends Produkt {
 	}
 
 	public void setBrugtFustagemængde(double brugtFustageMængde) {
+		if(brugtFustageMængde < 0) {
+			throw new IllegalArgumentException("brugt fustagemængde kan ikke være negativ");
+		}
 		double samletFustageMængde = 0;
 		for(Pris p : tilbehør) {
 			if(p.getProdukt().getKategori().equals("fustage")) {
@@ -65,7 +68,6 @@ public class Anlæg extends Produkt {
 		if(brugtFustageMængde <= samletFustageMængde) {
 			this.brugtFustageLiter = brugtFustageMængde;
 		}else {
-			//TODO Exception-Handling
 			throw new RuntimeException("brugt fustage-mængde overstiger indkøbt mængde");
 		}
 	}
@@ -75,6 +77,9 @@ public class Anlæg extends Produkt {
 	}
 
 	public void setBrugtKulsyremængde(double brugtKulsyreMængde) {
+		if(brugtKulsyreMængde < 0) {
+			throw new IllegalArgumentException("brugt kulsyremængde kan ikke være negativ");
+		}
 		double samletKulsyreMængde = 0;
 		for(Pris p : tilbehør) {
 			if(p.getProdukt().getKategori().equals("kulsyre")) {
@@ -84,7 +89,6 @@ public class Anlæg extends Produkt {
 		if(brugtKulsyreMængde <= samletKulsyreMængde) {
 			this.brugtKulsyreKg = brugtKulsyreMængde;
 		}else {
-			//TODO Exception-Handling
 			throw new RuntimeException("brugt kulsyre-mængde overstiger indkøbt mængde");
 		}
 	}

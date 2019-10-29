@@ -9,9 +9,9 @@ public class StudieRabat extends Rabat {
 	private ProduktLinje produktlinje;
 	
 	public StudieRabat(ProduktLinje produktlinje, int antalStuderende, double rabatProcent) {
-		this.produktlinje = produktlinje;
-		this.antalStuderende = antalStuderende;
-		this.rabatProcent = rabatProcent;
+		setProduktlinje(produktlinje);
+		setAntalStuderende(antalStuderende);
+		setRabatProcent(rabatProcent);
 	}
 	
 	@Override
@@ -26,6 +26,9 @@ public class StudieRabat extends Rabat {
 	}
 
 	public void setAntalStuderende(int antalStuderende) {
+		if(antalStuderende < 0 || antalStuderende > produktlinje.getAntal()) {
+			throw new IllegalArgumentException("Antallet af studerende kan ikke være negativ eller overstige antallet på rundvisningen");
+		}
 		this.antalStuderende = antalStuderende;
 	}
 
@@ -34,6 +37,9 @@ public class StudieRabat extends Rabat {
 	}
 
 	public void setRabatProcent(double rabatProcent) {
+		if(rabatProcent < 0 || rabatProcent > 100) {
+			throw new IllegalArgumentException("Studierabatprocenten kan ikke være negativ eller overstige 100%");
+		}
 		this.rabatProcent = rabatProcent;
 	}
 
@@ -42,10 +48,10 @@ public class StudieRabat extends Rabat {
 	}
 
 	public void setProduktlinje(ProduktLinje produktlinje) {
+		if(produktlinje == null) {
+			throw new IllegalArgumentException("produktlinjen kan ikke være null");
+		}
 		this.produktlinje = produktlinje;
 	}
-	
-	
-	
 	
 }

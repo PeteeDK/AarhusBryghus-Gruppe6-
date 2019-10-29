@@ -8,17 +8,12 @@ import model.rabat.StudieRabat;
 public class ProduktLinje {
 
     private int antal;
-    private Rabat rabat;
     private Produkt produkt;
     private Pris pris;
 
     public ProduktLinje(Pris pris, int antal) {
-		this.antal = antal;
-		this.pris = pris;
-	}
-    
-    public void setRabat(Rabat rabat) {
-    	this.rabat = rabat;
+		setPris(pris);
+		setAntal(antal);
     }
     
     public void addPris(Pris pris) {
@@ -26,7 +21,7 @@ public class ProduktLinje {
     }
     
     //TODO Man kan måske refakturere lidt her
-    private double beregnPris() {
+    public double getPris() {
     	if(pris.getProdukt().getKategori().equals("anlæg")) {
     		return antal * pris.getPris() + ((Anlæg)pris.getProdukt()).beregnForbrug();
     	}
@@ -40,25 +35,27 @@ public class ProduktLinje {
     	return pris.getPris() * antal;
     }
     
-    private double prisMedRabat(double prisUdenRabat) {
-    	return rabat.tildelRabat(prisUdenRabat);
-    }
-    
-    public double getPris() {
-    	if(rabat == null) {
-    		return beregnPris();
-    	}else {
-    		return prisMedRabat(beregnPris());
-    	}
-    } 
-
 	public int getAntal() {
 		return antal;
+	}
+	
+	public void setAntal(int antal) {
+		if(antal < 0) {
+			throw new IllegalArgumentException("Antallet kan ikke være negativ");
+		}
+		this.antal = antal;
+	}
+
+	public void setPris(Pris pris) {
+		if(pris == null) {
+			throw new IllegalArgumentException("prisen kan ikke være null");
+		}
+		this.pris = pris;
 	}
 
 	@Override
 	public String toString() {
-		return "ProduktLinje [antal=" + antal + ", rabat=" + rabat + ", produkt=" + produkt + ", pris=" + pris + "]";
+		return "ProduktLinje [antal=" + antal + ", produkt=" + produkt + ", pris=" + pris + "]";
 	}
     
 	

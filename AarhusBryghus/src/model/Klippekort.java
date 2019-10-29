@@ -1,25 +1,28 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import model.betalingsform.IBetalingsform;
+
 
 public class Klippekort extends Produkt implements IBetalingsform {
 
 	private int antalKlip;
 	private final ArrayList<Klip> klipEnheder = new ArrayList<>();
+	private LocalDate købsdato;
 	 
 	public Klippekort(String kategori, String produktNavn) {
 		super(kategori, produktNavn);
 		initKlip();
 		antalKlip = klipEnheder.size();
+		købsdato = LocalDate.now();
 	}
 	
 	private void initKlip() {
 		int i = 1;
 		while(i < 5) {
 			Klip k = createKlip(i);
-			klipEnheder.add(k);
 			i++;
 		}
 	}
@@ -57,7 +60,20 @@ public class Klippekort extends Produkt implements IBetalingsform {
 	}
 
 	public void setAntalKlip(int antalKlip) {
+		if(antalKlip < 0 && antalKlip > 4) {
+			throw new IllegalArgumentException("Antal klip kan ikke være negativ eller overstige 4");
+		}
 		this.antalKlip = antalKlip;
 	}
+
+	public LocalDate getKøbsdato() {
+		return købsdato;
+	}
+
+	public void setKøbsdato(LocalDate købsdato) {
+		this.købsdato = købsdato;
+	}
+	
+	
 	
 }

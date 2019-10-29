@@ -16,6 +16,9 @@ public class Tilbehør extends Produkt {
 	}
 
 	public void setMængde(double mængde) {
+		if(mængde < 0) {
+			throw new IllegalArgumentException("Mængden kan ikke være negativ");
+		}
 		this.mængde = mængde;
 	}
 
@@ -24,6 +27,9 @@ public class Tilbehør extends Produkt {
 	}
 
 	public void setPant(double pant) {
+		if(pant < 0) {
+			throw new IllegalArgumentException("Panten kan ikke være negativ");
+		}
 		this.pant = pant;
 	}
 
