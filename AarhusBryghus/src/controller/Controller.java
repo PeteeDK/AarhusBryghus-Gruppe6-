@@ -317,21 +317,21 @@ public class Controller {
     	
     	
     	
-    	PrisListe ButiksPris = Controller.createPrisliste("Butikspris");
-    	Pris bp1 = butikspris.createPris(f1, 36);
-    	Pris bp2 = butikspris.createPris(f2, 36);
-    	Pris bp3 = butikspris.createPris(f3, 36);
-    	Pris bp4 = butikspris.createPris(f4, 36);
-    	Pris bp5 = butikspris.createPris(f5, 36);
-    	Pris bp6 = butikspris.createPris(f6, 36);
-    	Pris bp7 = butikspris.createPris(f7, 36);
-    	Pris bp8 = butikspris.createPris(f8, 36);
-    	Pris bp9 = butikspris.createPris(f9, 36);
-    	Pris bp10 = butikspris.createPris(f10, 36);
-    	Pris bp11 = butikspris.createPris(f11, 36);
-    	Pris bp12 = butikspris.createPris(f12, 36);
-    	Pris bp13 = butikspris.createPris(f13, 36);
-    	Pris bp14 = butikspris.createPris(f14, 50);
+    	PrisListe butiksPris = Controller.createPrisliste("Butikspris");
+    	Pris bp1 = butiksPris.createPris(f1, 36);
+    	Pris bp2 = butiksPris.createPris(f2, 36);
+    	Pris bp3 = butiksPris.createPris(f3, 36);
+    	Pris bp4 = butiksPris.createPris(f4, 36);
+    	Pris bp5 = butiksPris.createPris(f5, 36);
+    	Pris bp6 = butiksPris.createPris(f6, 36);
+    	Pris bp7 = butiksPris.createPris(f7, 36);
+    	Pris bp8 = butiksPris.createPris(f8, 36);
+    	Pris bp9 = butiksPris.createPris(f9, 36);
+    	Pris bp10 = butiksPris.createPris(f10, 36);
+    	Pris bp11 = butiksPris.createPris(f11, 36);
+    	Pris bp12 = butiksPris.createPris(f12, 36);
+    	Pris bp13 = butiksPris.createPris(f13, 36);
+    	Pris bp14 = butiksPris.createPris(f14, 50);
     	
     }
 
