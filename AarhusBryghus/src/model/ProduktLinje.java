@@ -18,7 +18,7 @@ public class ProduktLinje {
     
     public void addPris(Pris pris) {
     	this.pris = pris; 
-    }
+    } 
     
     //TODO Man kan måske refakturere lidt her
     public double getPris() {
@@ -48,14 +48,19 @@ public class ProduktLinje {
 
 	public void setPris(Pris pris) {
 		if(pris == null) {
-			throw new IllegalArgumentException("prisen kan ikke være null");
+			throw new IllegalArgumentException("Prisen kan ikke være null");
 		}
 		this.pris = pris;
 	}
+	
+	public Pris getPrisObj() {
+		return pris;
+	}
 
+	
 	@Override
 	public String toString() {
-		return "ProduktLinje [antal=" + antal + ", produkt=" + produkt + ", pris=" + pris + "]";
+		return antal + " x " + pris.getProdukt().getProduktNavn() + " .......... " + getPris()+ " kr.";
 	}
     
 	

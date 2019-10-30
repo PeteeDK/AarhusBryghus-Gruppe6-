@@ -4,8 +4,8 @@ import model.Tilbehør;
 
 public class Fustage extends Tilbehør {
 
-	public Fustage(String kategori, String produktNavn, double mængde, double pant) {
-		super(kategori, produktNavn, mængde, pant);
+	public Fustage(String kategori, String produktNavn, double mængde) {
+		super(kategori, produktNavn, mængde);
 		// TODO Auto-generated constructor stub
 	}
 	

@@ -43,9 +43,6 @@ public class Salg {
     }
     
     public void setRabat(Rabat rabat) {
-		if(rabat == null) {
-			throw new IllegalArgumentException();
-		}
     	this.rabat = rabat;
     }
 	
@@ -79,7 +76,7 @@ public class Salg {
 		ProduktLinje produktLinje = new ProduktLinje(pris, antal);
 		produktLinjer.add(produktLinje);
 		return produktLinje;
-	}
+	} 
 
 	public void addProduktLinje(ProduktLinje produktlinje) {
 		if(produktlinje == null) {
@@ -91,9 +88,6 @@ public class Salg {
 	}
 
 	public void removeProduktLinje(ProduktLinje produktlinje) {
-		if(produktlinje == null) {
-			throw new IllegalArgumentException("Produktlinje kan ikke være null");
-		}
 		if(produktLinjer.contains(produktlinje)) {
 			produktLinjer.remove(produktlinje);
 		}

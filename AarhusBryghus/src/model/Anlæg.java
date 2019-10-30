@@ -68,7 +68,7 @@ public class Anlæg extends Produkt {
 		if(brugtFustageMængde <= samletFustageMængde) {
 			this.brugtFustageLiter = brugtFustageMængde;
 		}else {
-			throw new RuntimeException("brugt fustage-mængde overstiger indkøbt mængde");
+			throw new ArithmeticException("brugt fustage-mængde kan ikke overstiger indkøbt mængde");
 		}
 	}
 
@@ -89,7 +89,7 @@ public class Anlæg extends Produkt {
 		if(brugtKulsyreMængde <= samletKulsyreMængde) {
 			this.brugtKulsyreKg = brugtKulsyreMængde;
 		}else {
-			throw new RuntimeException("brugt kulsyre-mængde overstiger indkøbt mængde");
+			throw new RuntimeException("brugt kulsyre-mængde kan ikke overstige indkøbt mængde");
 		}
 	}
 	

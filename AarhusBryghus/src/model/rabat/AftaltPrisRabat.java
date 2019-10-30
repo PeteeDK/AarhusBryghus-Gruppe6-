@@ -11,7 +11,7 @@ public class AftaltPrisRabat extends Rabat {
 	@Override
 	public double tildelRabat(double pris) {
 		if(pris < fratrukketPris) {
-			throw new IllegalArgumentException("Fratrukket pris kan ikke overstige prisen på bestillingen");
+			throw new IllegalArgumentException("Fratrukket pris kan ikke overstige prisen på bestillingen. Sæt et mindre beløb, der skal trækkes fra.");
 		}
 		return pris - fratrukketPris;
 	}

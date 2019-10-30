@@ -1,14 +1,20 @@
 package model.produkter;
 
+import java.util.ArrayList;
+
 import model.Produkt;
 
 public class Sampakninger extends Produkt {
 
 	private int antalØl;
 	private int antalGlas;
+	private boolean sampakningFyldt;
+	private ArrayList<Produkt> indholdEnheder = new ArrayList<>();
 	
-	public Sampakninger(String kategori, String produktNavn) {
+	public Sampakninger(String kategori, String produktNavn, int antalGlas, int antalØl) {
 		super(kategori, produktNavn);
+		this.antalGlas = antalGlas;
+		this.antalØl = antalØl;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -35,5 +41,22 @@ public class Sampakninger extends Produkt {
 		this.antalGlas = antalGlas;
 	}
 
+	public void addIndhold(Produkt indhold) {
+		if(indhold.getKategori().equals("flaske")) {
+			antalØl--;
+			indholdEnheder.add(indhold);
+		}
+		if(indhold.getKategori().equals("glas")) {
+			antalGlas--;
+			indholdEnheder.add(indhold);
+		}
+	}
+	
+	public boolean sampakningFyldt() {
+		if(antalØl == 0 && antalGlas == 0) {
+			return true;
+		}
+		return false;
+	}
 	
 }

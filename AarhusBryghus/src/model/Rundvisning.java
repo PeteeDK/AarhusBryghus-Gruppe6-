@@ -12,10 +12,8 @@ public class Rundvisning extends Produkt {
 	private boolean betalt;
 	
 	
-	public Rundvisning(String kategori, String produktNavn, LocalDate dato, LocalTime tidspunkt) {
+	public Rundvisning(String kategori, String produktNavn) {
 		super(kategori, produktNavn);
-		this.dato = dato;					//TODO Skal dato valideres (fx muligt at booke i weekend og på helligdage)
-		this.tidspunkt = tidspunkt;			//TODO Skal tidspunkt valideres (fx skal det være muligt at booke midnat)
 	}
 
 	
@@ -26,22 +24,20 @@ public class Rundvisning extends Produkt {
 		}
 	}
 
-
 	public LocalDate getDato() {
 		return dato;
 	}
 
-
+	//TODO Skal dato valideres (fx muligt at booke i weekend og på helligdage)
 	public void setDato(LocalDate dato) {
 		this.dato = dato;
 	}
-
 
 	public LocalTime getTidspunkt() {
 		return tidspunkt;
 	}
 
-
+	//TODO Skal tidspunkt valideres (fx skal det være muligt at booke midnat)
 	public void setTidspunkt(LocalTime tidspunkt) {
 		this.tidspunkt = tidspunkt;
 	}

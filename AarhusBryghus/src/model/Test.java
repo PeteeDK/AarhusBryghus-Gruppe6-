@@ -28,21 +28,21 @@ public class Test {
 		//--- 5 klosterbryg i fredagsbar til 50 kr. med og uden rabat -----------------------------------
 		
 		//lav et Produkt fx. flaskeøl
-		Flaske flaske = Controller.createFlaske("flaske","klosterbryg");
+		Flaske flaske = new Flaske("flaske","klosterbryg");
 		
 		//lav en Pris på flaskeøl i PrisListe fx. 50 kr
-		PrisListe prisliste = Controller.createPrisliste("fredagsbar");
+		PrisListe prisliste = new PrisListe("fredagsbar");
 		Pris pris = prisliste.createPris(flaske, 50);
 		
 		//brug prisen til at lave en Produktlinje i Salg fx. 5 klosterbryg med pris 50 kr. 
-		Salg salg = Controller.createSalg();
+		Salg salg = new Salg();
 		ProduktLinje produktLinje = salg.createProduktLinje(pris, 5);
 		
 		//beregn prisen uden rabat - 250 kr.
 		System.out.println("5 klosterbryg i fredagsbar til 50 kr.:\n"+salg.getPris());
 		
 		//beregn prisen med procentvis rabat fx. 10% - lav objekt af ProcentvisRabat og tilføj til produktlinjen - 225 kr.
-		Rabat rabat = Controller.createProcentvisRabat(10);
+		Rabat rabat = new ProcentvisRabat(10);
 		salg.setRabat(rabat);
 		
 		System.out.println("\n5 klosterbryg i fredagsbar til 50 kr. med 10% rabat:\n"+salg.getPris());
@@ -60,14 +60,14 @@ public class Test {
 		//1.del - beregn pris af anlæg uden tilbehør
 		
 		//lav et Anlæg - 1-hane
-		Anlæg anlæg = Controller.createAnlæg("anlæg","1-hane");
+		Anlæg anlæg = new Anlæg("anlæg","1-hane");
 		
 		//lav en Pris for anlæg i Prisklasse - 250 kr.
-		PrisListe prisliste1 = Controller.createPrisliste("butik");
+		PrisListe prisliste1 = new PrisListe("butik");
 		Pris pris1 = prisliste1.createPris(anlæg, 250);
 		
 		//brug prisen til at oprette ProduktLinje i Salg - 1 stk., prisen
-		Salg s1 = Controller.createSalg();
+		Salg s1 = new Salg();
 		ProduktLinje produktlinje1 = s1.createProduktLinje(pris1, 1);
 		
 		//Tilføj til salget
@@ -80,13 +80,13 @@ public class Test {
 		//2.del - beregn pris af anlæg med tilbehør uden forbrug (beregning af pant)
 		
 		//lav en fustage - klosterbryg, 20, 200 kr. (pant)
-		Fustage fustage = Controller.createFustage("fustage","klosterbryg",20, 200);
+		Fustage fustage = new Fustage("fustage","klosterbryg",20);
 		
 		//lav en kulsyre - 6 kg, 1000 kr. (pant)
-		Kulsyre kulsyre = Controller.createKulsyre("kulsyre","",6, 1000);
+		Kulsyre kulsyre = new Kulsyre("kulsyre","",6);
 		
 		//lav en pris i Prisklasse til fustagen - 775/20 (pris pr. liter)
-		PrisListe prisliste2 = Controller.createPrisliste("butik");
+		PrisListe prisliste2 = new PrisListe("butik");
 		Pris pris2 = prisliste2.createPris(fustage, (775.0/20));
 		
 		//lav en pris i Prisklasse til kulsyren - 400/6 (pris pr. kg)
@@ -97,7 +97,7 @@ public class Test {
 		anlæg.addTilbehør(pris3);
 		
 		//lav en produktlinje i Salg - anlægget og 1 stk.
-		Salg s2 = Controller.createSalg();
+		Salg s2 = new Salg();
 		ProduktLinje produktlinje2 = s2.createProduktLinje(pris1, 1);
 		
 		//tilføj produktlinje til salget
@@ -121,7 +121,7 @@ public class Test {
 		anlæg.setAfleveret(true);
 		
 		//lav en produktlinje i salg - anlægget og 1 stk.
-		Salg s3 = Controller.createSalg();
+		Salg s3 = new Salg();
 		ProduktLinje produktlinje3 = s3.createProduktLinje(pris1,1);
 		
 		//Tilføj produktlinje til salget
@@ -140,14 +140,16 @@ public class Test {
 		//1.del - rundvisning, 10 personer, 100 kr. pr. person, uden studierabat
 		
 		//lav en rundvisning - LocalDate.of(24/10), LocalTime.of(12:00)
-		Rundvisning rundvisning1 = Controller.createRundvisning("Rundvisning","19V",LocalDate.of(2019, 10, 24), LocalTime.of(12, 00));
+		Rundvisning rundvisning1 = new Rundvisning("Rundvisning","19V");
+		rundvisning1.setDato(LocalDate.of(2019, 10, 24));
+		rundvisning1.setTidspunkt(LocalTime.of(12, 00));
 		
 		//lav en pris i Prisliste med rundvisningen - pris: 100
-		PrisListe prisliste1 = Controller.createPrisliste("Butik");
+		PrisListe prisliste1 = new PrisListe("Butik");
 		Pris pris1 = prisliste1.createPris(rundvisning1, 100);
 		
 		//lav en produktlinje i Salg med rundvisningen - antal: 10 stk.
-		Salg s1 = Controller.createSalg();
+		Salg s1 = new Salg();
 		ProduktLinje produktlinje1 = new ProduktLinje(pris1, 10);
 		
 		//beregn pris i produktlinje, ikke betalt - 0
@@ -173,7 +175,7 @@ public class Test {
 		//2.del - rundvisning, 10 personer, 100 kr. pr. person, med studierabat til 9 af dem
 		
 		//lav en studierabat til 9 af personerne på 10%
-		Rabat rabat1 = Controller.createStudieRabat(produktlinje1,9,10);
+		Rabat rabat1 = new StudieRabat(produktlinje1,9,10);
 		
 		//set rabat i salget fra 1.del
 		s1.setRabat(rabat1);
@@ -190,19 +192,19 @@ public class Test {
 	private static void testBeregnSamletPrisForSalg() {
 		
 		//opret tre forskellige produkter af flaskeøl
-		Flaske flaske1 = Controller.createFlaske("flaske", "klosterbryg");
-		Flaske flaske2 = Controller.createFlaske("flaske", "Sweet Georgia Brown");
-		Flaske flaske3 = Controller.createFlaske("flaske", "Extra Pilsner");
+		Flaske flaske1 = new Flaske("flaske", "klosterbryg");
+		Flaske flaske2 = new Flaske("flaske", "Sweet Georgia Brown");
+		Flaske flaske3 = new Flaske("flaske", "Extra Pilsner");
 		
 		
 		//opret tre forskellige priser til de tre forskellige produkter af flaske i en Prisliste
-		PrisListe prisliste1 = Controller.createPrisliste("Butik");
+		PrisListe prisliste1 = new PrisListe("Butik");
 		Pris pris1 = prisliste1.createPris(flaske1, 36);
 		Pris pris2 = prisliste1.createPris(flaske2, 36);
 		Pris pris3 = prisliste1.createPris(flaske3, 36);
 		
 		//lav et Salg der opretter 3 produktlinjer med hver deres pris
-		Salg s1 = Controller.createSalg();
+		Salg s1 = new Salg();
 		ProduktLinje produktlinje1 = s1.createProduktLinje(pris1, 1);
 		ProduktLinje produktlinje2 = s1.createProduktLinje(pris2, 1);
 		ProduktLinje produktlinje3 = s1.createProduktLinje(pris3, 1);
@@ -219,21 +221,21 @@ public class Test {
 	private static void testKlippekortSomProduktOgBetalingsform() {
 
 		//opret et klippekort som produkt
-		Produkt produkt1 = Controller.createKlippekort("klipppekort", "klippekort, 4 klip");
+		Produkt produkt1 = new Klippekort("klipppekort", "klippekort, 4 klip");
 		
 		//lav en pris til klippekort i PrisListe - 100 kr
-		PrisListe prisliste1 = Controller.createPrisliste("Fredagsbar");
+		PrisListe prisliste1 = new PrisListe("Fredagsbar");
 		Pris pris1 = prisliste1.createPris(produkt1, 100);
 		
 		//lav en produktlinje i Salg med prisen - 1 stk
-		Salg salg1 = Controller.createSalg();
+		Salg salg1 = new Salg();
 		ProduktLinje produktlinje1 = salg1.createProduktLinje(pris1, 1);
 		
 		//beregn samlet pris for salget
 		System.out.println("Samlet pris for klippekort i Salg:\n"+salg1.getPris());
 		
 		//opret klippekort som betalingsform
-		Betalingsform betalingsform1 = Controller.createBetalingsform();
+		Betalingsform betalingsform1 = new Betalingsform();
 		betalingsform1.setBetalingsform((IBetalingsform)produkt1);
 		
 		//tilføj betalingsformen til salget
@@ -280,23 +282,29 @@ public class Test {
 		
 		//1.del
 		
+		ArrayList<Klippekort> klippekort = new ArrayList<>();
+		
 		//opret 3 Klippekort som produkt med en uges interval
-		Klippekort klippekort1 = Controller.createKlippekort("Klippekort", "klippekort1");
+		Klippekort klippekort1 = new Klippekort("Klippekort", "klippekort1");
 		klippekort1.setKøbsdato(LocalDate.of(2019, 10, 1));
-		Klippekort klippekort2 = Controller.createKlippekort("Klippekort", "klippekort2");
+		Klippekort klippekort2 = new Klippekort("Klippekort", "klippekort2");
 		klippekort2.setKøbsdato(LocalDate.of(2019, 10, 8));
-		Klippekort klippekort3 = Controller.createKlippekort("Klippekort", "klippekort3");
+		Klippekort klippekort3 = new Klippekort("Klippekort", "klippekort3");
 		klippekort3.setKøbsdato(LocalDate.of(2019, 10, 15));
+		
+		klippekort.add(klippekort1);
+		klippekort.add(klippekort2);
+		klippekort.add(klippekort3);
 		
 		System.out.println("Alle klippekort der er udstedt - 3 stk.:");
 		//vis alle klippekort i storage for produkt
-		for(Produkt k : Controller.getKlippekortEnheder()) {
+		for(Produkt k : klippekort) {
 			System.out.println(k + ", købsdato: " + ((Klippekort)k).getKøbsdato());
 		}
 		
 		System.out.println("\nAlle klippekort udstedt mellem den 30/9 - 9/10 - 2 stk.:");
 		//vis klippekort der er udsted for en to uger lang periode
-		for(Produkt k : Controller.getKlippekortEnheder()) {
+		for(Produkt k : klippekort) {
 			if(((Klippekort)k).getKøbsdato().isAfter(LocalDate.of(2019, 9, 30)) && ((Klippekort)k).getKøbsdato().isBefore(LocalDate.of(2019, 10, 9))) {
 				System.out.println(k + ", købsdato: " + ((Klippekort)k).getKøbsdato());
 			}
@@ -326,17 +334,19 @@ public class Test {
 		}
 		
 		//vis alle klip der er brugt mellem d. 30/9 - 9/10 - 5 stk
-		for(Produkt klippekort : Controller.getKlippekortEnheder()) {
-			for(Klip k : ((Klippekort)klippekort).getKlipEnheder()) {
+		for(Klippekort kk : klippekort) {
+			for(Klip k : ((Klippekort)kk).getKlipEnheder()) {
 				if(k.isBrugt()) {
 					if(k.getTransaktionsdato().isAfter(LocalDate.of(2019, 9, 30)) && k.getTransaktionsdato().isBefore(LocalDate.of(2019, 10, 9))) {
-						System.out.println(klippekort.getProduktNavn() + ", " + k.getNr() + ", købsdato: " + k.getTransaktionsdato());
+						System.out.println(kk.getProduktNavn() + ", " + k.getNr() + ", købsdato: " + k.getTransaktionsdato());
 					}
 				}
 			}
 		}
 		
 		System.out.println("\n---------------------------------------------------------------\n");
+		
+		Rundvisning r1 = new Rundvisning("Rundvisning","");
 		
 	}
 

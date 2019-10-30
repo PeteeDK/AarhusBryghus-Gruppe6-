@@ -7,14 +7,15 @@ public class Pris {
 	
 	public Pris(Produkt produkt, double pris) {
 		if(produkt == null || pris < 0) {
-			throw new IllegalArgumentException("Produkt kan ikke være null eller prisen kan ikke være negativ");
+			throw new IllegalArgumentException("Produktet kan ikke være null eller prisen kan ikke være negativ");
 		}
 		this.produkt = produkt;
-		setPris(pris);
+		this.pris = pris;
 	}
 
 	public double getPris() {
-		return pris;
+		//display only two decimals
+		return Math.round(pris * 100.0) / 100.0;
 	}
 
 	public void setPris(double pris) {
@@ -31,7 +32,10 @@ public class Pris {
 	
 	@Override
 	public String toString() {
-		return "Pris [pris=" + pris + ", produkt=" + produkt + "]";
+		if(getProdukt().getProduktNavn().equals("")) {
+			return getProdukt().getKategori() + "\t\t" + getPris() + "kr.";
+		}
+		return getProdukt().getProduktNavn() + "\t\t" + getPris() + "kr.";
 	}
 
 	

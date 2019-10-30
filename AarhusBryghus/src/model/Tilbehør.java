@@ -5,10 +5,15 @@ public class Tilbehør extends Produkt {
 	private double mængde;
 	private double pant;
 	
-	public Tilbehør(String kategori, String produktNavn, double mængde, double pant) {
+	public Tilbehør(String kategori, String produktNavn, double mængde) {
 		super(kategori, produktNavn);
 		this.mængde = mængde;
-		this.pant = pant;
+		//pant for fustage- og kulsyre-produkter kan kun være hhv. 200 og 1000. Hvis der bliver behov for at specificere en anden værdi, kan man udvidde klassen med en ekstra constructor, der tager pant som parameter 
+		if(kategori.equals("fustage")) {
+			pant = 200;	
+		}else if(kategori.equals("kulsyre")) {
+			pant = 1000; 
+		}
 	}
 
 	public double getMængde() {

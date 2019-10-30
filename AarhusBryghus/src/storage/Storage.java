@@ -15,7 +15,24 @@ public class Storage {
 	private static ArrayList<PrisListe> prislister = new ArrayList<>();
 	private static ArrayList<Rabat> rabatter = new ArrayList<>();
 	private static ArrayList<IBetalingsform> betalingsformer = new ArrayList<>();
+	private static ArrayList<ProduktLinje> produktlinjer = new ArrayList<>();
 
+
+	// -------ProduktLinje---------------------------------------------
+
+	public static ArrayList<ProduktLinje> getProduktLinjer() {
+		return new ArrayList<ProduktLinje>(produktlinjer);
+	}
+
+	public static void addProduktLinje(ProduktLinje produktLinje) {
+		produktlinjer.add(produktLinje);
+	}
+
+	public static void removeProduktLinje(ProduktLinje produktLinje) {
+		produktlinjer.remove(produktLinje);
+	}
+
+	
 	
 	// -------Produkt---------------------------------------------
 
