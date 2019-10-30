@@ -54,8 +54,8 @@ public class Controller {
 		return malt;
 	}
 	
-	public static Sampakninger createSampaktninger(String kategori, String produktNavn) {
-		Sampakninger sampakning = new Sampakninger(kategori, produktNavn);
+	public static Sampakninger createSampaktninger(String kategori, String produktNavn, int antalØl, int antalGlas) {
+		Sampakninger sampakning = new Sampakninger(kategori, produktNavn,antalØl,antalGlas);
 		Storage.addProdukt(sampakning);
 		return sampakning;
 	}
@@ -386,13 +386,13 @@ public class Controller {
     	
     	Glas glas1 = Controller.createGlas("glas", "");
     	
-    	Sampakninger sampakninger1 = Controller.createSampaktninger("sampakninger", "gaveæske 2 øl, 2 glas");
-    	Sampakninger sampakninger2 = Controller.createSampaktninger("sampakninger", "gaveæske 4 øl");
-    	Sampakninger sampakninger3 = Controller.createSampaktninger("sampakninger", "trækasse 4 øl");
-    	Sampakninger sampakninger4 = Controller.createSampaktninger("sampakninger", "gaveæske 6 øl, 2 glas");
-    	Sampakninger sampakninger5 = Controller.createSampaktninger("sampakninger", "gaveæske 6 øl, 6 glas");
-    	Sampakninger sampakninger6 = Controller.createSampaktninger("sampakninger", "trækasse 12 øl");
-    	Sampakninger sampakninger7 = Controller.createSampaktninger("sampakninger", "papkasse 12 øl");
+    	Sampakninger sampakninger1 = Controller.createSampaktninger("sampakninger", "gaveæske 2 øl, 2 glas",2,2);
+    	Sampakninger sampakninger2 = Controller.createSampaktninger("sampakninger", "gaveæske 4 øl",4,0);
+    	Sampakninger sampakninger3 = Controller.createSampaktninger("sampakninger", "trækasse 4 øl",6,0);
+    	Sampakninger sampakninger4 = Controller.createSampaktninger("sampakninger", "gaveæske 6 øl, 2 glas",6,2);
+    	Sampakninger sampakninger5 = Controller.createSampaktninger("sampakninger", "gaveæske 6 øl, 6 glas",6,6);
+    	Sampakninger sampakninger6 = Controller.createSampaktninger("sampakninger", "trækasse 12 øl",12,0);
+    	Sampakninger sampakninger7 = Controller.createSampaktninger("sampakninger", "papkasse 12 øl",12,0);
 
     	Rundvisning rundvisning1 = Controller.createRundvisning("rundvisning", "");
     	

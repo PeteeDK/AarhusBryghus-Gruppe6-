@@ -12,8 +12,11 @@ public class Salg {
 	private int id = 1;
 	private ArrayList<ProduktLinje> produktLinjer = new ArrayList<>();
 	private IBetalingsform betalingsform;
+	private ArrayList<IBetalingsform> betalingsformer = new ArrayList<>();
 	private LocalDate salgsdato;
 	private Rabat rabat;
+	private double fuldBeløb;
+	private boolean erbetalt;
 	
 	public Salg() {
 		id += Controller.getSalgsEnheder().size();	
@@ -32,8 +35,10 @@ public class Salg {
 	
     public double getPris() {
     	if(rabat == null) {
+    		fuldBeløb = beregnPris();
     		return beregnPris();
     	}else {
+    		fuldBeløb = prisMedRabat(beregnPris());
     		return prisMedRabat(beregnPris());
     	}
     } 
@@ -54,10 +59,13 @@ public class Salg {
 		return betalingsform;
 	}
 
+	//TODO Er denne metode overflødig, da man også kan betale hele beløbet med delbetalinger()
 	public void setBetalingsform(Betalingsform betalingsform) {
 		if(betalingsform == null) {
 			throw new IllegalArgumentException("Betalingsform kan ikke være null");
 		}
+		fuldBeløb = 0;
+		erbetalt = true;
 		this.betalingsform = betalingsform;
 	}
 
@@ -104,4 +112,45 @@ public class Salg {
 	}
 	
 	
+	public void addBetalingsform(IBetalingsform betalingsform) {
+		betalingsformer.add(betalingsform);
+	}
+
+	
+	public void removeBetalingsform(IBetalingsform betalingsform) {
+		betalingsformer.remove(betalingsform);
+	}
+	
+	
+	public void delBetalinger(IBetalingsform betalingsform, double beløb) {
+		if(betalingsform == null || beløb < 0) {
+			throw new IllegalArgumentException("Betalingsformen kan ikke være null eller beløbet kan ikke være negativt");
+		}
+		
+		//Betalingsform->registrerBetaling() og trække beløb fra fuldtBetalt
+		if(beløb <= fuldBeløb) {
+			betalingsformer.add(betalingsform);
+			fuldBeløb -= beløb;
+			if(fuldBeløb == 0) {
+				erbetalt = true;
+			}
+//			System.out.println("[Salg -> delBetalinger()] Fuldbeløb: " + fuldBeløb);
+		}else {
+			throw new ArithmeticException("Beløb kan ikke være mindre en fuld beløb");
+		}
+		
+	}
+	
+	//TODO Kun til at teste med
+	public void setFuldbeløb(double beløb) {
+		this.fuldBeløb = beløb;
+	}
+	
+	public double getFuldBeløb() {
+		return fuldBeløb;
+	}
+
+	public boolean getErBetalt() {
+		return erbetalt;
+	}
 }

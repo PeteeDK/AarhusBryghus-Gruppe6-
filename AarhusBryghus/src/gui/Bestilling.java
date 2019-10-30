@@ -91,8 +91,9 @@ public class Bestilling extends GridPane {
 		
 		//TODO Kan ikke blive bedre. Jeg går over til Scene-builder
 		lvwKurveliste = new ListView<>();
-		this.add(lvwKurveliste, 2, 2, 1, 3);
+		this.add(lvwKurveliste, 2, 2, 1, 6);
 		lvwKurveliste.setPrefWidth(50);
+		lvwKurveliste.setMaxWidth(200);
 		lvwKurveliste.setPrefHeight(150);
 //		ChangeListener<ProduktLinje> kurvlistener = (ov, oldEmployee, newEmployee) -> this.selectedProduktlinjeChanged();
 //		lvwKurveliste.getSelectionModel().selectedItemProperty().addListener(kurvlistener);

@@ -60,6 +60,15 @@ public class MainApp extends Application {
 		tabBetaling.setContent(betaling);
 		tabBetaling.setOnSelectionChanged(event -> betaling.updateControls());
 
+		
+		Tab tabRundvisning = new Tab("Runvisning");
+		tabPane.getTabs().add(tabRundvisning);
+
+		Rundvisning rundvisning = new Rundvisning();
+		tabRundvisning.setContent(rundvisning);
+		tabRundvisning.setOnSelectionChanged(event -> rundvisning.updateControls());
+
+		
 	}
 
 }

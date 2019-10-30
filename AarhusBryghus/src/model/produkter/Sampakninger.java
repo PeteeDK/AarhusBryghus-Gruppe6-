@@ -10,8 +10,9 @@ public class Sampakninger extends Produkt {
 	private int antalGlas;
 	private boolean sampakningFyldt;
 	private ArrayList<Produkt> indholdEnheder = new ArrayList<>();
+	private int indholdstæller;
 	
-	public Sampakninger(String kategori, String produktNavn, int antalGlas, int antalØl) {
+	public Sampakninger(String kategori, String produktNavn, int antalØl, int antalGlas) {
 		super(kategori, produktNavn);
 		this.antalGlas = antalGlas;
 		this.antalØl = antalØl;
@@ -42,21 +43,39 @@ public class Sampakninger extends Produkt {
 	}
 
 	public void addIndhold(Produkt indhold) {
-		if(indhold.getKategori().equals("flaske")) {
+		if(indhold.getKategori().equals("flaske") && antalØl >= 0) {
 			antalØl--;
+			indholdstæller++;
 			indholdEnheder.add(indhold);
-		}
-		if(indhold.getKategori().equals("glas")) {
+		}else if(indhold.getKategori().equals("glas") && antalGlas >= 0) {
 			antalGlas--;
+			indholdstæller++;
 			indholdEnheder.add(indhold);
 		}
 	}
 	
-	public boolean sampakningFyldt() {
-		if(antalØl == 0 && antalGlas == 0) {
+	
+	public boolean isSampakningFyldt() {
+		if(antalØl == 0 && antalGlas == 0 && indholdEnheder.size() == indholdstæller) {
 			return true;
 		}
 		return false;
+	}
+	
+	public void removeIndhold(Produkt produkt) {
+		if(indholdEnheder.contains(produkt)) {
+			if(produkt.getKategori().equals("flaske")) {
+				antalØl++;
+				indholdEnheder.remove(produkt);
+			}else if(produkt.getKategori().equals("glas")) {
+				antalGlas++;
+				indholdEnheder.remove(produkt);
+			}
+		}
+	}
+	
+	public ArrayList<Produkt> getIndholdEnheder(){
+		return new ArrayList<>(indholdEnheder);
 	}
 	
 }

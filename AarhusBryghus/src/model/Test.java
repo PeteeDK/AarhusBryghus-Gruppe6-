@@ -20,7 +20,10 @@ public class Test {
 		testKlippekortSomProduktOgBetalingsform();
 		testVisDagensSalg();
 		testVisSolgteKlippekortForEnGivenPeriodeSamtBrugteKlip();
+		testAfSampakning();
+		testAfDelbetalinger();
 	}
+
 
 
 	private static void testOpretSalg() {
@@ -249,6 +252,8 @@ public class Test {
 			System.out.println(salg1.getBetalingsform().registrerBetaling());
 		}
 
+		
+		
 		System.out.println("\n---------------------------------------------------------------\n");
 
 		
@@ -349,7 +354,53 @@ public class Test {
 		Rundvisning r1 = new Rundvisning("Rundvisning","");
 		
 	}
+	
+	private static void testAfSampakning() {
 
+		Sampakninger sampakning1 = new Sampakninger("sampakning","gaveæske1",2,2);
+		Flaske flaske1 = new Flaske("flaske","klosterøl");
+		Flaske flaske2 = new Flaske("flaske","blondie");
+		Glas glas1 = new Glas("glas","");
+		Glas glas2 = new Glas("glas","");
+		Spiritus spiritus = new Spiritus("Spiritus","spirit of aarhus");
+		
+		sampakning1.addIndhold(flaske1);
+		sampakning1.addIndhold(flaske2);
+		sampakning1.addIndhold(glas1);
+		
+		//ikke fyldt ud - false
+		System.out.println("Ikke fyldt ud - false:\n"+sampakning1.isSampakningFyldt());
+		
+		sampakning1.addIndhold(glas2);
+		//fyldt ud - true
+		System.out.println("Fyldt ud - true: \n"+sampakning1.isSampakningFyldt());
+		
+		sampakning1.removeIndhold(glas2);
+		
+		System.out.println("Der er fjernet et indhold i sampakning - 3:\n"+sampakning1.getIndholdEnheder().size());
+		
+		sampakning1.addIndhold(spiritus);
+		
+		System.out.println("Spiritus er ikke tilføjet. Antallet af indholdsenheder i sampakninger er stadig 3:\n"+sampakning1.getIndholdEnheder().size());
+	}
+
+
+	private static void testAfDelbetalinger() {
+
+		Salg salg1 = new Salg();
+		salg1.setFuldbeløb(999);
+		
+	
+		while(!(salg1.getFuldBeløb() <= 0)) {
+			//Betal 200 kr. med Dankort
+			Betalingsform dankort = new Dankort();
+			salg1.delBetalinger(dankort, 200);
+			
+			//Beløb: 1000 - 200 = 800
+			System.out.println("\nFuldbeløb er nu :\n"+salg1.getFuldBeløb());
+
+		}
+	}
 
 	
 }
