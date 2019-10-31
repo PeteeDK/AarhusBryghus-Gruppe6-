@@ -56,7 +56,7 @@ public class Controller {
 		return malt;
 	}
 	
-	public static Sampakninger createSampaktninger(String kategori, String produktNavn, int antalØl, int antalGlas) {
+	public static Sampakninger createSampakninger(String kategori, String produktNavn, int antalØl, int antalGlas) {
 		Sampakninger sampakning = new Sampakninger(kategori, produktNavn,antalØl,antalGlas);
 		Storage.addProdukt(sampakning);
 		return sampakning;
@@ -97,7 +97,22 @@ public class Controller {
         return beklædninger;
     }
 
-	
+    
+    public static Produkt getGlas() {
+        Produkt glas = null;
+        for(Produkt p : Storage.getProdukter()) {
+      	  if(p.getKategori().equals("glas")) {
+      		  glas = p;
+      	  }
+        }
+        return glas;
+    }
+    
+    
+    
+    public static ArrayList<Produkt> getProdukter(){
+    	return Storage.getProdukter();
+    }
 
     
     //-------Anlæg---------------------------------------------------
@@ -289,6 +304,19 @@ public class Controller {
     	}
     	return priser;
     }
+    
+    
+    public static ArrayList<Pris> getPriserEfterKategori(String kategori){
+    	ArrayList<Pris> priser = new ArrayList<>();
+    	for(PrisListe pl : Controller.getPrislister()) {
+   			for(Pris p : pl.getPriser()) {
+   				if(p.getProdukt().getKategori().equals(kategori)) {
+       				priser.add(p);
+   				}
+   			}
+    	}
+    	return priser;
+    }
 
 
     public static ArrayList<Produkt> getProdukterEfterKategori(String kategori){
@@ -429,13 +457,13 @@ public class Controller {
     	
     	Glas glas1 = Controller.createGlas("glas", "");
     	
-    	Sampakninger sampakninger1 = Controller.createSampaktninger("sampakninger", "gaveæske 2 øl, 2 glas",2,2);
-    	Sampakninger sampakninger2 = Controller.createSampaktninger("sampakninger", "gaveæske 4 øl",4,0);
-    	Sampakninger sampakninger3 = Controller.createSampaktninger("sampakninger", "trækasse 4 øl",6,0);
-    	Sampakninger sampakninger4 = Controller.createSampaktninger("sampakninger", "gaveæske 6 øl, 2 glas",6,2);
-    	Sampakninger sampakninger5 = Controller.createSampaktninger("sampakninger", "gaveæske 6 øl, 6 glas",6,6);
-    	Sampakninger sampakninger6 = Controller.createSampaktninger("sampakninger", "trækasse 12 øl",12,0);
-    	Sampakninger sampakninger7 = Controller.createSampaktninger("sampakninger", "papkasse 12 øl",12,0);
+    	Sampakninger sampakninger1 = Controller.createSampakninger("sampakninger", "gaveæske 2 øl, 2 glas",2,2);
+    	Sampakninger sampakninger2 = Controller.createSampakninger("sampakninger", "gaveæske 4 øl",4,0);
+    	Sampakninger sampakninger3 = Controller.createSampakninger("sampakninger", "trækasse 4 øl",6,0);
+    	Sampakninger sampakninger4 = Controller.createSampakninger("sampakninger", "gaveæske 6 øl, 2 glas",6,2);
+    	Sampakninger sampakninger5 = Controller.createSampakninger("sampakninger", "gaveæske 6 øl, 6 glas",6,6);
+    	Sampakninger sampakninger6 = Controller.createSampakninger("sampakninger", "trækasse 12 øl",12,0);
+    	Sampakninger sampakninger7 = Controller.createSampakninger("sampakninger", "papkasse 12 øl",12,0);
 
     	Rundvisning rundvisning1 = Controller.createRundvisning("rundvisning", "");
     	
@@ -596,7 +624,7 @@ public class Controller {
     	
     	Pris bp47 = butik.createPris(klippekort1, 100);
 
-    	
+    	 
     }
 
       

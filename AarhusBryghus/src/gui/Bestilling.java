@@ -2,6 +2,7 @@ package gui;
 
 import controller.Controller;
 import model.*;
+import model.produkter.Sampakninger;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -239,6 +240,42 @@ public class Bestilling extends GridPane {
 		infoUpdate();
 		
 	}
+	
+	private void opretSampakninger() {
+		Pris pris = lvsProduktliste.getSelectionModel().getSelectedItem();
+		if (pris == null || !pris.getProdukt().getKategori().equals("sampakninger")) {
+			return;
+		}
+
+		int antal = 0;
+		try {
+	        antal = Integer.parseInt(txfAntal.getText().trim());
+		} catch (NumberFormatException ex) {
+			   // do nothing
+        }
+        if (antal < 0) {
+        	lblError.setText("Antal skal være et positivt tal");
+            return;
+        }
+        
+    	ProduktLinje sampakninger = Controller.createProduktLinje(pris, antal);
+
+    	//Der kan kun sættes det samme indhold i alle sampakninger, ellers må man tilføje flere sampakninger
+    	SampakningerWindow dia = new SampakningerWindow("Specifikationer til sampakning", pris.getProdukt());
+   		dia.showAndWait();
+   		
+		
+        StringBuilder sb = new StringBuilder();
+        sb.append("Kategori: " + sampakninger.getPrisObj().getProdukt().getKategori()+"\n");
+        sb.append("Hvad er prisen på sampakningen: " + sampakninger.getPrisObj().getPris()+"\n");
+        sb.append("Er sampakningen fyldt: " + ((Sampakninger)sampakninger.getPrisObj().getProdukt()).isSampakningFyldt()+"\n");
+        sb.append("Hvad er indholdet i sampakningen: " + ((Sampakninger)sampakninger.getPrisObj().getProdukt()).getIndholdEnheder()+"\n");
+		
+        txaAnlæg.setText(sb.toString());
+
+		infoUpdate();
+		
+	}
 
 	
 	
@@ -302,6 +339,9 @@ public class Bestilling extends GridPane {
         	return;
         }else if(pris.getProdukt().getKategori().equals("anlæg")) {
         	opretAnlægMedTilbehør();
+        	return;
+        }else if(pris.getProdukt().getKategori().equals("sampakninger")) {
+        	opretSampakninger();
         	return;
         }
 		

@@ -43,11 +43,11 @@ public class Sampakninger extends Produkt {
 	}
 
 	public void addIndhold(Produkt indhold) {
-		if(indhold.getKategori().equals("flaske") && antalØl >= 0) {
+		if(indhold.getKategori().equals("flaske") && antalØl > 0) {
 			antalØl--;
 			indholdstæller++;
 			indholdEnheder.add(indhold);
-		}else if(indhold.getKategori().equals("glas") && antalGlas >= 0) {
+		}else if(indhold.getKategori().equals("glas") && antalGlas > 0) {
 			antalGlas--;
 			indholdstæller++;
 			indholdEnheder.add(indhold);
