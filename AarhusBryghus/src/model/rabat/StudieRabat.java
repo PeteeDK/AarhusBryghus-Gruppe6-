@@ -54,4 +54,9 @@ public class StudieRabat extends Rabat {
 		this.produktlinje = produktlinje;
 	}
 	
+	@Override
+	public String toString() {
+		return " antal studerende: " + antalStuderende + ", studierabatprocent: " + rabatProcent;
+	}
+	
 }

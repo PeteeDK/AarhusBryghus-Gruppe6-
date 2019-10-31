@@ -136,7 +136,7 @@ public class Salg {
 			}
 //			System.out.println("[Salg -> delBetalinger()] Fuldbeløb: " + fuldBeløb);
 		}else {
-			throw new ArithmeticException("Beløb kan ikke være mindre en fuld beløb");
+			throw new ArithmeticException("Beløb kan ikke være mindre en det fulde beløb");
 		}
 		
 	}

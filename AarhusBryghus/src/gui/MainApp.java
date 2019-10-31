@@ -56,19 +56,18 @@ public class MainApp extends Application {
 		Tab tabBetaling = new Tab("Betaling");
 		tabPane.getTabs().add(tabBetaling);
 
-		Betaling betaling = new Betaling();
+		BetalingPane betaling = new BetalingPane();
 		tabBetaling.setContent(betaling);
 		tabBetaling.setOnSelectionChanged(event -> betaling.updateControls());
 
 		
-		Tab tabRundvisning = new Tab("Runvisning");
-		tabPane.getTabs().add(tabRundvisning);
+		Tab tabStatistik = new Tab("Statistik");
+		tabPane.getTabs().add(tabStatistik);
 
-		Rundvisning rundvisning = new Rundvisning();
-		tabRundvisning.setContent(rundvisning);
-		tabRundvisning.setOnSelectionChanged(event -> rundvisning.updateControls());
+		StatistikPane statistik = new StatistikPane();
+		tabStatistik.setContent(statistik);
+		tabStatistik.setOnSelectionChanged(event -> statistik.updateControls());
 
-		
 	}
 
 }

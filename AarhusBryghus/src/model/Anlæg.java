@@ -9,7 +9,8 @@ public class Anlæg extends Produkt {
 	private double brugtFustageLiter;
 	private double brugtKulsyreKg;
 	private double engangsPris;
-	private ArrayList<Pris> tilbehør = new ArrayList<>();
+	private ArrayList<Pris> tilbehørsPriser = new ArrayList<>();
+
 	
 	public Anlæg(String kategori, String produktNavn) {
 		super(kategori, produktNavn);
@@ -18,7 +19,7 @@ public class Anlæg extends Produkt {
 	public double beregnForbrug() {
 		double pris = 0;
 		if(afleveret) {
-			for(Pris t : tilbehør) {
+			for(Pris t : tilbehørsPriser) {
 				if(t.getProdukt().getKategori().equals("fustage")) {
 					pris += t.getPris() * brugtFustageLiter;	//t.getPris() er vel at mærke pris pr. liter
 				}else if(t.getProdukt().getKategori().equals("kulsyre")) {
@@ -35,7 +36,7 @@ public class Anlæg extends Produkt {
 	
 	private double beregnPant() {
 		double pant = 0;
-		for(Pris t : tilbehør) {
+		for(Pris t : tilbehørsPriser) {
 			if(t.getProdukt().getKategori().equals("fustage") || t.getProdukt().getKategori().equals("kulsyre")) {
 				pant += ((Tilbehør)t.getProdukt()).getPant();
 			}
@@ -60,7 +61,7 @@ public class Anlæg extends Produkt {
 			throw new IllegalArgumentException("brugt fustagemængde kan ikke være negativ");
 		}
 		double samletFustageMængde = 0;
-		for(Pris p : tilbehør) {
+		for(Pris p : tilbehørsPriser) {
 			if(p.getProdukt().getKategori().equals("fustage")) {
 				samletFustageMængde += ((Tilbehør)p.getProdukt()).getMængde();
 			}
@@ -81,7 +82,7 @@ public class Anlæg extends Produkt {
 			throw new IllegalArgumentException("brugt kulsyremængde kan ikke være negativ");
 		}
 		double samletKulsyreMængde = 0;
-		for(Pris p : tilbehør) {
+		for(Pris p : tilbehørsPriser) {
 			if(p.getProdukt().getKategori().equals("kulsyre")) {
 				samletKulsyreMængde += ((Tilbehør)p.getProdukt()).getMængde();
 			}
@@ -94,15 +95,19 @@ public class Anlæg extends Produkt {
 	}
 	
 	public void addTilbehør(Pris t) {
-		if(!tilbehør.contains(t)) {
-			tilbehør.add(t);
+		if(!tilbehørsPriser.contains(t)) {
+			tilbehørsPriser.add(t);
 		}
 	}
 	
 	public void removeTilbehør(Pris t) {
-		if(tilbehør.contains(t)) {
-			tilbehør.remove(t);
+		if(tilbehørsPriser.contains(t)) {
+			tilbehørsPriser.remove(t);
 		}
+	}
+	
+	public ArrayList<Pris> getTilbehør(){
+		return new ArrayList<>(tilbehørsPriser);
 	}
 
 	public String getStatus() {
@@ -113,7 +118,15 @@ public class Anlæg extends Produkt {
 		}
 	}
 	
+	//bruges i [Bestilling -> "listView: vise tilføjede produkter til anlæg"]
+	public ArrayList<Produkt> getTilbehørsProdukter(){
+		ArrayList<Produkt> produkter = new ArrayList<>();
+		for(Pris p : tilbehørsPriser) {
+			Produkt produkt = p.getProdukt();
+			produkter.add(produkt);
+		}
+		return produkter;
+	}
 	
-		
 	
 }

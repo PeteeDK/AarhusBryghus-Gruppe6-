@@ -24,6 +24,8 @@ public class Rundvisning extends Produkt {
 		}
 	}
 
+
+
 	public LocalDate getDato() {
 		return dato;
 	}

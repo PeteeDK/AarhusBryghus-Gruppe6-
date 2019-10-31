@@ -16,45 +16,58 @@ import javafx.scene.layout.HBox;
 import model.ProduktLinje;
 import model.Salg;
 
-public class Rundvisning extends GridPane {
+public class BetalingPane extends GridPane {
 	private TextField txfName, txfHours;
 	private TextArea txaEmps;
+	private ListView<ProduktLinje> lvwProduklinjer;
 	private Bestilling bestilling;
 	private Label lblError;
-	private TextArea txaDescription;
-	private TextField txfAntal;
 
 
-	public Rundvisning() {
+	public BetalingPane() {
 		this.setPadding(new Insets(20));
 		this.setHgap(20);
 		this.setVgap(10);
 		this.setGridLinesVisible(false);
 
-		Label lblComp = new Label("Beskrivelse");
+		Label lblComp = new Label("Companies");
 		this.add(lblComp, 0, 0);
 
-        txaDescription = new TextArea();
-        this.add(txaDescription, 0, 1);
-        txaDescription.setPrefRowCount(7);
-        txaDescription.setPrefWidth(270);
-        txaDescription.setEditable(false);
-        txaDescription.setText("Rundvisningsinfo....");
+		lvwProduklinjer = new ListView<>();
+		this.add(lvwProduklinjer, 0, 1, 1, 3);
+		lvwProduklinjer.setPrefWidth(200);
+		lvwProduklinjer.setPrefHeight(200);
+		lvwProduklinjer.getItems().setAll(Controller.getProduktlinjer());
+		
+		ChangeListener<ProduktLinje> listener = (ov, oldCompny, newCompany) -> this.selectedBetalingChanged();
+		lvwProduklinjer.getSelectionModel().selectedItemProperty().addListener(listener);
 
-        
-		Label lblAntal = new Label("Antal:");
-		this.add(lblAntal, 1, 0);
+		
+		Label lblName = new Label("Name:");
+		this.add(lblName, 1, 1);
 
-		txfAntal = new TextField();
-		this.add(txfAntal, 1, 1);
-		txfAntal.setPrefWidth(50);
-		txfAntal.setEditable(true);
+		txfName = new TextField();
+		this.add(txfName, 2, 1);
+		txfName.setEditable(false);
 
-        
-		Button btnKurv = new Button("....");
-		this.add(btnKurv, 2, 6);
-		btnKurv.setOnAction(event -> this.tilføjTilKurv());
+		Label lblHours = new Label("Weekly Hours:");
+		this.add(lblHours, 1, 2);
 
+		txfHours = new TextField();
+		this.add(txfHours, 2, 2);
+		txfHours.setEditable(false);
+
+	
+		Label lblEmps = new Label("Employees:");
+		this.add(lblEmps, 1, 3);
+		GridPane.setValignment(lblEmps, VPos.BASELINE);
+		lblEmps.setPadding(new Insets(4, 0, 4, 0));
+
+		txaEmps = new TextArea();
+		this.add(txaEmps, 2, 3);
+		txaEmps.setPrefWidth(200);
+		txaEmps.setPrefHeight(100);
+		txaEmps.setEditable(false);
 
 		HBox hbxButtons = new HBox(40);
 		this.add(hbxButtons, 0, 4, 3, 1);
@@ -78,23 +91,32 @@ public class Rundvisning extends GridPane {
         lblError.setStyle("-fx-text-fill: red");
 
 
+		if (lvwProduklinjer.getItems().size() > 0) {
+			lvwProduklinjer.getSelectionModel().select(0);
+		}
 	}
 
 	// -------------------------------------------------------------------------
 
-	private void tilføjTilKurv() {
-		// TODO Auto-generated method stub
-		return;
-	}
-
-	
-	
-	
 	private void createAction() {
+		lvwProduklinjer.getItems().setAll(Controller.getProduktlinjer());
 
 	}
 
 	private void updateAction() {
+		ProduktLinje produktlinje = lvwProduklinjer.getSelectionModel().getSelectedItem();
+		if (produktlinje == null) {
+			return;
+		}
+
+//		FredagsbarWindow dia = new FredagsbarWindow("Update Company", produktlinje);
+//		dia.showAndWait();
+
+		// Wait for the modal dialog to close
+
+		int selectIndex = lvwProduklinjer.getSelectionModel().getSelectedIndex();
+		lvwProduklinjer.getItems().setAll();
+		lvwProduklinjer.getSelectionModel().select(selectIndex);
 	}
 
 //	private void deleteAction() {
@@ -132,6 +154,16 @@ public class Rundvisning extends GridPane {
 	}
 
 	public void updateControls() {
+		ProduktLinje produktlinje = lvwProduklinjer.getSelectionModel().getSelectedItem();
+		if (produktlinje != null) {
+			txfName.setText(produktlinje.getPrisObj().getProdukt().getProduktNavn());
+			txfHours.setText(""+produktlinje.getPrisObj().getPris());
+			txaEmps.setText(""+produktlinje.getPris());
+		} else {
+			txfName.clear();
+			txfHours.clear();
+			txaEmps.clear();
+		}
 	}
 
 }

@@ -26,11 +26,7 @@ public class ProduktLinje {
     		return antal * pris.getPris() + ((Anlæg)pris.getProdukt()).beregnForbrug();
     	}
     	else if(pris.getProdukt().getKategori().equals("rundvisning")) {
-    		if(((Rundvisning)pris.getProdukt()).isBetalt()) {
-    	    	return pris.getPris() * antal;
-    		}else {
-    			return 0;
-    		}
+   	    	return pris.getPris() * antal;
     	}
     	return pris.getPris() * antal;
     }

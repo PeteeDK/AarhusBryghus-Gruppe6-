@@ -18,7 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler; 
 
 
-public class Bestilling extends GridPane {
+public class StatistikPane extends GridPane {
 	private TextField txfAntal, txfSamletBeløb;
 	private ListView<Pris> lvsProduktliste;
 	private ListView<ProduktLinje> lvwKurveliste;
@@ -32,7 +32,7 @@ public class Bestilling extends GridPane {
 	
 	
 	
-	public Bestilling() {
+	public StatistikPane() {
 		this.setPadding(new Insets(20));
 		this.setHgap(20);
 		this.setVgap(10);

@@ -3,6 +3,8 @@ package controller;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import model.*;
 import model.betalingsform.*;
@@ -96,8 +98,7 @@ public class Controller {
     }
 
 	
-	
-	
+
     
     //-------Anlæg---------------------------------------------------
       
@@ -275,6 +276,48 @@ public class Controller {
     }
     
     
+    public static ArrayList<Pris> getPriserEfterArrangementOgKategori(String arrangement, String kategori){
+    	ArrayList<Pris> priser = new ArrayList<>();
+    	for(PrisListe pl : Controller.getPrislister()) {
+    		if(pl.getArrangement().equals(arrangement)) {
+    			for(Pris p : pl.getPriser()) {
+    				if(p.getProdukt().getKategori().equals(kategori)) {
+        				priser.add(p);
+    				}
+    			}
+    		}
+    	}
+    	return priser;
+    }
+
+
+    public static ArrayList<Produkt> getProdukterEfterKategori(String kategori){
+    	ArrayList<Produkt> produkter = new ArrayList<>();
+    	for(Produkt p : Storage.getProdukter()) {
+    		if(p.getKategori().equals(kategori)) {
+    			produkter.add(p);
+    		}
+    	}
+    	return produkter;
+    }
+    
+    
+    
+    public static String[] getKategorier(){
+    	Set<String> kategorierSet = new HashSet<String>();
+    	for(Produkt p : Storage.getProdukter()) {
+    		kategorierSet.add(p.getKategori());
+    	}
+    	String[] kategorier = new String[kategorierSet.size()];
+    	int i = 0;
+    	for(String k : kategorierSet) {
+    		kategorier[i] = k;
+    		i++;
+    	}
+     	return kategorier;
+    }
+    
+    
     //create produktlinje
     
     public static ProduktLinje createProduktLinje(Pris pris, int antal) {
@@ -298,7 +341,7 @@ public class Controller {
 	
     
     
-    //get prisliste-arrangement
+    //get prisliste-arrangement - bruges i [Bestilling -> "comboBox"]
     public static String[] getArrangementer(){
     	String[] arrangementer = new String[Controller.getPrislister().size()];
     	int i = 0;

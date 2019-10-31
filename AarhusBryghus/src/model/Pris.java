@@ -15,7 +15,9 @@ public class Pris {
 
 	public double getPris() {
 		//display only two decimals
-		return Math.round(pris * 100.0) / 100.0;
+//		return Math.round(pris * 100.0) / 100.0;
+		return Math.round(pris);
+
 	}
 
 	public void setPris(double pris) {
@@ -32,8 +34,11 @@ public class Pris {
 	
 	@Override
 	public String toString() {
-		if(getProdukt().getProduktNavn().equals("")) {
+		if(getProdukt().getProduktNavn().equals("") && !getProdukt().getKategori().equals("kulsyre")) {
 			return getProdukt().getKategori() + "\t\t" + getPris() + "kr.";
+		}else if(getProdukt().getKategori().equals("fustage") || getProdukt().getKategori().equals("kulsyre")) {
+			return ((Tilbehør)getProdukt()).getKategori() + ", " + ((Tilbehør)getProdukt()).getProduktNavn() + ", " 
+					+ ((Tilbehør)getProdukt()).getMængde() + ", " + ((Tilbehør)getProdukt()).getPant();
 		}
 		return getProdukt().getProduktNavn() + "\t\t" + getPris() + "kr.";
 	}

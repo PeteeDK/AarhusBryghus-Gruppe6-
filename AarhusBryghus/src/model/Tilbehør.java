@@ -38,8 +38,12 @@ public class Tilbehør extends Produkt {
 		this.pant = pant;
 	}
 
+	@Override
+	public String toString() {
+		return "Tilbehør [mængde=" + mængde + ", pant=" + pant + ", getKategori()=" + getKategori()
+				+ ", getProduktNavn()=" + getProduktNavn() + "]";
+	}
 
-	
-	
+		
 	
 }
