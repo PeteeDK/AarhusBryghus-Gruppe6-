@@ -14,7 +14,7 @@ public class Anlæg extends Produkt {
 	private double engangsPris;
 	private ArrayList<Pris> tilbehørsPriser = new ArrayList<>();
 	private LocalDate købsdato;
-	private int id = 1;
+	private int id = 1; 
 
 	
 	public Anlæg(String kategori, String produktNavn) {

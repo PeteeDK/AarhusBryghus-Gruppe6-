@@ -100,7 +100,7 @@ public class RabatWindow extends Stage {
         pane.add(txfProcentvisRabat, 1, 2);
         txfProcentvisRabat.setPrefWidth(50); 
         txfProcentvisRabat.setText(""+0);
-        
+         
         //------radiobuttons------------------------------------
         
 		HBox box = new HBox();

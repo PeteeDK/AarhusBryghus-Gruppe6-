@@ -174,7 +174,7 @@ public class Bestilling extends GridPane {
 		
 		RundvisningWindow dia = new RundvisningWindow("Specifikationer til rundvisning", rundvisning);
 		dia.showAndWait();
-
+ 
 		
         StringBuilder sb = new StringBuilder();
         sb.append("Kategori: " + rundvisning.getPrisObj().getProdukt().getKategori()+"\n");
@@ -188,7 +188,7 @@ public class Bestilling extends GridPane {
 		
 	}
 
-
+ 
 	private void opretAnlægMedTilbehør() {
 		Pris pris = lvsProduktliste.getSelectionModel().getSelectedItem();
 		if (pris == null || !pris.getProdukt().getKategori().equals("anlæg")) {

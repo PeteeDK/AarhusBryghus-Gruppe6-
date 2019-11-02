@@ -64,7 +64,7 @@ public class RundvisningWindow extends Stage {
         txfAntalStuderende = new TextField();
         pane.add(txfAntalStuderende, 0, 1);
         txfAntalStuderende.setPrefWidth(200);
-
+ 
         Label lblStudieRabat = new Label("Angiv studierabat:");
         pane.add(lblStudieRabat, 0, 2);
 
@@ -130,6 +130,10 @@ public class RundvisningWindow extends Stage {
     }
 
     private void okAction() {
+    	
+    	if(ld == null) {
+    		return;
+    	}
 
         int antalStuderende = 0;
         

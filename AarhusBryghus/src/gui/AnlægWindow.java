@@ -2,6 +2,8 @@ package gui;
 
 import controller.Controller;
 import model.*;
+import model.rabat.AftaltPrisRabat;
+import model.rabat.ProcentvisRabat;
 import model.rabat.StudieRabat;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -10,11 +12,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -25,12 +31,15 @@ public class AnlægWindow extends Stage {
     private TextField txfAntalStuderende;
     private Label lblError;
     private LocalDate ld;
-	private TextField txfDato;
+	private TextField txfDato; 
 	private DatePicker dp = new DatePicker();
 	private TextField txfStudierabat;
 	private ListView<Pris> lvwKulsyre;
 	private ListView<Pris> lvwFustage;
 	private ListView<Produkt> lvwTilbehør;
+	private ToggleGroup udlejningsStatus;
+	private boolean afleveret;
+	private RadioButton rb;
 	
     public AnlægWindow(String title, ProduktLinje anlæg) {
         this.initStyle(StageStyle.UTILITY);
@@ -99,6 +108,34 @@ public class AnlægWindow extends Stage {
         Button btnTilføjFustage = new Button("Tilføj fustage");
         pane.add(btnTilføjFustage, 3, 3);
         btnTilføjFustage.setOnAction(event -> this.tilføjFustage());
+
+        Button btnFjern = new Button("Fjern tilbehør");
+        pane.add(btnFjern, 4, 5);
+        btnFjern.setOnAction(event -> this.fjernTilbehør());
+        
+        Button btnOk = new Button("Ok");
+        pane.add(btnOk, 3, 5);
+        btnOk.setOnAction(event -> this.okAction());
+        
+      //------radiobuttons------------------------------------
+        
+   		VBox box = new VBox();
+   		udlejningsStatus = new ToggleGroup();
+   		String[] betalingsformer = { "" , "Udlejet", "Afleveret" };
+   		RadioButton rb;
+   		for (int i = 0; i < betalingsformer.length; i++) {
+   			rb = new RadioButton();
+   			rb.setToggleGroup(udlejningsStatus);
+   			rb.setText(betalingsformer[i]);
+   			box.getChildren().add(rb);
+   		}
+   		pane.add(box, 3, 6, 4, 1);
+   		udlejningsStatus.getToggles().get(0).setSelected(true);
+
+   		udlejningsStatus.selectedToggleProperty().addListener(event -> toggleRadioButton());
+
+   		//--------------------------------------------------------
+
         
         lblError = new Label();
         pane.add(lblError, 0, 7);
@@ -109,7 +146,36 @@ public class AnlægWindow extends Stage {
 
     
 
-    private void tilføjFustage() {
+    private void fjernTilbehør() {
+    	Pris tilbehør = lvwFustage.getSelectionModel().getSelectedItem();
+		if (tilbehør == null) {
+			return;
+		}
+
+		((Anlæg) anlæg.getPrisObj().getProdukt()).removeTilbehør(tilbehør);
+
+		lvwTilbehør.getItems().setAll(((Anlæg) anlæg.getPrisObj().getProdukt()).getTilbehørsProdukter());
+    }
+
+	private void toggleRadioButton() {
+		rb = (RadioButton) udlejningsStatus.getSelectedToggle();
+		
+		switch(rb.getText()){
+			case "Udlejet":
+				afleveret = false;
+				break;
+			case "Afleveret":
+				afleveret = true;
+				break;
+			case "":
+				rb = null;
+				break;
+			default:
+		}
+		
+	}
+
+	private void tilføjFustage() {
     	Pris fustage = lvwFustage.getSelectionModel().getSelectedItem();
 		if (fustage == null) {
 			return;
@@ -144,36 +210,13 @@ public class AnlægWindow extends Stage {
     }
 
     private void okAction() {
-
-        int antalStuderende = 0;
-        
-        try {
-            antalStuderende = Integer.parseInt(txfAntalStuderende.getText().trim());
-        } catch (NumberFormatException ex) {
-            // do nothing
-        }
-        if (antalStuderende < 0 || antalStuderende > anlæg.getAntal()) {
-            lblError.setText("Antallet af studerende kan ikke være negativt eller kan ikke være større end antallet af alle til rundvisningen");
-            return;
-        }
-        
-        double rabatProcent = 0;
-        
-        try {
-        	rabatProcent = Double.parseDouble(txfStudierabat.getText().trim());
-        } catch (NumberFormatException ex) {
-            // do nothing
-        }
-        if (rabatProcent < 0 || rabatProcent > 100) {
-            lblError.setText("Studierabatprocenten kan ikke være negativ eller over 100%");
-            return;
-        }
-
-
-        // Call controller methods
-        if (anlæg != null && antalStuderende > 0) {
-        	Controller.createStudieRabat(anlæg, antalStuderende, rabatProcent);	
-        }
+    	
+    	//tjek på om afleveret eller udlejet er sat
+    	if(rb == null) {
+    		return;
+    	}
+    	
+    	((Anlæg) anlæg.getPrisObj().getProdukt()).setAfleveret(afleveret);
 
         this.hide();
     }
