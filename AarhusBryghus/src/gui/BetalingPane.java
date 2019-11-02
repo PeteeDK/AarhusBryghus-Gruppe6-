@@ -13,15 +13,19 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import model.Pris;
 import model.ProduktLinje;
 import model.Salg;
 
 public class BetalingPane extends GridPane {
-	private TextField txfName, txfHours;
-	private TextArea txaEmps;
-	private ListView<ProduktLinje> lvwProduklinjer;
+	private TextField txfSamletPris, txfIgnore;
+	private TextArea txaSalgsinfo;
+	private ListView<ProduktLinje> lvwProduktlinjer;
 	private Bestilling bestilling;
 	private Label lblError;
+	//TODO Der skal evt. være en knap helt i starten der hedder "nyt salg", hvor man opretter et salg og gemmer det i storage
+	private Salg salg;
+	private double samletPris;
 
 
 	public BetalingPane() {
@@ -29,140 +33,135 @@ public class BetalingPane extends GridPane {
 		this.setHgap(20);
 		this.setVgap(10);
 		this.setGridLinesVisible(false);
-
-		Label lblComp = new Label("Companies");
-		this.add(lblComp, 0, 0);
-
-		lvwProduklinjer = new ListView<>();
-		this.add(lvwProduklinjer, 0, 1, 1, 3);
-		lvwProduklinjer.setPrefWidth(200);
-		lvwProduklinjer.setPrefHeight(200);
-		lvwProduklinjer.getItems().setAll(Controller.getProduktlinjer());
 		
-		ChangeListener<ProduktLinje> listener = (ov, oldCompny, newCompany) -> this.selectedBetalingChanged();
-		lvwProduklinjer.getSelectionModel().selectedItemProperty().addListener(listener);
+		Label lblKurv = new Label("Kurv");
+		this.add(lblKurv, 0, 0);
+
+		lvwProduktlinjer = new ListView<>();
+		this.add(lvwProduktlinjer, 0, 1, 1, 3);
+		lvwProduktlinjer.setPrefWidth(200);
+		lvwProduktlinjer.setPrefHeight(200);
+		lvwProduktlinjer.getItems().setAll(Controller.getProduktlinjer());
 
 		
-		Label lblName = new Label("Name:");
-		this.add(lblName, 1, 1);
+		Label lblSamletPris = new Label("Samlet pris / Resterende beløb:");
+		this.add(lblSamletPris, 1, 1);
 
-		txfName = new TextField();
-		this.add(txfName, 2, 1);
-		txfName.setEditable(false);
+		txfSamletPris = new TextField();
+		this.add(txfSamletPris, 2, 1);
+		txfSamletPris.setEditable(false);
 
-		Label lblHours = new Label("Weekly Hours:");
+		//--- Hvis jer fjerner disse komponenter vil tingene ikke blive vist i vinduet -----------------
+		Label lblHours = new Label("");
 		this.add(lblHours, 1, 2);
 
-		txfHours = new TextField();
-		this.add(txfHours, 2, 2);
-		txfHours.setEditable(false);
+		txfIgnore = new TextField();
+		this.add(txfIgnore, 2, 2);
+		txfIgnore.setEditable(false);
+		txfIgnore.setText("Ignore");
 
+		
+		//----------------------------------------------------------------------------------------------
 	
-		Label lblEmps = new Label("Employees:");
-		this.add(lblEmps, 1, 3);
-		GridPane.setValignment(lblEmps, VPos.BASELINE);
-		lblEmps.setPadding(new Insets(4, 0, 4, 0));
+		Label lblSalgsinfo = new Label("Salgsinfo:");
+		this.add(lblSalgsinfo, 1, 3);
+		GridPane.setValignment(lblSalgsinfo, VPos.BASELINE);
+		lblSalgsinfo.setPadding(new Insets(4, 0, 4, 0));
 
-		txaEmps = new TextArea();
-		this.add(txaEmps, 2, 3);
-		txaEmps.setPrefWidth(200);
-		txaEmps.setPrefHeight(100);
-		txaEmps.setEditable(false);
+		txaSalgsinfo = new TextArea();
+		this.add(txaSalgsinfo, 2, 3);
+		txaSalgsinfo.setPrefWidth(200);
+		txaSalgsinfo.setPrefHeight(100);
+		txaSalgsinfo.setEditable(false);
 
-		HBox hbxButtons = new HBox(40);
-		this.add(hbxButtons, 0, 4, 3, 1);
-		hbxButtons.setPadding(new Insets(10, 0, 0, 0));
-		hbxButtons.setAlignment(Pos.BASELINE_CENTER);
+		//TODO Kan ikke finde en måde at vise indholdet af kurven automatisk, når man åbner fanen
+		Button btnViskurv = new Button("Opdater");
+		this.add(btnViskurv, 0, 5);
+		btnViskurv.setOnAction(event -> this.opdater());
 
-		Button btnCreate = new Button("Create");
-		hbxButtons.getChildren().add(btnCreate);
-		btnCreate.setOnAction(event -> this.createAction());
+		Button btnTildelRabat = new Button("Tildel rabat");
+		this.add(btnTildelRabat, 1, 5);
+		btnTildelRabat.setOnAction(event -> this.tildelRabat());
 
-//		Button btnUpdate = new Button("Update");
-//		hbxButtons.getChildren().add(btnUpdate);
-//		btnUpdate.setOnAction(event -> this.updateAction());
-//
-//		Button btnDelete = new Button("Delete");
-//		hbxButtons.getChildren().add(btnDelete);
-//		btnDelete.setOnAction(event -> this.deleteAction());
+		Button btnAngivBetalingsform = new Button("Angiv betalingsform");
+		this.add(btnAngivBetalingsform, 2, 5);
+		btnAngivBetalingsform.setOnAction(event -> this.angivBetalingsform());
+		
+		
 		
         lblError = new Label();
         this.add(lblError, 0, 7);
         lblError.setStyle("-fx-text-fill: red");
 
 
-		if (lvwProduklinjer.getItems().size() > 0) {
-			lvwProduklinjer.getSelectionModel().select(0);
+		if (lvwProduktlinjer.getItems().size() > 0) {
+			lvwProduktlinjer.getSelectionModel().select(0);
 		}
 	}
 
-	// -------------------------------------------------------------------------
+	
+	private void angivBetalingsform() {
 
-	private void createAction() {
-		lvwProduklinjer.getItems().setAll(Controller.getProduktlinjer());
-
-	}
-
-	private void updateAction() {
-		ProduktLinje produktlinje = lvwProduklinjer.getSelectionModel().getSelectedItem();
-		if (produktlinje == null) {
+		if (salg == null ) {
 			return;
 		}
 
-//		FredagsbarWindow dia = new FredagsbarWindow("Update Company", produktlinje);
-//		dia.showAndWait();
+		BetalingsformWindow dia = new BetalingsformWindow("Angiv betalingsform samt beløb", salg);
+		dia.showAndWait();
 
-		// Wait for the modal dialog to close
-
-		int selectIndex = lvwProduklinjer.getSelectionModel().getSelectedIndex();
-		lvwProduklinjer.getItems().setAll();
-		lvwProduklinjer.getSelectionModel().select(selectIndex);
+		System.out.println("[BetalingsPane -> angivBetalingsfor] "+salg);
+		
+        StringBuilder sb = new StringBuilder();
+        sb.append("Id: " + salg.getId()+"\n");
+        sb.append("ProduktLinjer: " + salg.getProduktLinjer()+"\n");
+        sb.append("Fulde beløb/resterende beløb: " + salg.getFuldBeløb()+"\n");
+        sb.append("Betalingsform: " + salg.getBetalingsform()+"\n");
+        sb.append("Er betalt: " + salg.getErBetalt()+"\n");
+        sb.append("Alle registrerede rabatter: " + Controller.getRabatter().toString()+"\n");
+		
+		txaSalgsinfo.setText(sb.toString());
+		
+		txfSamletPris.setText(""+salg.getFuldBeløb());
 	}
 
-//	private void deleteAction() {
-//		ProduktLinje produktlinje = lvwProduklinjer.getSelectionModel().getSelectedItem();
-//		if (produktlinje == null) {
-//			return;
-//		}
-//
-//		if (produktlinje.employeesCount() == 0) {
-//			Alert alert = new Alert(AlertType.CONFIRMATION);
-//			alert.setTitle("Delete Company");
-//			// alert.setContentText("Are you sure?");
-//			alert.setHeaderText("Are you sure?");
-//			Optional<ButtonType> result = alert.showAndWait();
-//			if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
-//				Controller.deleteCompany(produktlinje);
-//				lvwProduklinjer.getItems().setAll(Controller.getCompanies());
-//				this.updateControls();
-//			}
-//
-//		} else {
-//			Alert alert = new Alert(AlertType.INFORMATION);
-//			alert.setTitle("Delete Company");
-//			alert.setHeaderText("Can't delete a company that has emlpoyees");
-//			// wait for the modal dialog to close
-//			alert.show();
-//		}
-//	}
+	private void tildelRabat() {
+		
+	}
 
 	// -------------------------------------------------------------------------
 
+	private void opdater() {
+		salg = Controller.createSalg();
+		//TODO Det er muligvis ikke her at produktlinjerne skal tilføjes til salg
+		for(ProduktLinje pl : Controller.getProduktlinjer()) {
+			salg.addProduktLinje(pl);
+		}
+
+		samletPris = salg.getPris();
+
+		lvwProduktlinjer.getItems().setAll(Controller.getProduktlinjer());
+
+		txfSamletPris.setText(""+salg.getFuldBeløb());
+
+
+	}
+
+
+	// -------------------------------------------------------------------------
+
+
+	
 	
 	private void selectedBetalingChanged() {
 		this.updateControls();
 	}
 
 	public void updateControls() {
-		ProduktLinje produktlinje = lvwProduklinjer.getSelectionModel().getSelectedItem();
+		ProduktLinje produktlinje = lvwProduktlinjer.getSelectionModel().getSelectedItem();
 		if (produktlinje != null) {
-			txfName.setText(produktlinje.getPrisObj().getProdukt().getProduktNavn());
-			txfHours.setText(""+produktlinje.getPrisObj().getPris());
-			txaEmps.setText(""+produktlinje.getPris());
+			
 		} else {
-			txfName.clear();
-			txfHours.clear();
-			txaEmps.clear();
+			
 		}
 	}
 

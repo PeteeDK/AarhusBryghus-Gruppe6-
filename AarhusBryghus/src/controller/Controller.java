@@ -380,8 +380,24 @@ public class Controller {
     	return arrangementer;
     }
     
+	public static ArrayList<Produkt> getSolgteKlippekort() {
+		ArrayList<Produkt> solgteKlippekort = new ArrayList<>();
+		for(Salg s : Storage.getSalgsenheder()) {
+			for(ProduktLinje pl : s.getProduktLinjer()) {
+				if(pl.getPrisObj().getProdukt().getKategori().equals("klippekort")) {
+					int i = 0;
+					while(i < pl.getAntal()) {
+						solgteKlippekort.add(pl.getPrisObj().getProdukt());
+						i++;
+					}
+				}else {
+					solgteKlippekort.add(pl.getPrisObj().getProdukt());
+				}
+			}
+		}
+		return solgteKlippekort;
+	}
 
-    
     
     
 	
@@ -390,6 +406,8 @@ public class Controller {
     public static void initStorage() {
     	
     	//----Produkter--------------------------------------------------------------------
+    	
+    	//TODO Unødvendigt at bruge Controller...
     	
     	Flaske flaske1 = Controller.createFlaske("flaske", "klosterbryg");
     	Flaske flaske2 = Controller.createFlaske("flaske", "sweet georgia brown");
@@ -468,6 +486,8 @@ public class Controller {
     	Rundvisning rundvisning1 = Controller.createRundvisning("rundvisning", "");
     	
     	Klippekort klippekort1 = Controller.createKlippekort("klippekort", "klippekort, 4 klip");
+    	Klippekort klippekort2 = Controller.createKlippekort("klippekort", "klippekort, 4 klip");
+
     	
     	//----PrisListe-fredagsbar-------------------------------------------------------------------
     	
@@ -623,11 +643,27 @@ public class Controller {
     	//klippekort
     	
     	Pris bp47 = butik.createPris(klippekort1, 100);
+    	Pris bp48 = butik.createPris(klippekort2, 100);
+		//TODO Skal det samme klippekort kunne blive solgt igen, der skal evt. en sikkerhed attribut på Klippekort "erSolgt"
 
+    	
+    	// --------------------- Salg ---------------------------------------
+    	
+    	Salg salg1 = Controller.createSalg();
+    	salg1.createProduktLinje(bp47, 2);
+    	
+       	Salg salg2 = Controller.createSalg();
+    	salg1.createProduktLinje(bp48, 1);
+    	
+    	
+    	
+    	
+    	
+    	
+    	// -------------------------------------------------------------------
     	 
     }
-
-      
+     
       
       
 }

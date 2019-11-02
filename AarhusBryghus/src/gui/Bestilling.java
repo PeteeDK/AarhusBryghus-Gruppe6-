@@ -153,13 +153,6 @@ public class Bestilling extends GridPane {
 	
    
 
-/**
- * Når man prøver at tilføje fx 47 rundvisninger til kurv popper et vindue op, hvor man angiver specifikationer
- * til at oprette studierabat-pris, der bliver beregnet i Salg. 
- * - Jeg prøvede om det virkede i et vindue. Det er nok en bedre idé at oprette et pane som var planen til at
- * at starte med. Kodemæssigt at tingene også højere samhørrighed i klassen, hvis man opretter en klasse for hver
- * af de store produkt-kategorier TODO Lav det til en pane
- */
 	private void opretRundvisningMedStudierabat() {
 		Pris pris = lvsProduktliste.getSelectionModel().getSelectedItem();
 		if (pris == null || !pris.getProdukt().getKategori().equals("rundvisning")) {
@@ -313,7 +306,7 @@ public class Bestilling extends GridPane {
   
         cmbPrisLister.setOnAction(event); 
 	}
-
+ 
 	private void comboKategoriListeChanger() {
 
         EventHandler<ActionEvent> event = 

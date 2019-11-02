@@ -5,7 +5,7 @@ public class AftaltPrisRabat extends Rabat {
 	private double fratrukketPris;
 	
 	public AftaltPrisRabat(double fratrukketPris) {
-		this.fratrukketPris = fratrukketPris;
+		this.fratrukketPris = fratrukketPris; 
 	}
 	
 	@Override

@@ -15,7 +15,7 @@ public class Klippekort extends Produkt implements IBetalingsform {
 	public Klippekort(String kategori, String produktNavn) {
 		super(kategori, produktNavn);
 		initKlip();
-		antalKlip = klipEnheder.size();
+		this.antalKlip = klipEnheder.size();
 		købsdato = LocalDate.now();
 	}
 	
@@ -60,8 +60,8 @@ public class Klippekort extends Produkt implements IBetalingsform {
 	}
 
 	public void setAntalKlip(int antalKlip) {
-		if(antalKlip < 0 && antalKlip > 4) {
-			throw new IllegalArgumentException("Antal klip kan ikke være negativ eller overstige 4");
+		if(antalKlip < 0) {
+			throw new IllegalArgumentException("Antal klip kan ikke være negativ");
 		}
 		this.antalKlip = antalKlip;
 	}
@@ -73,6 +73,12 @@ public class Klippekort extends Produkt implements IBetalingsform {
 	public void setKøbsdato(LocalDate købsdato) {
 		this.købsdato = købsdato;
 	}
+
+	@Override
+	public String toString() {
+		return "Klippekort [antalKlip=" + antalKlip + ", toString()=" + super.toString() + "]";
+	}
+
 	
 	
 	

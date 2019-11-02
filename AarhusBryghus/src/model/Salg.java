@@ -11,8 +11,7 @@ public class Salg {
  
 	private int id = 1;
 	private ArrayList<ProduktLinje> produktLinjer = new ArrayList<>();
-	private IBetalingsform betalingsform;
-	private ArrayList<IBetalingsform> betalingsformer = new ArrayList<>();
+	private ArrayList<String> betalingsformer = new ArrayList<>();
 	private LocalDate salgsdato;
 	private Rabat rabat;
 	private double fuldBeløb;
@@ -55,19 +54,10 @@ public class Salg {
 		return id;
 	}
 	
-	public IBetalingsform getBetalingsform() {
-		return betalingsform;
+	public ArrayList<String> getBetalingsform() {
+		return new ArrayList<>(betalingsformer);
 	}
 
-	//TODO Er denne metode overflødig, da man også kan betale hele beløbet med delbetalinger()
-	public void setBetalingsform(Betalingsform betalingsform) {
-		if(betalingsform == null) {
-			throw new IllegalArgumentException("Betalingsform kan ikke være null");
-		}
-		fuldBeløb = 0;
-		erbetalt = true;
-		this.betalingsform = betalingsform;
-	}
 
 	public LocalDate getSalgsdato() {
 		return salgsdato;
@@ -105,14 +95,9 @@ public class Salg {
 		return new ArrayList<>(produktLinjer);
 	}
 	
-	@Override
-	public String toString() {
-		return "Salg [id=" + id + ", produktLinjer=" + produktLinjer + ", betalingsform=" + betalingsform
-				+ ", salgsdato=" + salgsdato + ", rabat=" + rabat + "]";
-	}
+
 	
-	
-	public void addBetalingsform(IBetalingsform betalingsform) {
+	private void addBetalingsform(String betalingsform) {
 		betalingsformer.add(betalingsform);
 	}
 
@@ -122,18 +107,18 @@ public class Salg {
 	}
 	
 	
-	public void delBetalinger(IBetalingsform betalingsform, double beløb) {
+	public void betaling(IBetalingsform betalingsform, double beløb) {
 		if(betalingsform == null || beløb < 0) {
 			throw new IllegalArgumentException("Betalingsformen kan ikke være null eller beløbet kan ikke være negativt");
 		}
 		
 		//Betalingsform->registrerBetaling() og trække beløb fra fuldtBetalt
 		if(beløb <= fuldBeløb) {
-			betalingsformer.add(betalingsform);
+			betalingsformer.add(betalingsform.registrerBetaling()+", beløb: "+beløb);
 			fuldBeløb -= beløb;
 			if(fuldBeløb == 0) {
 				erbetalt = true;
-			}
+			} 
 //			System.out.println("[Salg -> delBetalinger()] Fuldbeløb: " + fuldBeløb);
 		}else {
 			throw new ArithmeticException("Beløb kan ikke være mindre en det fulde beløb");
@@ -153,4 +138,18 @@ public class Salg {
 	public boolean getErBetalt() {
 		return erbetalt;
 	}
+	
+	public void setErBetalt(boolean betalt) {
+		erbetalt = betalt;
+	}
+
+	@Override
+	public String toString() {
+		return "Salg [id=" + id + ", produktLinjer=" + produktLinjer + ", betalingsformer=" + betalingsformer
+				+ ", salgsdato=" + salgsdato + ", rabat=" + rabat + ", fuldBeløb=" + fuldBeløb + ", erbetalt="
+				+ erbetalt + "]";
+	}
+	
+	
+	
 }

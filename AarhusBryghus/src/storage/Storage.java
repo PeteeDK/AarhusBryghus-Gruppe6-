@@ -20,7 +20,7 @@ public class Storage {
 
 	// -------ProduktLinje---------------------------------------------
 
-	public static ArrayList<ProduktLinje> getProduktLinjer() {
+	public static ArrayList<ProduktLinje> getProduktLinjer() { 
 		return new ArrayList<ProduktLinje>(produktlinjer);
 	}
 
@@ -56,7 +56,9 @@ public class Storage {
 	}
 
 	public static void addSalg(Salg salg) {
-		salgsEnheder.add(salg);
+		if(!salgsEnheder.contains(salg)) {
+			salgsEnheder.add(salg);
+		}
 	}
 
 	public static void removeSalg(Salg salg) {

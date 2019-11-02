@@ -32,8 +32,8 @@ public class RundvisningWindow extends Stage {
 	
     public RundvisningWindow(String title, ProduktLinje rundvisning) {
         this.initStyle(StageStyle.UTILITY);
-        this.initModality(Modality.APPLICATION_MODAL);
-        this.setResizable(false);
+        this.initModality(Modality.APPLICATION_MODAL); 
+        this.setResizable(false); 
 
         this.rundvisning = rundvisning;
 
@@ -158,9 +158,12 @@ public class RundvisningWindow extends Stage {
 
         // Call controller methods
         if (rundvisning != null && antalStuderende > 0) {
-        	Controller.createStudieRabat(rundvisning, antalStuderende, rabatProcent);	
+        	//TODO Man kan diskutere om det er nødvendigt at oprette studierabat og gemme den i storage
+            rundvisning.setStudieRabat(Controller.createStudieRabat(rundvisning, antalStuderende, rabatProcent));	
         }
-
+        
+        System.out.println("RundvisningWindow -> okAction(): "+rundvisning.getPris());
+        
         this.hide();
     }
 

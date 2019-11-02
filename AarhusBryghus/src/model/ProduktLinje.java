@@ -9,6 +9,7 @@ public class ProduktLinje {
 
     private int antal;
     private Produkt produkt;
+    private StudieRabat studierabat;
     private Pris pris;
 
     public ProduktLinje(Pris pris, int antal) {
@@ -26,13 +27,25 @@ public class ProduktLinje {
     		return antal * pris.getPris() + ((Anlæg)pris.getProdukt()).beregnForbrug();
     	}
     	else if(pris.getProdukt().getKategori().equals("rundvisning")) {
-   	    	return pris.getPris() * antal;
+   	    	if(studierabat == null) {
+   	    		return pris.getPris() * antal;
+   	    	}else {
+   	    		return studierabat.tildelRabat(pris.getPris() * antal);
+   	    	}
     	}
     	return pris.getPris() * antal;
     }
-    
+     
 	public int getAntal() {
 		return antal;
+	}
+	
+	public void setStudieRabat(StudieRabat studierabat) {
+		this.studierabat = studierabat;
+	}
+	
+	public StudieRabat getStudieRabat() {
+		return studierabat;
 	}
 	
 	public void setAntal(int antal) {

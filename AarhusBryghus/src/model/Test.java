@@ -242,14 +242,15 @@ public class Test {
 		betalingsform1.setBetalingsform((IBetalingsform)produkt1);
 		
 		//tilføj betalingsformen til salget
-		salg1.setBetalingsform(betalingsform1);
+//		salg1.setBetalingsform(betalingsform1);
 		
 		//udskriv betalingsform for salget
-		System.out.println("\nBetalt med klippekort for køb af klippekort:\n"+salg1.getBetalingsform().registrerBetaling());
+		//TODO Skal testes om
+//		System.out.println("\nBetalt med klippekort for køb af klippekort:\n"+salg1.getBetalingsform().registrerBetaling());
 		
 		System.out.println("\nHver gang der registreres betaling med klippekortet bliver et klip brugt:");
 		for(int i = 0; i < 4; i++) {
-			System.out.println(salg1.getBetalingsform().registrerBetaling());
+//			System.out.println(salg1.getBetalingsform().registrerBetaling());
 		}
 
 		
@@ -391,13 +392,13 @@ public class Test {
 		salg1.setFuldbeløb(999);
 		
 	
-		while(!(salg1.getFuldBeløb() <= 0)) {
+		while(!(salg1.getResterendeBeløb() <= 0)) {
 			//Betal 200 kr. med Dankort
 			Betalingsform dankort = new Dankort();
-			salg1.delBetalinger(dankort, 200);
+			salg1.betaling(dankort, 200);
 			
 			//Beløb: 1000 - 200 = 800
-			System.out.println("\nFuldbeløb er nu :\n"+salg1.getFuldBeløb());
+			System.out.println("\nFuldbeløb er nu :\n"+salg1.getResterendeBeløb());
 
 		}
 	}
