@@ -34,8 +34,8 @@ public class RundvisningWindow extends Stage {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL); 
         this.setResizable(false); 
-
-        this.rundvisning = rundvisning;
+  
+        this.rundvisning = rundvisning; 
 
         this.setTitle(title);
         GridPane pane = new GridPane();
@@ -104,7 +104,7 @@ public class RundvisningWindow extends Stage {
     		ld = dp.getValue(); 
     		System.out.println("[Rundvisning -> kørDatePicker()] "+ld);
     		Rundvisning r = (Rundvisning) rundvisning.getPrisObj().getProdukt();
-    		r.setDato(ld);
+    		r.setDato(ld); 
     	});
     	
     	Button btnCancel = new Button("OK");

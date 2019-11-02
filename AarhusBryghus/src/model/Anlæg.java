@@ -1,6 +1,9 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+
+import controller.Controller;
 
 
 public class Anlæg extends Produkt {
@@ -10,10 +13,14 @@ public class Anlæg extends Produkt {
 	private double brugtKulsyreKg;
 	private double engangsPris;
 	private ArrayList<Pris> tilbehørsPriser = new ArrayList<>();
+	private LocalDate købsdato;
+	private int id = 1;
 
 	
 	public Anlæg(String kategori, String produktNavn) {
 		super(kategori, produktNavn);
+		setKøbsdato(LocalDate.now());
+		setId(getId() + Controller.getSolgteAnlæg().size());	
 	}
 
 	public double beregnForbrug() {
@@ -123,10 +130,33 @@ public class Anlæg extends Produkt {
 		ArrayList<Produkt> produkter = new ArrayList<>();
 		for(Pris p : tilbehørsPriser) {
 			Produkt produkt = p.getProdukt();
-			produkter.add(produkt);
+			produkter.add(produkt); 
 		}
 		return produkter;
 	}
+
+	@Override
+	public String toString() {
+		return "Anlæg [afleveret=" + afleveret + ", engangsPris=" + engangsPris + ", tilbehørsPriser=" + tilbehørsPriser
+				+ "]";
+	}
+
+	public LocalDate getKøbsdato() {
+		return købsdato;
+	}
+
+	public void setKøbsdato(LocalDate købsdato) {
+		this.købsdato = købsdato;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	
 	
 }

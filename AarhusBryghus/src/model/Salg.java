@@ -114,7 +114,7 @@ public class Salg {
 		if(betalingsform == null || beløb < 0) {
 			throw new IllegalArgumentException("Betalingsformen kan ikke være null eller beløbet kan ikke være negativt");
 		}
-		
+		 
 		//Betalingsform->registrerBetaling() og trække beløb fra fuldtBetalt
 		if(beløb <= fuldBeløb) {
 			betalingsformer.add(betalingsform.registrerBetaling()+", beløb: "+beløb);

@@ -21,11 +21,10 @@ public class Test {
 		testVisDagensSalg();
 		testVisSolgteKlippekortForEnGivenPeriodeSamtBrugteKlip();
 		testAfSampakning();
-		testAfDelbetalinger();
-	}
+	} 
 
 
-
+ 
 	private static void testOpretSalg() {
 	
 		//--- 5 klosterbryg i fredagsbar til 50 kr. med og uden rabat -----------------------------------
@@ -386,22 +385,6 @@ public class Test {
 	}
 
 
-	private static void testAfDelbetalinger() {
-
-		Salg salg1 = new Salg();
-		salg1.setFuldbeløb(999);
-		
-	
-		while(!(salg1.getResterendeBeløb() <= 0)) {
-			//Betal 200 kr. med Dankort
-			Betalingsform dankort = new Dankort();
-			salg1.betaling(dankort, 200);
-			
-			//Beløb: 1000 - 200 = 800
-			System.out.println("\nFuldbeløb er nu :\n"+salg1.getResterendeBeløb());
-
-		}
-	}
 
 	
 }

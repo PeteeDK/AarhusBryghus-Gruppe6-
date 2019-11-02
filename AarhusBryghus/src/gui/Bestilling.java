@@ -120,7 +120,7 @@ public class Bestilling extends GridPane {
 		
 
 		Label lblRundvisningsInfo = new Label("RundvisningsInfo:");
-		this.add(lblRundvisningsInfo, 0, 8);
+		this.add(lblRundvisningsInfo, 0, 8); 
 
         txaDescription = new TextArea();
         this.add(txaDescription, 0, 9);
@@ -169,7 +169,7 @@ public class Bestilling extends GridPane {
         	lblError.setText("Antal skal være et positivt tal");
             return;
         }
-		
+ 		
 		ProduktLinje rundvisning = Controller.createProduktLinje(pris, antal);
 		
 		RundvisningWindow dia = new RundvisningWindow("Specifikationer til rundvisning", rundvisning);

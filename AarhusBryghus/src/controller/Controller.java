@@ -396,10 +396,110 @@ public class Controller {
 			}
 		}
 		return solgteKlippekort;
+	} 
+
+	
+	public static ArrayList<Produkt> getSolgteAnlæg() {
+		ArrayList<Produkt> solgteAnlæg = new ArrayList<>();
+		for(Salg s : Storage.getSalgsenheder()) {
+			for(ProduktLinje pl : s.getProduktLinjer()) {
+				if(pl.getPrisObj().getProdukt().getKategori().equals("anlæg") && (pl.getPrisObj().getProdukt().getProduktNavn().equals("1-hane") || pl.getPrisObj().getProdukt().getProduktNavn().equals("2-haner") || pl.getPrisObj().getProdukt().getProduktNavn().equals("bar med flere haner"))) {
+					int i = 0;
+					while(i < pl.getAntal()) {
+						solgteAnlæg.add(pl.getPrisObj().getProdukt());
+						i++;
+					}
+				}
+			}
+		}
+		return solgteAnlæg;
+	}
+
+
+
+	public static ArrayList<Produkt> getSolgteKlippekortMellemStartOgSlut(LocalDate startdato, LocalDate slutdato) {
+		ArrayList<Produkt> solgteKlippekort = new ArrayList<>();
+		for(Salg s : Storage.getSalgsenheder()) {
+			for(ProduktLinje pl : s.getProduktLinjer()) {
+				if(pl.getPrisObj().getProdukt().getKategori().equals("klippekort")) {
+					Klippekort p = (Klippekort) pl.getPrisObj().getProdukt();
+					if(p.getKøbsdato().isAfter(startdato) && p.getKøbsdato().isBefore(slutdato)) {
+						int i = 0;
+						while(i < pl.getAntal()) {
+							solgteKlippekort.add(pl.getPrisObj().getProdukt());
+							i++;
+						}
+					}
+				}
+			}
+		}
+		return solgteKlippekort;
 	}
 
     
-    
+	public static ArrayList<String> getBrugteKlipMellemStartOgSlut(LocalDate startDato, LocalDate slutDato, boolean brugt) {
+		//arrayList Klip
+		ArrayList<String> brugteKlip = new ArrayList<>();
+		
+		//tag solgte klippekort i periode
+		for(Produkt kk : getSolgteKlippekortMellemStartOgSlut(startDato, slutDato)) {
+			
+			//udtræk klip fra Klippekort klip-liste
+			for(Klip k : ((Klippekort) kk).getKlipEnheder()) {
+			
+				//hvis brugt = "true" tilføj de klip,  hvor [klip->brugt() = true] 
+				if(brugt == true) {
+					if(k.isBrugt()) {
+						String message = "KlippekortID: " + ((Klippekort) kk).getId() + " " + k.toString(); 
+						brugteKlip.add(message);
+					}
+				}else {
+					if(!k.isBrugt()) {
+						String message = "KlippekortID: " + ((Klippekort) kk).getId() + " " + k.toString(); 
+						brugteKlip.add(message);
+					}
+				}
+			}
+		}
+		return brugteKlip;
+	}
+
+
+	public static ArrayList<Produkt> getIkkeAfleveredeAnlægMellemStartOgSlut(LocalDate startdato, LocalDate slutdato) {
+		//arrayList Klip
+		ArrayList<Produkt> ikkeAfleveredeAnlæg = new ArrayList<>();
+		
+		//tag solgte klippekort i periode
+		for(Produkt p : getSolgteAnlæg()) {
+			
+			if(!((Anlæg) p).isAfleveret() && ((Anlæg) p).getKøbsdato().isAfter(startdato) && ((Anlæg) p).getKøbsdato().isBefore(slutdato)) {
+				ikkeAfleveredeAnlæg.add(p);
+			}
+			System.out.println("[Controller -> getIkkeAfleveredeAnlægMellemStartOgSlut] " + ikkeAfleveredeAnlæg);
+		}
+		return ikkeAfleveredeAnlæg;
+	
+	}
+
+	
+	public static ArrayList<Salg> getDagensSalgMellemStartOgSlut(LocalDate startdato, LocalDate slutdato){
+		ArrayList<Salg> dagensSalg = new ArrayList<>();
+		for(Salg s : Controller.getSalgsEnheder()) {
+			if(s.getSalgsdato().isAfter(startdato) && s.getSalgsdato().isBefore(slutdato)) {
+				dagensSalg.add(s);
+			}
+		}
+		return dagensSalg;
+	}
+	
+	
+	
+	
+	
+	
+
+	
+
 	
 	
 	//Init storage
@@ -468,7 +568,7 @@ public class Controller {
     	Beklædning beklædning3 = Controller.createBeklædning("beklædning", "cap");
     	
     	Anlæg anlæg1 = Controller.createAnlæg("anlæg", "1-hane");
-    	Anlæg anlæg2 = Controller.createAnlæg("anlæg", "2-hane");
+    	Anlæg anlæg2 = Controller.createAnlæg("anlæg", "2-haner");
     	Anlæg anlæg3 = Controller.createAnlæg("anlæg", "bar med flere haner");
     	Anlæg anlæg4 = Controller.createAnlæg("anlæg", "levering");
     	Anlæg anlæg5 = Controller.createAnlæg("anlæg", "krus");
@@ -663,7 +763,7 @@ public class Controller {
     	// -------------------------------------------------------------------
     	 
     }
-     
-      
+
+
       
 }

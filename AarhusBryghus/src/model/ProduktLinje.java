@@ -23,7 +23,7 @@ public class ProduktLinje {
     
     //TODO Man kan måske refakturere lidt her
     public double getPris() {
-    	if(pris.getProdukt().getKategori().equals("anlæg")) {
+    	if(pris.getProdukt().getKategori().equals("anlæg")) { 
     		return antal * pris.getPris() + ((Anlæg)pris.getProdukt()).beregnForbrug();
     	}
     	else if(pris.getProdukt().getKategori().equals("rundvisning")) {

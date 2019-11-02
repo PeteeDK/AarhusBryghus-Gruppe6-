@@ -8,9 +8,9 @@ public class Klip {
 	private boolean brugt;
 	private LocalDate transaktionsdato;
 	
-	public Klip(int nr) {
+	public Klip(int nr) { 
 		this.nr = nr;
-	}
+	} 
 
 	public int getNr() {
 		return nr;
@@ -38,6 +38,12 @@ public class Klip {
 	public void setTransaktionsdato(LocalDate købsdato) {
 		this.transaktionsdato = købsdato;
 	}
+
+	@Override
+	public String toString() {
+		return "Klip [nr=" + nr + ", brugt=" + brugt + ", transaktionsdato=" + transaktionsdato + "]";
+	}
+	
 	
 	
 

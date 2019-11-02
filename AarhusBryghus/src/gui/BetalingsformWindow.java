@@ -43,7 +43,7 @@ public class BetalingsformWindow extends Stage {
 	private IBetalingsform ib = null;
 	private ListView<Produkt> lvwKlippekort;
 	private TextField txfResterendeBeløb;
-	private double resterendeBeløb;
+	private double resterendeBeløb; 
 	private double beløb; 
 
 
@@ -83,7 +83,7 @@ public class BetalingsformWindow extends Stage {
         
 		VBox box = new VBox();
 		betalingsform = new ToggleGroup();
-		String[] betalingsformer = { "Dankort", "MobilePay", "Kontant", "Regning", "Klip (klippekort)" };
+		String[] betalingsformer = { "", "Dankort", "MobilePay", "Kontant", "Regning", "Klip (klippekort)" };
 		RadioButton rb;
 		for (int i = 0; i < betalingsformer.length; i++) {
 			rb = new RadioButton();
