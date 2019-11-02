@@ -105,7 +105,7 @@ public class RabatWindow extends Stage {
         
 		HBox box = new HBox();
 		rabatform = new ToggleGroup();
-		String[] betalingsformer = { "Fratrække beløb", "Procentvisrabat" };
+		String[] betalingsformer = { "      " , "Fratrække beløb", "Procentvisrabat" };
 		RadioButton rb;
 		for (int i = 0; i < betalingsformer.length; i++) {
 			rb = new RadioButton();
@@ -151,14 +151,8 @@ public class RabatWindow extends Stage {
     	
     	System.out.println("BetalingsformWindow -> registrerBetaling(): "+salg.getFuldBeløb());
 
-//    	if(resterendeBeløb < 0) {
-//        	lblError.setText("Man kan ikke betale over det resterende beløb");
-//            return;
-//		}else if(resterendeBeløb == 0) {
-//			salg.setFuldbeløb(0);
-//			salg.setErBetalt(true);
-//		}
-		
+    	salg.setRabat(rabat);
+    	
 		this.hide();
 		
     }
@@ -178,9 +172,7 @@ public class RabatWindow extends Stage {
 			default:
 		}
 		
-		double tmp = salg.getFuldBeløb();
-		
-		txfResterendeBeløb.setText(""+salg);
+		txfResterendeBeløb.setText(""+rabat.tildelRabat(salg.getFuldBeløb()));
 	}
     
     

@@ -125,6 +125,18 @@ public class BetalingPane extends GridPane {
 	}
 
 	private void tildelRabat() {
+
+		if (salg == null ) {
+			return;
+		}
+
+		RabatWindow dia = new RabatWindow("Angiv rabat", salg);
+		dia.showAndWait();
+
+		txfSamletPris.setText(""+salg.getFuldBeløb());
+
+		
+		System.out.println("[BetalingsPane -> tildelRabat()] "+salg);
 		
 	}
 

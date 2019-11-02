@@ -48,6 +48,9 @@ public class Salg {
     
     public void setRabat(Rabat rabat) {
     	this.rabat = rabat;
+    	if(rabat != null) {
+    		fuldBeløb = rabat.tildelRabat(fuldBeløb);
+    	}
     }
 	
 	public int getId() {
@@ -126,10 +129,6 @@ public class Salg {
 		
 	}
 	
-	//TODO Kun til at teste med
-	public void setFuldbeløb(double beløb) {
-		this.fuldBeløb = beløb;
-	}
 	
 	public double getFuldBeløb() {
 		return fuldBeløb;
