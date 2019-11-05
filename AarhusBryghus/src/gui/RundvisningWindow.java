@@ -170,7 +170,8 @@ public class RundvisningWindow extends Stage {
 
         // Call controller methods 
         if (rundvisning != null && antalStuderende > 0) {
-            rundvisning.setStudieRabat(Controller.createStudieRabat(rundvisning, antalStuderende, rabatProcent));	
+        	StudieRabat sr = new StudieRabat(rundvisning, antalStuderende, rabatProcent);
+            rundvisning.setStudieRabat(sr);	
         }
         
         System.out.println("RundvisningWindow -> okAction(): "+rundvisning.getPris());

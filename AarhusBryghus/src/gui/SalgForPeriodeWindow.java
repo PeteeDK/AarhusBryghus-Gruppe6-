@@ -1,6 +1,7 @@
 package gui;
 
 import controller.Controller;
+import controller.StatistikCtlr;
 import model.Salg;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -55,7 +56,7 @@ public class SalgForPeriodeWindow extends Stage {
 		pane.add(lvwSalg, 0, 2, 1, 3);
 		lvwSalg.setPrefWidth(100);
 		lvwSalg.setPrefHeight(100);
-		lvwSalg.getItems().setAll(Controller.getDagensSalgMellemStartOgSlut(startDato, slutDato));
+		lvwSalg.getItems().setAll(StatistikCtlr.getDagensSalgMellemStartOgSlut(startDato, slutDato));
 
         
         lblError = new Label();

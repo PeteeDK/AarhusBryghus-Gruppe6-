@@ -2,7 +2,7 @@ package gui;
 
 import java.time.LocalDate;
 
-import controller.Controller;
+import controller.BestillingCtlr;
 import model.*;
 import model.produkter.Sampakninger;
 import javafx.collections.FXCollections;
@@ -73,7 +73,7 @@ public class BestillingPane extends GridPane {
 		this.add(lvwRundvisninger, 2, 9, 1, 5);
 		lvwRundvisninger.setPrefWidth(200);
 		lvwRundvisninger.setPrefHeight(200);
-		lvwRundvisninger.getItems().setAll(Controller.getSolgteRundvisningerEfterDagensDato(LocalDate.now()));
+		lvwRundvisninger.getItems().setAll(BestillingCtlr.getSolgteRundvisningerEfterDagensDato(LocalDate.now()));
 		
 		Button btnAfregnRundvisning = new Button("Afregn rundvisning:");
 		this.add(btnAfregnRundvisning, 3, 10);
@@ -84,7 +84,7 @@ public class BestillingPane extends GridPane {
 		//ComboBox - PrisListe 
 		// - https://www.geeksforgeeks.org/javafx-combobox-with-examples/
 		
-		String prisliste[] = Controller.getArrangementer();
+		String prisliste[] = BestillingCtlr.getArrangementer();
 		cmbPrisLister = new ComboBox(FXCollections.observableArrayList(prisliste));
 		selected = new Label(""); 
 		
@@ -100,7 +100,7 @@ public class BestillingPane extends GridPane {
 
 		//ComboBox - Kategori 
 		
-		String kategoriliste[] = Controller.getKategorier();
+		String kategoriliste[] = BestillingCtlr.getKategorier();
 		cmbKategoriLister = new ComboBox(FXCollections.observableArrayList(kategoriliste));
 		selected = new Label(""); 
 		
@@ -174,11 +174,11 @@ public class BestillingPane extends GridPane {
 
 		((Rundvisning) pl.getPrisObj().getProdukt()).setBetalt(true, LocalDate.now());
 		
-		Controller.addProduktLinje(pl);
+		BestillingCtlr.addProduktLinje(pl);
 	
 		infoUpdate();
 		
-		lvwRundvisninger.getItems().setAll(Controller.getSolgteRundvisningerEfterDagensDato(LocalDate.now()));
+		lvwRundvisninger.getItems().setAll(BestillingCtlr.getSolgteRundvisningerEfterDagensDato(LocalDate.now()));
 		
 	}
 
@@ -202,7 +202,7 @@ public class BestillingPane extends GridPane {
             return;
         }
  		
-		ProduktLinje rundvisning = Controller.createProduktLinje(pris, antal);
+		ProduktLinje rundvisning = BestillingCtlr.createProduktLinje(pris, antal);
 		
 		RundvisningWindow dia = new RundvisningWindow("Specifikationer til rundvisning", rundvisning);
 		dia.showAndWait();
@@ -212,7 +212,6 @@ public class BestillingPane extends GridPane {
         sb.append("Kategori: " + rundvisning.getPrisObj().getProdukt().getKategori()+"\n");
         sb.append("Pris pr. person" + rundvisning.getPrisObj().getPris()+"\n");
         sb.append("Totale antal: " + rundvisning.getAntal()+"\n"); 
-        sb.append(Controller.getRabatter().toString()+"\n");
 		
 		txaDescription.setText(sb.toString());
 
@@ -240,7 +239,7 @@ public class BestillingPane extends GridPane {
         
         //TODO Levering skal muligvis være en tilvalgsydelse, der tilføjes i AnlægWindow i stedet for at være et produkt i prislisten
 		
-		ProduktLinje anlæg = Controller.createProduktLinje(pris, antal);
+		ProduktLinje anlæg = BestillingCtlr.createProduktLinje(pris, antal);
 		
 		//det er kun muligt at tilføje fustager og kulsyrer til følgende produkter
 		if(anlæg.getPrisObj().getProdukt().getProduktNavn().equals("1-hane") || anlæg.getPrisObj().getProdukt().getProduktNavn().equals("2-haner") ||
@@ -283,7 +282,7 @@ public class BestillingPane extends GridPane {
             return;
         }
         
-    	ProduktLinje sampakninger = Controller.createProduktLinje(pris, antal);
+    	ProduktLinje sampakninger = BestillingCtlr.createProduktLinje(pris, antal);
 
     	//Der kan kun sættes det samme indhold i alle sampakninger, ellers må man tilføje flere sampakninger
     	SampakningerWindow dia = new SampakningerWindow("Specifikationer til sampakning", pris.getProdukt());
@@ -307,14 +306,14 @@ public class BestillingPane extends GridPane {
 		if (produktlinje == null) {
 			return;
 		}
-		Controller.removeProduktLinje(produktlinje);
+		BestillingCtlr.removeProduktLinje(produktlinje);
 
-		lvwKurveliste.getItems().setAll(Controller.getProduktlinjer());
+		lvwKurveliste.getItems().setAll(BestillingCtlr.getProduktlinjer());
 		
 		//TODO kan evt. laves til en metode i controlleren, der hedder Controller.getSamletPris()
 		double samletPris = 0;
 		
-		for(ProduktLinje pl : Controller.getProduktlinjer()) {
+		for(ProduktLinje pl : BestillingCtlr.getProduktlinjer()) {
 			samletPris += pl.getPris();
 		}
 		
@@ -330,7 +329,7 @@ public class BestillingPane extends GridPane {
             { 
                 selected.setText(cmbPrisLister.getValue().toString()); 
         		arrangement = selected.getText();
-        		lvsProduktliste.getItems().setAll(Controller.getPriser(arrangement));
+        		lvsProduktliste.getItems().setAll(BestillingCtlr.getPriser(arrangement));
             } 
         }; 
   
@@ -345,7 +344,7 @@ public class BestillingPane extends GridPane {
             { 
                 selected.setText(cmbKategoriLister.getValue().toString()); 
         		kategori = selected.getText();
-        		lvsProduktliste.getItems().setAll(Controller.getPriserEfterArrangementOgKategori(arrangement, kategori));
+        		lvsProduktliste.getItems().setAll(BestillingCtlr.getPriserEfterArrangementOgKategori(arrangement, kategori));
             } 
         }; 
   
@@ -356,7 +355,6 @@ public class BestillingPane extends GridPane {
 	private void tilføjTilKurv() {
 		Pris pris = lvsProduktliste.getSelectionModel().getSelectedItem();
 
-		//TODO Lav en opgørelse over produkter der ikke skal kunne blive tilføjet til kurv fx. levering
 		if (pris == null) {
 			return;
 		}else if(pris.getProdukt().getKategori().equals("rundvisning")) {
@@ -382,7 +380,7 @@ public class BestillingPane extends GridPane {
         }
         
         if (pris != null && antal > 0) {
-        	Controller.createProduktLinje(pris, antal);
+        	BestillingCtlr.createProduktLinje(pris, antal);
         } 
         
        
@@ -395,11 +393,11 @@ public class BestillingPane extends GridPane {
 		double samletPris = 0;
 
 		//TODO Denne kunne også bare blive kaldt fra Controlleren
-		for(ProduktLinje pl : Controller.getProduktlinjer()) {
+		for(ProduktLinje pl : BestillingCtlr.getProduktlinjer()) {
 			samletPris += pl.getPris();
 		}
 
-		lvwKurveliste.getItems().setAll(Controller.getProduktlinjer());
+		lvwKurveliste.getItems().setAll(BestillingCtlr.getProduktlinjer());
 
 		txfSamletBeløb.setText(""+samletPris);
 	}

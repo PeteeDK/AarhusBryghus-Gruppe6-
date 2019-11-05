@@ -1,6 +1,7 @@
 package gui;
 
 import controller.Controller;
+import controller.StatistikCtlr;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
@@ -64,7 +65,7 @@ public class KlipWindow extends Stage {
 		lvwBrugteKlip.setPrefWidth(100);
 		lvwBrugteKlip.setPrefHeight(100);
 		//true = "klip der er brugt" og false = "klip der ikke er brugt"
-		lvwBrugteKlip.getItems().setAll(Controller.getBrugteKlipMellemStartOgSlut(startDato, slutDato, brugt));
+		lvwBrugteKlip.getItems().setAll(StatistikCtlr.getBrugteKlipMellemStartOgSlut(startDato, slutDato, brugt));
 
         //------radiobuttons------------------------------------
         
@@ -106,7 +107,7 @@ public class KlipWindow extends Stage {
 				break;
 			default:
 		}
-		lvwBrugteKlip.getItems().setAll(Controller.getBrugteKlipMellemStartOgSlut(startDato, slutDato, brugt));
+		lvwBrugteKlip.getItems().setAll(StatistikCtlr.getBrugteKlipMellemStartOgSlut(startDato, slutDato, brugt));
 	}
 
 	private void initControls() {

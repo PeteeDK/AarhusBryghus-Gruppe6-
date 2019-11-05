@@ -26,7 +26,7 @@ public class Test {
 		testRandom();
 	} 
 
-
+ 
  
 	private static void testOpretSalg() {
 	

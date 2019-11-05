@@ -16,8 +16,8 @@ public class Controller{
  
 
 	//-------Produkter---------------------------------------------------
-    
-	 
+     
+	  
 	//create
   	public static Beklædning createBeklædning(String kategori, String produktNavn) {
   		Beklædning beklædning = new Beklædning(kategori, produktNavn);
@@ -72,54 +72,14 @@ public class Controller{
 		Storage.addProdukt(glas);
 		return glas;
 	}
-
-
-	//----get------------------------------------------------------------------
-	
-    
-    public static Produkt getGlas() {
-        Produkt glas = null;
-        for(Produkt p : Storage.getProdukter()) {
-      	  if(p.getKategori().equals("glas")) {
-      		  glas = p;
-      	  }
-        }
-        return glas;
-    }
-    
-    
-    
-    public static ArrayList<Produkt> getProdukter(){
-    	return Storage.getProdukter();
-    }
-
-    
-    //-------Anlæg---------------------------------------------------
       
       
-  	//create
   	public static Anlæg createAnlæg(String kategori, String produktNavn) {
   		Anlæg anlæg = new Anlæg(kategori,produktNavn);
   		Storage.addProdukt(anlæg);
   		return anlæg;
   	}
   	
-  	
-  	//get
-    public static ArrayList<Produkt> getAnlægsEnheder() {
-    	ArrayList<Produkt> anlægsEnheder = new ArrayList<>();
-      	for(Produkt p : Storage.getProdukter()) {
-      		if(p.getKategori().equals("anlæg")) {
-      			anlægsEnheder.add(p);
-      		}
-     	}
-        return anlægsEnheder;
-    } 
-      
-    
-      
-    //-------Rundvisning---------------------------------------------------
-      
       
   	//create
   	public static Rundvisning createRundvisning(String kategori, String produktNavn) {
@@ -127,24 +87,8 @@ public class Controller{
   	  	Storage.addProdukt(rundvisning);
   	  	return rundvisning;
   	}
-  	
-  	
-  	//get
-    public static ArrayList<Produkt> getRundvisninger() {
-    	ArrayList<Produkt> rundvisninger = new ArrayList<>();
-      	for(Produkt p : Storage.getProdukter()) {
-      		if(p.getKategori().equals("rundvisning")) {
-      			rundvisninger.add(p);
-      		}
-      	}
-        return rundvisninger;
-    }
 
-      
-      
-    //-------Klippekort---------------------------------------------------
-      
-      
+  	
   	//create
   	public static Klippekort createKlippekort(String kategori, String produktNavn) {
   	  	Klippekort klippekort = new Klippekort(kategori, produktNavn);
@@ -153,22 +97,6 @@ public class Controller{
   	}
   	
   	
-  	//get
-   public static ArrayList<Produkt> getKlippekortEnheder() {
-      ArrayList<Produkt> klippekortEnheder = new ArrayList<>();
-      for(Produkt p : Storage.getProdukter()) {
-    	  if(p.getKategori().equals("klippekort")) {
-      		klippekortEnheder.add(p);
-      	  }
-      }
-      return klippekortEnheder;
-   }
-
-    
-    
-  //-------Prisliste---------------------------------------------------
-    
-    
 	//create
 	public static PrisListe createPrisliste(String arrangement) {
 		PrisListe prisliste = new PrisListe(arrangement);
@@ -176,58 +104,6 @@ public class Controller{
 	  	return prisliste;
 	}
 	
-	//get
-    public static ArrayList<PrisListe> getPrislister() {
-    	return Storage.getPrislister();
-    }
-
-    
-    //-------ProcentvisRabat---------------------------------------------------
-    
-    
-  	//create
-  	public static ProcentvisRabat createProcentvisRabat(double procent) {
-  		ProcentvisRabat procentvisRabat = new ProcentvisRabat(procent);
-  	  	Storage.addRabat(procentvisRabat);
-  	  	return procentvisRabat;
-  	}
-  	
-  	//get
-    public static ArrayList<Rabat> getRabatter() {
-      	return Storage.getRabatter();
-    }
-
-    
-    
-    //-------StudieRabat---------------------------------------------------
-    
-    
-  	//create
-  	public static StudieRabat createStudieRabat(ProduktLinje produktlinje, int antalStuderende, double rabatProcent) {
-  		StudieRabat studieRabat = new StudieRabat(produktlinje, antalStuderende, rabatProcent);
-  	  	Storage.addRabat(studieRabat);
-  	  	return studieRabat;
-  	}
-  	
-  	
-    
-    
-    //-------Betalingsform---------------------------------------------------
-    
-    
-    
-  	
-  	
-  	
-  	//get
-    public static ArrayList<IBetalingsform> getBetalingsformer() {
-      	return Storage.getBetalingsformer();
-    }
-
-      
-      
-    //-----Salg------------------------------------------------------------
-      
     //create
     public static Salg createSalg() {
     	Salg salg = new Salg();
@@ -235,87 +111,6 @@ public class Controller{
     	return salg;
     }
           	
-    //get
-    public static ArrayList<Salg> getSalgsEnheder() {
-    	return Storage.getSalgsenheder();
-    }
-    
-
-    //---------------Priser-med-og-uden-arrangement-------------------------------------------------------
-    
-    
-    public static ArrayList<Pris> getPriser(String arg){
-    	ArrayList<Pris> priser = new ArrayList<>();
-    	for(PrisListe pl : getPrislister()) {
-    		if(pl.getArrangement().equals(arg)) {
-        		for(Pris p : pl.getPriser()) {
-        			priser.add(p);
-        		}
-    		}
-    	}
-    	return priser;
-    }
-    
-    
-    public static ArrayList<Pris> getPriserEfterArrangementOgKategori(String arrangement, String kategori){
-    	ArrayList<Pris> priser = new ArrayList<>();
-    	for(PrisListe pl : getPrislister()) {
-    		if(pl.getArrangement().equals(arrangement)) {
-    			for(Pris p : pl.getPriser()) {
-    				if(p.getProdukt().getKategori().equals(kategori)) {
-        				priser.add(p);
-    				}
-    			}
-    		}
-    	}
-    	return priser;
-    }
-    
-    
-    public static ArrayList<Pris> getPriserEfterKategori(String kategori){
-    	ArrayList<Pris> priser = new ArrayList<>();
-    	for(PrisListe pl : getPrislister()) {
-   			for(Pris p : pl.getPriser()) {
-   				if(p.getProdukt().getKategori().equals(kategori)) {
-       				priser.add(p);
-   				}
-   			}
-    	}
-    	return priser;
-    }
-
-    
-    
-    //---------------------Produkter--------------------------------------------------
-
-    
-    public static ArrayList<Produkt> getProdukterEfterKategori(String kategori){
-    	ArrayList<Produkt> produkter = new ArrayList<>();
-    	for(Produkt p : Storage.getProdukter()) {
-    		if(p.getKategori().equals(kategori)) {
-    			produkter.add(p);
-    		}
-    	}
-    	return produkter;
-    }
-    
-    
-    public static String[] getKategorier(){
-    	Set<String> kategorierSet = new HashSet<String>();
-    	for(Produkt p : Storage.getProdukter()) {
-    		kategorierSet.add(p.getKategori());
-    	}
-    	String[] kategorier = new String[kategorierSet.size()];
-    	int i = 0;
-    	for(String k : kategorierSet) {
-    		kategorier[i] = k;
-    		i++;
-    	}
-     	return kategorier;
-    }
-    
-    
-    //------------create produktlinje-------------------------------------------------------------
     
     public static ProduktLinje createProduktLinje(Pris pris, int antal) {
     	ProduktLinje produktLinje = new ProduktLinje(pris, antal);
@@ -323,37 +118,13 @@ public class Controller{
     	return produktLinje;
     }
     
-    //TODO Overvej om man bruge denne til at redigere en produktlinje med i stedet for blot at fjerne den fra kurv
-    public static void updateProduktLinje(ProduktLinje produktlinje, Pris pris, int antal) {
-    	produktlinje.setPris(pris);
-    	produktlinje.setAntal(antal);
-    }
-
-	public static void removeProduktLinje(ProduktLinje produktlinje) {
-		Storage.removeProduktLinje(produktlinje);
-	}
-
-	public static ArrayList<ProduktLinje> getProduktlinjer(){
-		return Storage.getProduktLinjer();
-	}
-	
-    
-    
-    //get prisliste-arrangement - bruges i [Bestilling -> "comboBox"]
-    public static String[] getArrangementer(){
-    	String[] arrangementer = new String[getPrislister().size()];
-    	int i = 0;
-    	for(PrisListe pl : getPrislister()) {
-    		arrangementer[i] = pl.getArrangement();
-    		i++;
-    	}
-    	return arrangementer;
+    //get
+    public static ArrayList<Salg> getSalgsEnheder() {
+    	return Storage.getSalgsenheder();
     }
     
     
-    //------------------Statistik:Solgte-Enheder----------------------------------------------------
-    
-    
+    //Metode til Klippekort
 	public static ArrayList<Produkt> getSolgteKlippekort() {
 		ArrayList<Produkt> solgteKlippekort = new ArrayList<>();
 		for(Salg s : Storage.getSalgsenheder()) {
@@ -370,9 +141,10 @@ public class Controller{
 			}
 		}
 		return solgteKlippekort;
-	} 
-
+	}
 	
+	
+	//Metode til Anlæg
 	public static ArrayList<Produkt> getSolgteAnlæg() {
 		ArrayList<Produkt> solgteAnlæg = new ArrayList<>();
 		for(Salg s : Storage.getSalgsenheder()) {
@@ -389,97 +161,6 @@ public class Controller{
 		return solgteAnlæg;
 	}
 
-	
-	public static ArrayList<ProduktLinje> getSolgteRundvisningerEfterDagensDato(LocalDate now) {
-		ArrayList<ProduktLinje> solgteRundvisninger = new ArrayList<>();
-		for(Salg s : Storage.getSalgsenheder()) {
-			for(ProduktLinje pl : s.getProduktLinjer()) {
-				if(pl.getPrisObj().getProdukt().getKategori().equals("rundvisning")) {
-					Rundvisning rundvisning = ((Rundvisning) pl.getPrisObj().getProdukt());
-					if(rundvisning.getDato().isBefore(now) && !rundvisning.isBetalt()) {
-						solgteRundvisninger.add(pl);
-					}
-				}
-			}
-		}
-		return solgteRundvisninger;
-	}
-
-	public static void addProduktLinje(ProduktLinje produktlinje) {
-		Storage.addProduktLinje(produktlinje);
-	}
-
-
-	public static ArrayList<Produkt> getSolgteKlippekortMellemStartOgSlut(LocalDate startdato, LocalDate slutdato) {
-		ArrayList<Produkt> solgteKlippekort = new ArrayList<>();
-		for(Salg s : Storage.getSalgsenheder()) {
-			for(ProduktLinje pl : s.getProduktLinjer()) {
-				if(pl.getPrisObj().getProdukt().getKategori().equals("klippekort")) {
-					Klippekort p = (Klippekort) pl.getPrisObj().getProdukt();
-					if(p.getKøbsdato().isAfter(startdato) && p.getKøbsdato().isBefore(slutdato)) {
-						int i = 0;
-						while(i < pl.getAntal()) {
-							solgteKlippekort.add(pl.getPrisObj().getProdukt());
-							i++;
-						}
-					}
-				}
-			}
-		}
-		return solgteKlippekort;
-	}
-
-
-	
-	public static ArrayList<String> getBrugteKlipMellemStartOgSlut(LocalDate startDato, LocalDate slutDato, boolean brugt) {
-		ArrayList<String> brugteKlip = new ArrayList<>();
-		for(Produkt kk : getSolgteKlippekortMellemStartOgSlut(startDato, slutDato)) {
-			for(Klip k : ((Klippekort) kk).getKlipEnheder()) {
-				if(brugt == true) {
-					if(k.isBrugt()) {
-						String message = "KlippekortID: " + ((Klippekort) kk).getId() + " " + k.toString(); 
-						brugteKlip.add(message);
-					}
-				}else {
-					if(!k.isBrugt()) {
-						String message = "KlippekortID: " + ((Klippekort) kk).getId() + " " + k.toString(); 
-						brugteKlip.add(message);
-					}
-				}
-			}
-		}
-		return brugteKlip;
-	}
-
-
-	public static ArrayList<Produkt> getIkkeAfleveredeAnlægMellemStartOgSlut(LocalDate startdato, LocalDate slutdato) {
-		ArrayList<Produkt> ikkeAfleveredeAnlæg = new ArrayList<>();
-		for(Produkt p : getSolgteAnlæg()) {
-			if(!((Anlæg) p).isAfleveret() && ((Anlæg) p).getKøbsdato().isAfter(startdato) && ((Anlæg) p).getKøbsdato().isBefore(slutdato)) {
-				ikkeAfleveredeAnlæg.add(p);
-			}
-		}
-		return ikkeAfleveredeAnlæg;
-	}
-
-	
-	public static ArrayList<Salg> getDagensSalgMellemStartOgSlut(LocalDate startdato, LocalDate slutdato){
-		ArrayList<Salg> dagensSalg = new ArrayList<>();
-		for(Salg s : getSalgsEnheder()) {
-			if(s.getSalgsdato().isAfter(startdato) && s.getSalgsdato().isBefore(slutdato)) {
-				dagensSalg.add(s);
-			}
-		}
-		return dagensSalg;
-	}
-	
-	
-	public static void tømProduktlinjer() {
-		Storage.tømProduktLinjer();
-	}
-
-	
-	
 		
 	
 	public static void initStorage() {

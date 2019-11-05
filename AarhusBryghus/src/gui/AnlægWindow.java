@@ -1,6 +1,6 @@
 package gui;
 
-import controller.Controller;
+import controller.AnlægCtlr;
 import model.*;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -64,7 +64,7 @@ public class AnlægWindow extends Stage {
 		pane.add(lvwKulsyre, 0, 1, 1, 5); 
 		lvwKulsyre.setPrefWidth(200);
 		lvwKulsyre.setPrefHeight(200);									//TODO Skal arrangement fra comboboxen sætte arrangementet i stedet for at hard-coder det
-		lvwKulsyre.getItems().setAll(Controller.getPriserEfterArrangementOgKategori("butik", "kulsyre"));
+		lvwKulsyre.getItems().setAll(AnlægCtlr.getPriserEfterArrangementOgKategori("butik", "kulsyre"));
 
         
 		Label lblFustage = new Label("Fustager:");
@@ -74,7 +74,7 @@ public class AnlægWindow extends Stage {
 		pane.add(lvwFustage, 0, 8, 1, 5);
 		lvwFustage.setPrefWidth(200);
 		lvwFustage.setPrefHeight(200);
-		lvwFustage.getItems().setAll(Controller.getPriserEfterArrangementOgKategori("butik", "fustage"));
+		lvwFustage.getItems().setAll(AnlægCtlr.getPriserEfterArrangementOgKategori("butik", "fustage"));
 
 		
 		

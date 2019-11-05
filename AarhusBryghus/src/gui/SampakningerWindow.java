@@ -1,5 +1,6 @@
 package gui;
 
+import controller.BestillingCtlr;
 import controller.Controller;
 import model.*;
 import model.produkter.Sampakninger;
@@ -18,7 +19,7 @@ public class SampakningerWindow extends Stage {
     private Label lblError;
 	private ListView<Pris> lvwFlasker;
 	private ListView<Produkt> lvwTilføjetTilSampakninger;
-	
+	 
     public SampakningerWindow(String title, Produkt produkt) {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
@@ -58,7 +59,7 @@ public class SampakningerWindow extends Stage {
 		pane.add(lvwFlasker, 0, 1, 1, 5);
 		lvwFlasker.setPrefWidth(200);
 		lvwFlasker.setPrefHeight(200);									//TODO Skal arrangement fra comboboxen sætte arrangementet i stedet for at hard-coder det
-		lvwFlasker.getItems().setAll(Controller.getPriserEfterArrangementOgKategori("butik", "flaske"));
+		lvwFlasker.getItems().setAll(BestillingCtlr.getPriserEfterArrangementOgKategori("butik", "flaske"));
 
 		Label lblIntroduktion = new Label("(Sampakningerne indeholder det samme)");
 		pane.add(lblIntroduktion, 5, 0);
@@ -89,7 +90,7 @@ public class SampakningerWindow extends Stage {
     private void initGlas() {
 		//tilføjer glas til hver sampakning som er gemt i storage
 		while(((Sampakninger) produkt).getAntalGlas() != 0) {
-			((Sampakninger) produkt).addIndhold(Controller.getGlas());
+			((Sampakninger) produkt).addIndhold(BestillingCtlr.getGlas());
 			lvwTilføjetTilSampakninger.getItems().setAll(((Sampakninger) produkt).getIndholdEnheder());
 		}
 

@@ -45,7 +45,7 @@ public class StatistikPane extends GridPane {
 		txfSlutDato.setPrefWidth(50);
 		txfSlutDato.setEditable(true);
 	
-
+ 
 		Button btnViskurv = new Button("Registrere datoer:"); 
 		this.add(btnViskurv, 0, 4);
 		btnViskurv.setOnAction(event -> this.registrereDatoer());

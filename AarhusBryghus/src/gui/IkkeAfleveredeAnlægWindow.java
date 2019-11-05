@@ -1,6 +1,7 @@
 package gui;
 
 import controller.Controller;
+import controller.StatistikCtlr;
 import model.Rundvisning;
 import model.rabat.StudieRabat;
 import model.Pris;
@@ -67,7 +68,7 @@ public class IkkeAfleveredeAnlægWindow extends Stage {
 		pane.add(lvwIkkeAfleveredeAnlæg, 0, 2, 1, 3);
 		lvwIkkeAfleveredeAnlæg.setPrefWidth(100);
 		lvwIkkeAfleveredeAnlæg.setPrefHeight(100);
-		lvwIkkeAfleveredeAnlæg.getItems().setAll(Controller.getIkkeAfleveredeAnlægMellemStartOgSlut(startDato, slutDato));
+		lvwIkkeAfleveredeAnlæg.getItems().setAll(StatistikCtlr.getIkkeAfleveredeAnlægMellemStartOgSlut(startDato, slutDato));
 
         
         lblError = new Label();

@@ -154,8 +154,8 @@ public class UnitTests {
 	public void testAnlæg7() {
 		Tilbehør produkt1 = new Tilbehør("fustage", "klosterbryg", 20);
 		Tilbehør produkt2 = new Tilbehør("kulsyre", "", 6);
-		Pris pris1 = new Pris(produkt1,(775.0/20));
-		Pris pris2 = new Pris(produkt2,(400.0/6));
+		Pris pris1 = new Pris(produkt1,(775.0));
+		Pris pris2 = new Pris(produkt2,(400.0));
 		Anlæg anlæg1 = new Anlæg("anlæg","1-hane");
 		anlæg1.addTilbehør(pris1);
 		anlæg1.addTilbehør(pris2);

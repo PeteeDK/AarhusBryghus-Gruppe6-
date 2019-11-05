@@ -1,6 +1,7 @@
 package gui;
 
 import controller.Controller;
+import controller.StatistikCtlr;
 import model.Produkt;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -56,7 +57,7 @@ public class KlippekortWindow extends Stage {
 		pane.add(lvwKlippekort, 0, 2, 1, 3);
 		lvwKlippekort.setPrefWidth(100);
 		lvwKlippekort.setPrefHeight(100);
-		lvwKlippekort.getItems().setAll(Controller.getSolgteKlippekortMellemStartOgSlut(startDato, slutDato));
+		lvwKlippekort.getItems().setAll(StatistikCtlr.getSolgteKlippekortMellemStartOgSlut(startDato, slutDato));
 
         
         lblError = new Label();

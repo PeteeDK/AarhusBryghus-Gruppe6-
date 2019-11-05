@@ -1,6 +1,7 @@
 package gui;
 
 
+import controller.BetalingCtlr;
 import controller.Controller;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
@@ -23,7 +24,6 @@ public class BetalingPane extends GridPane {
 	private ListView<ProduktLinje> lvwProduktlinjer;
 	private BestillingPane bestilling;
 	private Label lblError;
-	//TODO Der skal evt. være en knap helt i starten der hedder "nyt salg", hvor man opretter et salg og gemmer det i storage
 	private Salg salg;
 	private double samletPris;
    
@@ -41,7 +41,7 @@ public class BetalingPane extends GridPane {
 		this.add(lvwProduktlinjer, 0, 1, 1, 3);
 		lvwProduktlinjer.setPrefWidth(200);
 		lvwProduktlinjer.setPrefHeight(200);
-		lvwProduktlinjer.getItems().setAll(Controller.getProduktlinjer());
+		lvwProduktlinjer.getItems().setAll(BetalingCtlr.getProduktlinjer());
 
 		
 		Label lblSamletPris = new Label("Samlet pris / Resterende beløb:");
@@ -104,11 +104,11 @@ public class BetalingPane extends GridPane {
 
 	
 	private void nytSalg() {
-		salg = Controller.createSalg();
+		salg = BetalingCtlr.createSalg();
 		
-		Controller.tømProduktlinjer();
+		BetalingCtlr.tømProduktlinjer();
 		
-		System.out.println("[BetalingsPane->nytSalg()]: "+Controller.getProduktlinjer());
+		System.out.println("[BetalingsPane->nytSalg()]: "+BetalingCtlr.getProduktlinjer());
 	}
 
 
@@ -129,7 +129,7 @@ public class BetalingPane extends GridPane {
         sb.append("Fulde beløb/resterende beløb: " + salg.getFuldBeløb()+"\n");
         sb.append("Betalingsform: " + salg.getBetalingsform()+"\n");
         sb.append("Er betalt: " + salg.getErBetalt()+"\n");
-        sb.append("Alle registrerede rabatter: " + Controller.getRabatter().toString()+"\n");
+        sb.append("Alle registrerede rabatter: " +"\n");
 		
 		txaSalgsinfo.setText(sb.toString());
 		
@@ -158,18 +158,18 @@ public class BetalingPane extends GridPane {
 		salg = Controller.createSalg();
 
 		//TODO Denne kan også blot blive kaldt fra controlleren med salg som argument
-		for(ProduktLinje pl : Controller.getProduktlinjer()) {
+		for(ProduktLinje pl : BetalingCtlr.getProduktlinjer()) {
 			salg.addProduktLinje(pl);
 		}
 
 		samletPris = salg.getPris();
 
-		lvwProduktlinjer.getItems().setAll(Controller.getProduktlinjer());
+		lvwProduktlinjer.getItems().setAll(BetalingCtlr.getProduktlinjer());
 
 		txfSamletPris.setText(""+salg.getFuldBeløb());
 
-		System.out.println("[BetalingsPane -> opdater()] Salgsenheder i storage:" + Controller.getSalgsEnheder());
-		System.out.println("[BetalingsPane -> opdater()] Produktlinjer i storage:" + Controller.getProduktlinjer());
+		System.out.println("[BetalingsPane -> opdater()] Salgsenheder i storage:" + BetalingCtlr.getSalgsEnheder());
+		System.out.println("[BetalingsPane -> opdater()] Produktlinjer i storage:" + BetalingCtlr.getProduktlinjer());
 
 	}
 

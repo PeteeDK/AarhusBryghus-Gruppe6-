@@ -1,5 +1,6 @@
 package gui;
 
+import controller.BetalingCtlr;
 import controller.Controller;
 import model.Salg;
 import model.betalingsform.*;
@@ -91,7 +92,7 @@ public class BetalingsformWindow extends Stage {
 		pane.add(lvwKlippekort, 0, 5, 1, 3);
 		lvwKlippekort.setPrefWidth(100);
 		lvwKlippekort.setPrefHeight(100);
-		lvwKlippekort.getItems().setAll(Controller.getSolgteKlippekort());
+		lvwKlippekort.getItems().setAll(BetalingCtlr.getSolgteKlippekort());
 
 	
 		
@@ -154,7 +155,7 @@ public class BetalingsformWindow extends Stage {
 	}
 
     private void registrerBetaling() {
-    	if(ib == null || Controller.getProduktlinjer().isEmpty()) {
+    	if(ib == null || BetalingCtlr.getProduktlinjer().isEmpty()) {
     		return;
     	}
     	beløb = Double.parseDouble(txfBeløb.getText().trim());
