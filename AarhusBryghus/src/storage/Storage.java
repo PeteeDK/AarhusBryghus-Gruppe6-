@@ -9,7 +9,6 @@ import model.rabat.*;
 public class Storage {
 
 	//TODO Overvej andre collection-frameworks(datastrukturer)
-	//TODO Er det en god idé at opbevare alle produktkategorierne i én liste
 	private static ArrayList<Produkt> produkter = new ArrayList<>();
 	private static ArrayList<Salg> salgsEnheder = new ArrayList<>();
 	private static ArrayList<PrisListe> prislister = new ArrayList<>();

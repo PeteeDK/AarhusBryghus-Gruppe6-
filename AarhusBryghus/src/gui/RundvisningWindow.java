@@ -109,9 +109,9 @@ public class RundvisningWindow extends Stage {
     	
     	Button btnCancel = new Button("OK");
         root.add(btnCancel, 0, 5);
-        btnCancel.setOnAction(event -> this.okAction());	//TODO Jeg har ikke lige en bedre måde at lukke kalender-vinduet på
+        btnCancel.setOnAction(event -> this.okAction());	
 	}
-    
+     
 
     private void initControls() {
         if (rundvisning.getPrisObj().getProdukt() != null) {
@@ -162,7 +162,6 @@ public class RundvisningWindow extends Stage {
 
         // Call controller methods
         if (rundvisning != null && antalStuderende > 0) {
-        	//TODO Man kan diskutere om det er nødvendigt at oprette studierabat og gemme den i storage
             rundvisning.setStudieRabat(Controller.createStudieRabat(rundvisning, antalStuderende, rabatProcent));	
         }
         

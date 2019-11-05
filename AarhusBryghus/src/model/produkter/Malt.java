@@ -8,7 +8,6 @@ public class Malt extends Produkt {
 	
 	public Malt(String kategori, String produktNavn) {
 		super(kategori, produktNavn);
-		// TODO Auto-generated constructor stub
 	}
 
 	public double getMængde() {
@@ -22,4 +21,5 @@ public class Malt extends Produkt {
 		this.mængde = mængde;
 	}
 	
+	 
 }

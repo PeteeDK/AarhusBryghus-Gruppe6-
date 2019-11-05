@@ -63,11 +63,10 @@ public class StatistikPane extends GridPane {
 		txfSlutDato.setEditable(true);
 	
 
-		Button btnViskurv = new Button("Registrere datoer:");
+		Button btnViskurv = new Button("Registrere datoer:"); 
 		this.add(btnViskurv, 0, 4);
 		btnViskurv.setOnAction(event -> this.registrereDatoer());
 		
-		//TODO Kan ikke finde en måde at vise indholdet af kurven automatisk, når man åbner fanen
 		Button btnKlippekort = new Button("Klippekort udstedt mellem startdato og slutdato");
 		this.add(btnKlippekort, 0, 5);
 		btnKlippekort.setOnAction(event -> this.klippekortUdstedt());

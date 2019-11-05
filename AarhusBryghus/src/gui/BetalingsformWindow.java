@@ -159,7 +159,7 @@ public class BetalingsformWindow extends Stage {
 				//TODO Skal håndtere at man kan vælge solgte(fra produktLinjer) klippekort fra listView
 				ib = (IBetalingsform) lvwKlippekort.getSelectionModel().getSelectedItem();
 				break;
-			default:
+			default: 
 		}
 		
 	}

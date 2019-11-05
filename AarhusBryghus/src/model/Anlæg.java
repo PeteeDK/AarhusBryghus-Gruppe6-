@@ -6,26 +6,38 @@ import java.util.ArrayList;
 import controller.Controller;
 
 
+/**
+ * Anlæg indeholder information omkring udlejning af fadølsanlæg. Klassen indholder en liste med elementer 
+ * af klassen Pris, der anvendes til at beregne prisen for hhv. pant ved udlejningen og forbruget af
+ * kulsyrer og fustager ved aflevering. Derfor kan den kun tage imod priser, hvor produktet entener kulsyre
+ * eller fustage 
+ * @author Erik Kato Ipsen
+ */
+
 public class Anlæg extends Produkt {
 
 	private boolean afleveret;
 	private double brugtFustageLiter;
 	private double brugtKulsyreKg;
-	private double engangsPris;
 	private ArrayList<Pris> tilbehørsPriser = new ArrayList<>();
 	private LocalDate købsdato;
 	private int id = 1; 
-
-	
+ 
+	 
 	public Anlæg(String kategori, String produktNavn) {
 		super(kategori, produktNavn);
 		setKøbsdato(LocalDate.now());
 		setId(getId() + Controller.getSolgteAnlæg().size());	
 	}
-
+  
+	/**
+	 * Metoden kaldes i getPris() i klassen, når beløbet for pant af tilbehør som fustage og kulsyre skal gøres op
+	 * eller forbruget af disse varer 
+	 * @return ved aflevering returneres prisen af forbruget på kulsyrer og fustager og panten trækkes fra og ved udlejning (når alvering = false) returneres panten
+	 */
 	public double beregnForbrug() {
 		double pris = 0;
-		if(afleveret) {
+		if(afleveret) { 
 			for(Pris t : tilbehørsPriser) {
 				if(t.getProdukt().getKategori().equals("fustage")) {
 					pris += t.getPris() * brugtFustageLiter;	//t.getPris() er vel at mærke pris pr. liter
@@ -37,10 +49,13 @@ public class Anlæg extends Produkt {
 		}else {
 			pris = beregnPant();
 		}
-		return pris;
+		return pris; 
 	}
 	
-	
+	/**
+	 * Hjælpe metode til beregnForbrug()
+	 * @return returnerer beløbet af den samlede pant, der er tilføjet som priser i listen tilbehør
+	 */
 	private double beregnPant() {
 		double pant = 0;
 		for(Pris t : tilbehørsPriser) {
@@ -63,6 +78,10 @@ public class Anlæg extends Produkt {
 		return brugtFustageLiter;
 	}
 
+	/**
+	 * Den angivede brugte mængde øl fra fustager valideres, således at den brugte mængde ikke kan overstige den indkøbte mængde
+	 * @param brugtFustageMængde liter øl der er forbrugt
+	 */
 	public void setBrugtFustagemængde(double brugtFustageMængde) {
 		if(brugtFustageMængde < 0) {
 			throw new IllegalArgumentException("brugt fustagemængde kan ikke være negativ");
@@ -72,7 +91,7 @@ public class Anlæg extends Produkt {
 			if(p.getProdukt().getKategori().equals("fustage")) {
 				samletFustageMængde += ((Tilbehør)p.getProdukt()).getMængde();
 			}
-		}
+		} 
 		if(brugtFustageMængde <= samletFustageMængde) {
 			this.brugtFustageLiter = brugtFustageMængde;
 		}else {
@@ -84,6 +103,10 @@ public class Anlæg extends Produkt {
 		return brugtKulsyreKg;
 	}
 
+	/**
+	 * Mængden af brugt kulsyres valideres, således at den brugte mængde ikke kan overstige den indkøbte mængde
+	 * @param brugtKulsyreMængde kg kulsyre der er forbrugt
+	 */
 	public void setBrugtKulsyremængde(double brugtKulsyreMængde) {
 		if(brugtKulsyreMængde < 0) {
 			throw new IllegalArgumentException("brugt kulsyremængde kan ikke være negativ");
@@ -97,13 +120,19 @@ public class Anlæg extends Produkt {
 		if(brugtKulsyreMængde <= samletKulsyreMængde) {
 			this.brugtKulsyreKg = brugtKulsyreMængde;
 		}else {
-			throw new RuntimeException("brugt kulsyre-mængde kan ikke overstige indkøbt mængde");
+			throw new ArithmeticException("brugt kulsyre-mængde kan ikke overstige indkøbt mængde");
 		}
 	}
 	
+	/**
+	 * De tilføjede priser til listen tilbehørsPriser valideres således, at det kun er priser med produkterne fustage og kulsyre tilføjes
+	 * @param t tilbehør til udlejningen af anlæg - altså indkøb af fustager og kulsyrer
+	 */
 	public void addTilbehør(Pris t) {
 		if(!tilbehørsPriser.contains(t)) {
-			tilbehørsPriser.add(t);
+			if(t.getProdukt().getKategori().equals("fustage") || t.getProdukt().getKategori().equals("kulsyre")) {
+				tilbehørsPriser.add(t);
+			}
 		}
 	}
 	
@@ -117,15 +146,9 @@ public class Anlæg extends Produkt {
 		return new ArrayList<>(tilbehørsPriser);
 	}
 
-	public String getStatus() {
-		if(afleveret) {
-			return "Anlægget er afleveret";
-		}else {
-			return "Anlægget er udlejet";
-		}
-	}
-	
-	//bruges i [Bestilling -> "listView: vise tilføjede produkter til anlæg"]
+	/**
+	 * Hvert Produkt-objekt i hvert Pris-objekt i tilbehørsPriser lægges i en ny liste som returneres
+	 */
 	public ArrayList<Produkt> getTilbehørsProdukter(){
 		ArrayList<Produkt> produkter = new ArrayList<>();
 		for(Pris p : tilbehørsPriser) {
@@ -137,7 +160,7 @@ public class Anlæg extends Produkt {
 
 	@Override
 	public String toString() {
-		return "Anlæg [afleveret=" + afleveret + ", engangsPris=" + engangsPris + ", tilbehørsPriser=" + tilbehørsPriser
+		return "Anlæg [afleveret=" + afleveret + ", tilbehørsPriser=" + tilbehørsPriser
 				+ "]";
 	}
 

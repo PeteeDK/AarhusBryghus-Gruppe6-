@@ -31,7 +31,7 @@ public class AnlægWindow extends Stage {
     private TextField txfAntalStuderende;
     private Label lblError;
     private LocalDate ld;
-	private TextField txfDato; 
+	private TextField txfDato;  
 	private DatePicker dp = new DatePicker();
 	private TextField txfStudierabat;
 	private ListView<Pris> lvwKulsyre;
@@ -75,7 +75,7 @@ public class AnlægWindow extends Stage {
 		pane.add(lblKulsyre, 0, 0);
 
 		lvwKulsyre = new ListView<>();
-		pane.add(lvwKulsyre, 0, 1, 1, 5);
+		pane.add(lvwKulsyre, 0, 1, 1, 5); 
 		lvwKulsyre.setPrefWidth(200);
 		lvwKulsyre.setPrefHeight(200);									//TODO Skal arrangement fra comboboxen sætte arrangementet i stedet for at hard-coder det
 		lvwKulsyre.getItems().setAll(Controller.getPriserEfterArrangementOgKategori("butik", "kulsyre"));

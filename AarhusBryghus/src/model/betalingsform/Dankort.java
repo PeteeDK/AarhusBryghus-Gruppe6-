@@ -1,6 +1,6 @@
 package model.betalingsform;
 
-public class Dankort extends Betalingsform {
+public class Dankort implements IBetalingsform {
 
 	@Override
 	public String registrerBetaling() {

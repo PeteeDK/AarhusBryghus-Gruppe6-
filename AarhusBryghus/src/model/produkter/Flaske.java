@@ -8,7 +8,6 @@ public class Flaske extends Produkt {
 	
 	public Flaske(String kategori, String produktNavn) {
 		super(kategori, produktNavn);
-		// TODO Auto-generated constructor stub
 	}
 
 	public double getFlaskeStørrelse() {
@@ -24,3 +23,4 @@ public class Flaske extends Produkt {
 
 	
 }
+ 

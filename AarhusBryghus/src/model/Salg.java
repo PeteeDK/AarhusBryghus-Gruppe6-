@@ -7,21 +7,36 @@ import controller.Controller;
 import model.betalingsform.*;
 import model.rabat.*;
 
+/**
+ * Ved oprettelsen af objekter af klassen Salg tildeles objektet et unikt id samt en salgdato, hvilket gør det nemmere at
+ * finde det pågældende objekt senere hen, når fx dagens salg skal gøres op. Klassen salg står for at udregne den
+ * samlede pris fra objekterne af klassen ProduktLinje, der er blevet tilføjet samt evt. at tildele forskellige
+ * former for rabat og registrere betaling med forskellige betalingsformer med beløb, der trækkes fra det samlede pris.
+ * Når den samlede pris er betalt sættes attributten "erBetalt" til true  
+ * @author Erik Kato Ipsen
+ *
+ */
+
 public class Salg {
  
-	private int id = 1;
+	private int id = 1; 
 	private ArrayList<ProduktLinje> produktLinjer = new ArrayList<>();
 	private ArrayList<String> betalingsformer = new ArrayList<>();
 	private LocalDate salgsdato;
 	private Rabat rabat;
 	private double fuldBeløb;
 	private boolean erbetalt;
-	
+	 
 	public Salg() {
-		id += Controller.getSalgsEnheder().size();	
+		id += Controller.getSalgsEnheder().size();	 
 		salgsdato = LocalDate.now(); 
 	}
-	 
+	
+	/**
+	 * beregnPris() er hjælpemetode til getPris(). Metoden beregner og returnerer den samlede pris fra produktlinjerne
+	 * @return samlede pris fra produktlinjerne
+	 */
+	
 	private double beregnPris() {
 		double samletPris = 0;
 		
@@ -30,8 +45,11 @@ public class Salg {
 		}
 		//display only two decimals
 		return Math.round(samletPris * 100.0) / 100.0;
-	} 
+	}  
 	
+	/**
+	 * @return den samlede pris i forhold til om der er sat en rabat eller ej
+	 */
     public double getPris() {
     	if(rabat == null) {
     		fuldBeløb = beregnPris();
@@ -42,10 +60,21 @@ public class Salg {
     	}
     } 
 	
+    /**
+     * hjælpemetode til getPris(). Beregner den samlede pris i forhold til de forskellige rabat-former. Her anvendes
+     * strategy-pattern, da algoritmen tildelrabat(double) afhænger af hvilken subklasse til Rabat, der er sat.
+     * @param prisUdenRabat den samlede pris fra produktlinjerne i beregnPris()
+     * @return den samlede pris med rabat (afhængig af subklassen attributten "rabat" er sat til samt dets paramtre)
+     */
     private double prisMedRabat(double prisUdenRabat) {
     	return rabat.tildelRabat(prisUdenRabat);
     }
     
+    /**
+     * Hvis rabat ikke er null, sørger metoden for at opdatere fuldBeløb til den samlede pris med rabatten som rabat-
+     * objektet udregner. Derved behøver man ikke at kalde getPris() lige efter man har indsat parameteren
+     * @param rabat subklasserne til superklassen Rabat
+     */
     public void setRabat(Rabat rabat) {
     	this.rabat = rabat;
     	if(rabat != null) {
@@ -70,6 +99,7 @@ public class Salg {
 		this.salgsdato = salgsdato;
 	}
 	
+	//TODO Skal lige overvejes om den kan udelades, produktlinjerne oprettes separat og senere bliver tilføjet til salg
 	public ProduktLinje createProduktLinje(Pris pris, int antal) {
 		if(pris == null || antal < 0) {
 			throw new IllegalArgumentException("prisen kan ikke være null eller antallet kan ikke være negativ");
@@ -78,7 +108,7 @@ public class Salg {
 		produktLinjer.add(produktLinje);
 		return produktLinje;
 	} 
-
+ 
 	public void addProduktLinje(ProduktLinje produktlinje) {
 		if(produktlinje == null) {
 			throw new IllegalArgumentException("Produktlinje kan ikke være null");
@@ -101,7 +131,9 @@ public class Salg {
 
 	
 	private void addBetalingsform(String betalingsform) {
-		betalingsformer.add(betalingsform);
+		if(betalingsform == null) {
+			betalingsformer.add(betalingsform);
+		}
 	}
 
 	
@@ -109,26 +141,31 @@ public class Salg {
 		betalingsformer.remove(betalingsform);
 	}
 	
-	
+
+	/**
+	 * Metoden registrerer betalinger af den samlede pris fra getPris() og gemmer dem i listen betalingsformer. Man kan
+	 * enten betale et del-beløb af den samlede pris eller hele prisen, men aldrig over den samlede pris eller det
+	 * tilbageværende beløb. Når fuldBeløb er lig 0, sættes attributten "erbetalt" til true
+	 * @param betalingsform er den pågældende klasse som implementerer IBetalingsform. Hver klasse har sin implementation
+	 * af registrerBetaling() 
+	 * @param beløb er det beløb, der trækkes fra "fuldBeløb", der udgør den samlede pris fra getPris()
+	 */
 	public void betaling(IBetalingsform betalingsform, double beløb) {
 		if(betalingsform == null || beløb < 0) {
 			throw new IllegalArgumentException("Betalingsformen kan ikke være null eller beløbet kan ikke være negativt");
 		}
 		 
-		//Betalingsform->registrerBetaling() og trække beløb fra fuldtBetalt
 		if(beløb <= fuldBeløb) {
 			betalingsformer.add(betalingsform.registrerBetaling()+", beløb: "+beløb);
 			fuldBeløb -= beløb;
 			if(fuldBeløb == 0) {
 				erbetalt = true;
 			} 
-//			System.out.println("[Salg -> delBetalinger()] Fuldbeløb: " + fuldBeløb);
 		}else {
-			throw new ArithmeticException("Beløb kan ikke være mindre en det fulde beløb");
+			throw new ArithmeticException("Beløb kan ikke være mindre end det fulde beløb/resterende beløb");
 		}
-		
 	}
-	
+
 	
 	public double getFuldBeløb() {
 		return fuldBeløb;

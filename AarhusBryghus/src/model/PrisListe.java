@@ -2,6 +2,14 @@ package model;
 
 import java.util.ArrayList;
 
+/**
+ * Objekter af klassen PrisListe, står for at oprette objekter af klassen Pris og gemme den i listen priser. 
+ * Som beskrevet i klassen Pris kan et objekt af klassen Produkt blive tilknyttet flere priser. Ved at selektere 
+ * på PrisListe kan man tilgå den ønskede pris man ønsker til det pågældende objekt af klassen Produkt.
+ * @author Erik Kato Ipsen
+ *
+ */
+
 public class PrisListe {
 
 	private String arrangement;

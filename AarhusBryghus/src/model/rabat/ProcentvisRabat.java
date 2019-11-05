@@ -1,8 +1,15 @@
 package model.rabat;
 
+/**
+ * Klassen ProcentvisRabat dækker over en rabat-type, hvor man angiver en procentsats, der skal fratrækkes den samlede
+ * pris fra produklinjerne i objekter af klassen Salg. Dog kan procentsatsen hverken være negativ eller over 100
+ * @author erikk
+ *
+ */
+
 public class ProcentvisRabat extends Rabat {
 
-	private double procent;
+	private double procent; 
 	
 	
 	public ProcentvisRabat(double procent) {
@@ -15,7 +22,7 @@ public class ProcentvisRabat extends Rabat {
 	
 	
 	public double getProcent() {
-		return procent;
+		return procent; 
 	}
 
 	public void setProcent(double procent) {

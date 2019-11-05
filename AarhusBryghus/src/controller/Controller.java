@@ -12,12 +12,12 @@ import model.rabat.*;
 import storage.Storage;
 import model.produkter.*;
 
-public class Controller {
-
+public class Controller{
+ 
 
 	//-------Produkter---------------------------------------------------
     
-	
+	 
 	//create
   	public static Beklædning createBeklædning(String kategori, String produktNavn) {
   		Beklædning beklædning = new Beklædning(kategori, produktNavn);
@@ -38,7 +38,6 @@ public class Controller {
   	}
 	
   	public static Fustage createFustage(String kategori, String produktNavn, double mængde) {
-  		//TODO Fejlhåndtering
   		Fustage fustage = new Fustage(kategori, produktNavn, mængde);
   		Storage.addProdukt(fustage);
   		return fustage;
@@ -77,26 +76,6 @@ public class Controller {
 
 	//----get------------------------------------------------------------------
 	
-    public static ArrayList<Produkt> getBeklædninger() {
-        ArrayList<Produkt> beklædninger = new ArrayList<>();
-        for(Produkt p : Storage.getProdukter()) {
-      	  if(p.getKategori().equals("beklædning")) {
-      		  beklædninger.add(p);
-        	  }
-        }
-        return beklædninger;
-    }
-
-    public static ArrayList<Produkt> getFadølsenheder() {
-        ArrayList<Produkt> beklædninger = new ArrayList<>();
-        for(Produkt p : Storage.getProdukter()) {
-      	  if(p.getKategori().equals("beklædning")) {
-      		  beklædninger.add(p);
-        	  }
-        }
-        return beklædninger;
-    }
-
     
     public static Produkt getGlas() {
         Produkt glas = null;
@@ -170,7 +149,6 @@ public class Controller {
   	public static Klippekort createKlippekort(String kategori, String produktNavn) {
   	  	Klippekort klippekort = new Klippekort(kategori, produktNavn);
   	  	Storage.addProdukt(klippekort);
-  	  	Storage.addBetalingsform((IBetalingsform)klippekort);	//TODO Overvej om klippekort skal tilføjes til begge lister
   	  	return klippekort;
   	}
   	
@@ -232,22 +210,13 @@ public class Controller {
   	}
   	
   	
-  	//get TODO Er det nødvendigt at lave en get-metode for alle rabatter eller er det nok med én
     
     
     //-------Betalingsform---------------------------------------------------
     
     
-    //TODO Hav styr på hvornår der skal bruges Betalingsform og IBetalingsform
     
-  	//create
-  	public static Betalingsform createBetalingsform() {
-  		Betalingsform betalingsform = new Betalingsform();
-  	  	Storage.addBetalingsform(betalingsform);
-  	  	return betalingsform;
-  	}
   	
-  	//update TODO ingen attributter i contructoren for Betalingsform
   	
   	
   	//get
@@ -257,10 +226,7 @@ public class Controller {
 
       
       
-      
-    /**
-     * Registrer og hent alle salgsenheder
-     */
+    //-----Salg------------------------------------------------------------
       
     //create
     public static Salg createSalg() {
@@ -269,18 +235,18 @@ public class Controller {
     	return salg;
     }
           	
-    //update - unødvendig, der er ingen parametre i constructoren
-    	
-
     //get
     public static ArrayList<Salg> getSalgsEnheder() {
     	return Storage.getSalgsenheder();
     }
     
+
+    //---------------Priser-med-og-uden-arrangement-------------------------------------------------------
+    
     
     public static ArrayList<Pris> getPriser(String arg){
     	ArrayList<Pris> priser = new ArrayList<>();
-    	for(PrisListe pl : Controller.getPrislister()) {
+    	for(PrisListe pl : getPrislister()) {
     		if(pl.getArrangement().equals(arg)) {
         		for(Pris p : pl.getPriser()) {
         			priser.add(p);
@@ -293,7 +259,7 @@ public class Controller {
     
     public static ArrayList<Pris> getPriserEfterArrangementOgKategori(String arrangement, String kategori){
     	ArrayList<Pris> priser = new ArrayList<>();
-    	for(PrisListe pl : Controller.getPrislister()) {
+    	for(PrisListe pl : getPrislister()) {
     		if(pl.getArrangement().equals(arrangement)) {
     			for(Pris p : pl.getPriser()) {
     				if(p.getProdukt().getKategori().equals(kategori)) {
@@ -308,7 +274,7 @@ public class Controller {
     
     public static ArrayList<Pris> getPriserEfterKategori(String kategori){
     	ArrayList<Pris> priser = new ArrayList<>();
-    	for(PrisListe pl : Controller.getPrislister()) {
+    	for(PrisListe pl : getPrislister()) {
    			for(Pris p : pl.getPriser()) {
    				if(p.getProdukt().getKategori().equals(kategori)) {
        				priser.add(p);
@@ -318,7 +284,11 @@ public class Controller {
     	return priser;
     }
 
+    
+    
+    //---------------------Produkter--------------------------------------------------
 
+    
     public static ArrayList<Produkt> getProdukterEfterKategori(String kategori){
     	ArrayList<Produkt> produkter = new ArrayList<>();
     	for(Produkt p : Storage.getProdukter()) {
@@ -328,7 +298,6 @@ public class Controller {
     	}
     	return produkter;
     }
-    
     
     
     public static String[] getKategorier(){
@@ -346,7 +315,7 @@ public class Controller {
     }
     
     
-    //create produktlinje
+    //------------create produktlinje-------------------------------------------------------------
     
     public static ProduktLinje createProduktLinje(Pris pris, int antal) {
     	ProduktLinje produktLinje = new ProduktLinje(pris, antal);
@@ -354,6 +323,7 @@ public class Controller {
     	return produktLinje;
     }
     
+    //TODO Overvej om man bruge denne til at redigere en produktlinje med i stedet for blot at fjerne den fra kurv
     public static void updateProduktLinje(ProduktLinje produktlinje, Pris pris, int antal) {
     	produktlinje.setPris(pris);
     	produktlinje.setAntal(antal);
@@ -371,14 +341,18 @@ public class Controller {
     
     //get prisliste-arrangement - bruges i [Bestilling -> "comboBox"]
     public static String[] getArrangementer(){
-    	String[] arrangementer = new String[Controller.getPrislister().size()];
+    	String[] arrangementer = new String[getPrislister().size()];
     	int i = 0;
-    	for(PrisListe pl : Controller.getPrislister()) {
+    	for(PrisListe pl : getPrislister()) {
     		arrangementer[i] = pl.getArrangement();
     		i++;
     	}
     	return arrangementer;
     }
+    
+    
+    //------------------Statistik:Solgte-Enheder----------------------------------------------------
+    
     
 	public static ArrayList<Produkt> getSolgteKlippekort() {
 		ArrayList<Produkt> solgteKlippekort = new ArrayList<>();
@@ -436,18 +410,12 @@ public class Controller {
 		return solgteKlippekort;
 	}
 
-    
+
+	
 	public static ArrayList<String> getBrugteKlipMellemStartOgSlut(LocalDate startDato, LocalDate slutDato, boolean brugt) {
-		//arrayList Klip
 		ArrayList<String> brugteKlip = new ArrayList<>();
-		
-		//tag solgte klippekort i periode
 		for(Produkt kk : getSolgteKlippekortMellemStartOgSlut(startDato, slutDato)) {
-			
-			//udtræk klip fra Klippekort klip-liste
 			for(Klip k : ((Klippekort) kk).getKlipEnheder()) {
-			
-				//hvis brugt = "true" tilføj de klip,  hvor [klip->brugt() = true] 
 				if(brugt == true) {
 					if(k.isBrugt()) {
 						String message = "KlippekortID: " + ((Klippekort) kk).getId() + " " + k.toString(); 
@@ -466,25 +434,19 @@ public class Controller {
 
 
 	public static ArrayList<Produkt> getIkkeAfleveredeAnlægMellemStartOgSlut(LocalDate startdato, LocalDate slutdato) {
-		//arrayList Klip
 		ArrayList<Produkt> ikkeAfleveredeAnlæg = new ArrayList<>();
-		
-		//tag solgte klippekort i periode
 		for(Produkt p : getSolgteAnlæg()) {
-			
 			if(!((Anlæg) p).isAfleveret() && ((Anlæg) p).getKøbsdato().isAfter(startdato) && ((Anlæg) p).getKøbsdato().isBefore(slutdato)) {
 				ikkeAfleveredeAnlæg.add(p);
 			}
-			System.out.println("[Controller -> getIkkeAfleveredeAnlægMellemStartOgSlut] " + ikkeAfleveredeAnlæg);
 		}
 		return ikkeAfleveredeAnlæg;
-	
 	}
 
 	
 	public static ArrayList<Salg> getDagensSalgMellemStartOgSlut(LocalDate startdato, LocalDate slutdato){
 		ArrayList<Salg> dagensSalg = new ArrayList<>();
-		for(Salg s : Controller.getSalgsEnheder()) {
+		for(Salg s : getSalgsEnheder()) {
 			if(s.getSalgsdato().isAfter(startdato) && s.getSalgsdato().isBefore(slutdato)) {
 				dagensSalg.add(s);
 			}
@@ -492,108 +454,97 @@ public class Controller {
 		return dagensSalg;
 	}
 	
+		
 	
-	
-	
-	
-	
-
-	
-
-	
-	
-	//Init storage
-    public static void initStorage() {
+	public static void initStorage() {
     	
     	//----Produkter--------------------------------------------------------------------
     	
-    	//TODO Unødvendigt at bruge Controller...
-    	
-    	Flaske flaske1 = Controller.createFlaske("flaske", "klosterbryg");
-    	Flaske flaske2 = Controller.createFlaske("flaske", "sweet georgia brown");
-    	Flaske flaske3 = Controller.createFlaske("flaske", "ekstra pilsner");
-    	Flaske flaske4 = Controller.createFlaske("flaske", "celebration");
-    	Flaske flaske5 = Controller.createFlaske("flaske", "blondie");
-    	Flaske flaske6 = Controller.createFlaske("flaske", "forårsbryg");
-    	Flaske flaske7 = Controller.createFlaske("flaske", "india pale ale");
-    	Flaske flaske8 = Controller.createFlaske("flaske", "julebryg");
-    	Flaske flaske9 = Controller.createFlaske("flaske", "juletønden");
-    	Flaske flaske10 = Controller.createFlaske("flaske", "old strong ale");
-    	Flaske flaske11 = Controller.createFlaske("flaske", "fregatten jylland");
-    	Flaske flaske12 = Controller.createFlaske("flaske", "imperial stout");
-    	Flaske flaske13 = Controller.createFlaske("flaske", "tribute");
-    	Flaske flaske14 = Controller.createFlaske("flaske", "black monster");
+    	Flaske flaske1 = createFlaske("flaske", "klosterbryg");
+    	Flaske flaske2 = createFlaske("flaske", "sweet georgia brown");
+    	Flaske flaske3 = createFlaske("flaske", "ekstra pilsner");
+    	Flaske flaske4 = createFlaske("flaske", "celebration");
+    	Flaske flaske5 = createFlaske("flaske", "blondie");
+    	Flaske flaske6 = createFlaske("flaske", "forårsbryg");
+    	Flaske flaske7 = createFlaske("flaske", "india pale ale");
+    	Flaske flaske8 = createFlaske("flaske", "julebryg");
+    	Flaske flaske9 = createFlaske("flaske", "juletønden");
+    	Flaske flaske10 = createFlaske("flaske", "old strong ale");
+    	Flaske flaske11 = createFlaske("flaske", "fregatten jylland");
+    	Flaske flaske12 = createFlaske("flaske", "imperial stout");
+    	Flaske flaske13 = createFlaske("flaske", "tribute");
+    	Flaske flaske14 = createFlaske("flaske", "black monster");
 
-    	Fadøl fadøl1 = Controller.createFadøl("fadøl", "klosterbryg");
-    	Fadøl fadøl2 = Controller.createFadøl("fadøl", "jazz classic");
-    	Fadøl fadøl3 = Controller.createFadøl("fadøl", "ekstra pilsner");
-    	Fadøl fadøl4 = Controller.createFadøl("fadøl", "celebration");
-    	Fadøl fadøl5 = Controller.createFadøl("fadøl", "blondie");
-    	Fadøl fadøl6 = Controller.createFadøl("fadøl", "forårsbryg");
-    	Fadøl fadøl7 = Controller.createFadøl("fadøl", "india pale ale");
-    	Fadøl fadøl8 = Controller.createFadøl("fadøl", "julebryg");
-    	Fadøl fadøl9 = Controller.createFadøl("fadøl", "imperial stout");
-    	Fadøl fadøl10 = Controller.createFadøl("fadøl", "special");
-    	Fadøl fadøl11 = Controller.createFadøl("fadøl", "æblebrus");
-    	Fadøl fadøl12 = Controller.createFadøl("fadøl", "chips");
-    	Fadøl fadøl13 = Controller.createFadøl("fadøl", "peanuts");
-    	Fadøl fadøl14 = Controller.createFadøl("fadøl", "cola");
-    	Fadøl fadøl15 = Controller.createFadøl("fadøl", "nikoline");
-    	Fadøl fadøl16 = Controller.createFadøl("fadøl", "7-up");
-    	Fadøl fadøl17 = Controller.createFadøl("fadøl", "vand");
+    	Fadøl fadøl1 = createFadøl("fadøl", "klosterbryg");
+    	Fadøl fadøl2 = createFadøl("fadøl", "jazz classic");
+    	Fadøl fadøl3 = createFadøl("fadøl", "ekstra pilsner");
+    	Fadøl fadøl4 = createFadøl("fadøl", "celebration");
+    	Fadøl fadøl5 = createFadøl("fadøl", "blondie");
+    	Fadøl fadøl6 = createFadøl("fadøl", "forårsbryg");
+    	Fadøl fadøl7 = createFadøl("fadøl", "india pale ale");
+    	Fadøl fadøl8 = createFadøl("fadøl", "julebryg");
+    	Fadøl fadøl9 = createFadøl("fadøl", "imperial stout");
+    	Fadøl fadøl10 = createFadøl("fadøl", "special");
+    	Fadøl fadøl11 = createFadøl("fadøl", "æblebrus");
+    	Fadøl fadøl12 = createFadøl("fadøl", "chips");
+    	Fadøl fadøl13 = createFadøl("fadøl", "peanuts");
+    	Fadøl fadøl14 = createFadøl("fadøl", "cola");
+    	Fadøl fadøl15 = createFadøl("fadøl", "nikoline");
+    	Fadøl fadøl16 = createFadøl("fadøl", "7-up");
+    	Fadøl fadøl17 = createFadøl("fadøl", "vand");
 
-    	Spiritus spiritus1 = Controller.createSpiritus("spiritus", "spirit of aarhus");
-    	Spiritus spiritus2 = Controller.createSpiritus("spiritus", "soa med pind");
-    	Spiritus spiritus3 = Controller.createSpiritus("spiritus", "whiskey");
-    	Spiritus spiritus4 = Controller.createSpiritus("spiritus", "liquor of aarhus");
+    	Spiritus spiritus1 = createSpiritus("spiritus", "spirit of aarhus");
+    	Spiritus spiritus2 = createSpiritus("spiritus", "soa med pind");
+    	Spiritus spiritus3 = createSpiritus("spiritus", "whiskey");
+    	Spiritus spiritus4 = createSpiritus("spiritus", "liquor of aarhus");
     	
-    	Fustage fustage1 = Controller.createFustage("fustage", "klosterbryg", 20);
-    	Fustage fustage2 = Controller.createFustage("fustage", "jazz classic", 25);
-    	Fustage fustage3 = Controller.createFustage("fustage", "ekstra pilsner", 25);
-    	Fustage fustage4 = Controller.createFustage("fustage", "celebration", 20);
-    	Fustage fustage5 = Controller.createFustage("fustage", "blondie", 25);
-    	Fustage fustage6 = Controller.createFustage("fustage", "forårsbryg", 20);
-    	Fustage fustage7 = Controller.createFustage("fustage", "india pale", 20);
-    	Fustage fustage8 = Controller.createFustage("fustage", "julebryg", 20);
-    	Fustage fustage9 = Controller.createFustage("fustage", "imperial stout", 20);
+    	Fustage fustage1 = createFustage("fustage", "klosterbryg", 20);
+    	Fustage fustage2 = createFustage("fustage", "jazz classic", 25);
+    	Fustage fustage3 = createFustage("fustage", "ekstra pilsner", 25);
+    	Fustage fustage4 = createFustage("fustage", "celebration", 20);
+    	Fustage fustage5 = createFustage("fustage", "blondie", 25);
+    	Fustage fustage6 = createFustage("fustage", "forårsbryg", 20);
+    	Fustage fustage7 = createFustage("fustage", "india pale", 20);
+    	Fustage fustage8 = createFustage("fustage", "julebryg", 20);
+    	Fustage fustage9 = createFustage("fustage", "imperial stout", 20);
 
-    	Kulsyre kulsyre1 = Controller.createKulsyre("kulsyre", "", 6);
-    	Kulsyre kulsyre2 = Controller.createKulsyre("kulsyre", "", 4);
-    	Kulsyre kulsyre3 = Controller.createKulsyre("kulsyre", "", 10);
+    	Kulsyre kulsyre1 = createKulsyre("kulsyre", "", 6);
+    	Kulsyre kulsyre2 = createKulsyre("kulsyre", "", 4);
+    	Kulsyre kulsyre3 = createKulsyre("kulsyre", "", 10);
     	
-    	Malt malt1 = Controller.createMalt("malt", "25 kg sæk");
+    	Malt malt1 = createMalt("malt", "25 kg sæk");
     	
-    	Beklædning beklædning1 = Controller.createBeklædning("beklædning", "t-shirt");
-    	Beklædning beklædning2 = Controller.createBeklædning("beklædning", "polo");
-    	Beklædning beklædning3 = Controller.createBeklædning("beklædning", "cap");
+    	Beklædning beklædning1 = createBeklædning("beklædning", "t-shirt");
+    	Beklædning beklædning2 = createBeklædning("beklædning", "polo");
+    	Beklædning beklædning3 = createBeklædning("beklædning", "cap");
     	
-    	Anlæg anlæg1 = Controller.createAnlæg("anlæg", "1-hane");
-    	Anlæg anlæg2 = Controller.createAnlæg("anlæg", "2-haner");
-    	Anlæg anlæg3 = Controller.createAnlæg("anlæg", "bar med flere haner");
-    	Anlæg anlæg4 = Controller.createAnlæg("anlæg", "levering");
-    	Anlæg anlæg5 = Controller.createAnlæg("anlæg", "krus");
+    	Anlæg anlæg1 = createAnlæg("anlæg", "1-hane");
+    	Anlæg anlæg2 = createAnlæg("anlæg", "2-haner");
+    	Anlæg anlæg3 = createAnlæg("anlæg", "bar med flere haner");
+    	Anlæg anlæg4 = createAnlæg("anlæg", "levering");
+    	Anlæg anlæg5 = createAnlæg("anlæg", "krus");
     	
-    	Glas glas1 = Controller.createGlas("glas", "");
+    	Glas glas1 = createGlas("glas", "");
     	
-    	Sampakninger sampakninger1 = Controller.createSampakninger("sampakninger", "gaveæske 2 øl, 2 glas",2,2);
-    	Sampakninger sampakninger2 = Controller.createSampakninger("sampakninger", "gaveæske 4 øl",4,0);
-    	Sampakninger sampakninger3 = Controller.createSampakninger("sampakninger", "trækasse 4 øl",6,0);
-    	Sampakninger sampakninger4 = Controller.createSampakninger("sampakninger", "gaveæske 6 øl, 2 glas",6,2);
-    	Sampakninger sampakninger5 = Controller.createSampakninger("sampakninger", "gaveæske 6 øl, 6 glas",6,6);
-    	Sampakninger sampakninger6 = Controller.createSampakninger("sampakninger", "trækasse 12 øl",12,0);
-    	Sampakninger sampakninger7 = Controller.createSampakninger("sampakninger", "papkasse 12 øl",12,0);
+    	Sampakninger sampakninger1 = createSampakninger("sampakninger", "gaveæske 2 øl, 2 glas",2,2);
+    	Sampakninger sampakninger2 = createSampakninger("sampakninger", "gaveæske 4 øl",4,0);
+    	Sampakninger sampakninger3 = createSampakninger("sampakninger", "trækasse 4 øl",6,0);
+    	Sampakninger sampakninger4 = createSampakninger("sampakninger", "gaveæske 6 øl, 2 glas",6,2);
+    	Sampakninger sampakninger5 = createSampakninger("sampakninger", "gaveæske 6 øl, 6 glas",6,6);
+    	Sampakninger sampakninger6 = createSampakninger("sampakninger", "trækasse 12 øl",12,0);
+    	Sampakninger sampakninger7 = createSampakninger("sampakninger", "papkasse 12 øl",12,0);
 
-    	Rundvisning rundvisning1 = Controller.createRundvisning("rundvisning", "");
+    	Rundvisning rundvisning1 = createRundvisning("rundvisning", "");
     	
-    	Klippekort klippekort1 = Controller.createKlippekort("klippekort", "klippekort, 4 klip");
-    	Klippekort klippekort2 = Controller.createKlippekort("klippekort", "klippekort, 4 klip");
+    	Klippekort klippekort1 = createKlippekort("klippekort", "klippekort, 4 klip");
+    	Klippekort klippekort2 = createKlippekort("klippekort", "klippekort, 4 klip");
 
     	
     	//----PrisListe-fredagsbar-------------------------------------------------------------------
     	
     	//flasker
     	
-    	PrisListe fredagsbar = Controller.createPrisliste("fredagsbar");
+    	PrisListe fredagsbar = createPrisliste("fredagsbar");
     	Pris fp1 = fredagsbar.createPris(flaske1, 50);
     	Pris fp2 = fredagsbar.createPris(flaske2, 50);
     	Pris fp3 = fredagsbar.createPris(flaske3, 50);
@@ -665,7 +616,7 @@ public class Controller {
     	
     	//flasker
     	
-    	PrisListe butik = Controller.createPrisliste("butik");
+    	PrisListe butik = createPrisliste("butik");
     	Pris bp1 = butik.createPris(flaske1, 36);
     	Pris bp2 = butik.createPris(flaske2, 36);
     	Pris bp3 = butik.createPris(flaske3, 36);
@@ -749,16 +700,16 @@ public class Controller {
     	
     	// --------------------- Salg ---------------------------------------
     	
-    	Salg salg1 = Controller.createSalg();
+    	Salg salg1 = createSalg();
     	salg1.createProduktLinje(bp47, 2);
     	
-       	Salg salg2 = Controller.createSalg();
+       	Salg salg2 = createSalg();
     	salg1.createProduktLinje(bp48, 1);
     	
     	
     	
     	
-    	
+    	 
     	
     	// -------------------------------------------------------------------
     	 

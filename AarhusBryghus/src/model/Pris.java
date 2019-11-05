@@ -1,10 +1,18 @@
 package model;
 
+/**
+ * Objekter af klassen Pris oprettes af objekter af klassen PrisListe, og gemmes i en liste i det pågældende objekt
+ * af PrisListe. Klassen Pris knytter et objekt af klassen Produkt til en pris. På den måde kan man tilknytte flere 
+ * priser til det samme objekt af Produkt. 
+ * @author Erik Kato Ipsen
+ *
+ */
+
 public class Pris {
 
 	private double pris;
 	private Produkt produkt;
-	
+	 
 	public Pris(Produkt produkt, double pris) {
 		if(produkt == null || pris < 0) {
 			throw new IllegalArgumentException("Produktet kan ikke være null eller prisen kan ikke være negativ");
@@ -15,11 +23,9 @@ public class Pris {
 
 	public double getPris() {
 		//display only two decimals
-//		return Math.round(pris * 100.0) / 100.0;
-		return Math.round(pris);
-
+		return Math.round(pris * 100.0) / 100.0;
 	}
-
+ 
 	public void setPris(double pris) {
 		if(pris < 0) {
 			throw new IllegalArgumentException("prisen kan ikke være negativ");
@@ -32,6 +38,10 @@ public class Pris {
 	}
 
 	
+	/**
+	 * TODO Find ud af hvordan jeg beskriver de forskellige situationer der knytter sig til denne. 
+	 * Metoden er ikke færdig endnu.
+	 */
 	@Override
 	public String toString() {
 		if(getProdukt().getProduktNavn().equals("") && !getProdukt().getKategori().equals("kulsyre")) {

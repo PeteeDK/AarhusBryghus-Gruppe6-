@@ -1,5 +1,7 @@
 package model;
 
+import static org.junit.Assert.assertEquals;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ public class Test {
 		testVisDagensSalg();
 		testVisSolgteKlippekortForEnGivenPeriodeSamtBrugteKlip();
 		testAfSampakning();
+		testRandom();
 	} 
 
 
@@ -144,7 +147,7 @@ public class Test {
 		//lav en rundvisning - LocalDate.of(24/10), LocalTime.of(12:00)
 		Rundvisning rundvisning1 = new Rundvisning("Rundvisning","19V");
 		rundvisning1.setDato(LocalDate.of(2019, 10, 24));
-		rundvisning1.setTidspunkt(LocalTime.of(12, 00));
+//		rundvisning1.setTidspunkt(LocalTime.of(12, 00)); 
 		
 		//lav en pris i Prisliste med rundvisningen - pris: 100
 		PrisListe prisliste1 = new PrisListe("Butik");
@@ -237,8 +240,8 @@ public class Test {
 		System.out.println("Samlet pris for klippekort i Salg:\n"+salg1.getPris());
 		
 		//opret klippekort som betalingsform
-		Betalingsform betalingsform1 = new Betalingsform();
-		betalingsform1.setBetalingsform((IBetalingsform)produkt1);
+//		Betalingsform betalingsform1 = new Betalingsform();
+//		betalingsform1.setBetalingsform((IBetalingsform)produkt1);
 		
 		//tilføj betalingsformen til salget
 //		salg1.setBetalingsform(betalingsform1);
@@ -385,7 +388,20 @@ public class Test {
 	}
 
 
+	public static void testRandom() {
+		
+		Rundvisning rundvisning1 = new Rundvisning("rundvisning","");
+		Pris pris1 = new Pris(rundvisning1,100);
+		rundvisning1.setBetalt(true, LocalDate.now().plusDays(1));
+//		ProduktLinje produktlinje1 = new ProduktLinje(pris1,10);
+//		StudieRabat sr = new StudieRabat(produktlinje1, 9, 20);
+//		produktlinje1.setStudieRabat(sr);
+//		Salg salg1 = new Salg();
+//		salg1.addProduktLinje(produktlinje1);
+//		System.out.println(salg1.getPris());
 
+	}
+	
 	
 }
 

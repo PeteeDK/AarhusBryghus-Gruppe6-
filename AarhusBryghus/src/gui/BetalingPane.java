@@ -26,7 +26,7 @@ public class BetalingPane extends GridPane {
 	//TODO Der skal evt. være en knap helt i starten der hedder "nyt salg", hvor man opretter et salg og gemmer det i storage
 	private Salg salg;
 	private double samletPris;
-
+ 
 
 	public BetalingPane() {
 		this.setPadding(new Insets(20));

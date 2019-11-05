@@ -6,7 +6,6 @@ public class Fustage extends Tilbehør {
 
 	public Fustage(String kategori, String produktNavn, double mængde) {
 		super(kategori, produktNavn, mængde);
-		// TODO Auto-generated constructor stub
 	}
 	
 }

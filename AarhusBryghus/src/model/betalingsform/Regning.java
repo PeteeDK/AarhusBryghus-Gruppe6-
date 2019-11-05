@@ -1,6 +1,6 @@
 package model.betalingsform;
 
-public class Regning extends Betalingsform {
+public class Regning implements IBetalingsform {
 
 	@Override
 	public String registrerBetaling() {

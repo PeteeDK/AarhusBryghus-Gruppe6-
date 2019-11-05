@@ -26,12 +26,12 @@ public class Bestilling extends GridPane {
 	private String arrangement, kategori;
 	private ComboBox cmbPrisLister;
 	private Label selected;
-	private Label lblError;
+	private Label lblError; 
 	private TextArea txaDescription;
 	private ComboBox cmbKategoriLister;
 	private TextArea txaAnlæg;
 	
-	
+	 
 	
 	public Bestilling() {
 		this.setPadding(new Insets(20));
@@ -179,7 +179,7 @@ public class Bestilling extends GridPane {
         StringBuilder sb = new StringBuilder();
         sb.append("Kategori: " + rundvisning.getPrisObj().getProdukt().getKategori()+"\n");
         sb.append("Pris pr. person" + rundvisning.getPrisObj().getPris()+"\n");
-        sb.append("Totale antal: " + rundvisning.getAntal()+"\n");
+        sb.append("Totale antal: " + rundvisning.getAntal()+"\n"); 
         sb.append(Controller.getRabatter().toString()+"\n");
 		
 		txaDescription.setText(sb.toString());
@@ -201,8 +201,8 @@ public class Bestilling extends GridPane {
 		} catch (NumberFormatException ex) {
 			   // do nothing
         }
-        if (antal < 0) {
-        	lblError.setText("Antal skal være et positivt tal");
+        if (antal < 1) {
+        	lblError.setText("Antal skal være lig eller over 1");
             return;
         }
         
@@ -215,7 +215,7 @@ public class Bestilling extends GridPane {
 			anlæg.getPrisObj().getProdukt().getProduktNavn().equals("bar med flere haner")) {
 
 			AnlægWindow dia = new AnlægWindow("Specifikationer til anlæg", anlæg);
-			dia.showAndWait();
+			dia.showAndWait(); 
 			
 		}
 
