@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import controller.Controller;
 import model.*;
 import model.produkter.Sampakninger;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -21,14 +20,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler; 
 
 
-public class Bestilling extends GridPane {
+public class BestillingPane extends GridPane {
 	private TextField txfAntal, txfSamletBeløb;
 	private ListView<Pris> lvsProduktliste;
 	private ListView<ProduktLinje> lvwKurveliste;
 	private String arrangement, kategori;
 	private ComboBox cmbPrisLister;
 	private Label selected;
-	private Label lblError; 
+	private Label lblError;  
 	private TextArea txaDescription;
 	private ComboBox cmbKategoriLister;
 	private TextArea txaAnlæg;
@@ -36,7 +35,7 @@ public class Bestilling extends GridPane {
 	
 	 
 	
-	public Bestilling() {
+	public BestillingPane() {
 		this.setPadding(new Insets(20));
 		this.setHgap(20);
 		this.setVgap(10);
@@ -52,8 +51,6 @@ public class Bestilling extends GridPane {
 		this.add(lvsProduktliste, 0, 2, 1, 5);
 		lvsProduktliste.setPrefWidth(50);
 		lvsProduktliste.setPrefHeight(200);
-		ChangeListener<Pris> listener = (ov, oldEmployee, newEmployee) -> this.selectedBestillingChanged();
-		lvsProduktliste.getSelectionModel().selectedItemProperty().addListener(listener);
 
 		Label lblAntal = new Label("Antal:");
 		this.add(lblAntal, 1, 1);
@@ -313,7 +310,8 @@ public class Bestilling extends GridPane {
 		Controller.removeProduktLinje(produktlinje);
 
 		lvwKurveliste.getItems().setAll(Controller.getProduktlinjer());
-				
+		
+		//TODO kan evt. laves til en metode i controlleren, der hedder Controller.getSamletPris()
 		double samletPris = 0;
 		
 		for(ProduktLinje pl : Controller.getProduktlinjer()) {
@@ -358,6 +356,7 @@ public class Bestilling extends GridPane {
 	private void tilføjTilKurv() {
 		Pris pris = lvsProduktliste.getSelectionModel().getSelectedItem();
 
+		//TODO Lav en opgørelse over produkter der ikke skal kunne blive tilføjet til kurv fx. levering
 		if (pris == null) {
 			return;
 		}else if(pris.getProdukt().getKategori().equals("rundvisning")) {
@@ -394,7 +393,8 @@ public class Bestilling extends GridPane {
 
 	private void infoUpdate() {
 		double samletPris = 0;
-		
+
+		//TODO Denne kunne også bare blive kaldt fra Controlleren
 		for(ProduktLinje pl : Controller.getProduktlinjer()) {
 			samletPris += pl.getPris();
 		}
@@ -406,17 +406,8 @@ public class Bestilling extends GridPane {
 
 	
 	public void updateControls() {
-		this.selectedBestillingChanged();
 	}
 	
 	
-	private void selectedBestillingChanged() {
-		Pris p = lvsProduktliste.getSelectionModel().getSelectedItem();
-		if (p != null) {
-			txfAntal.setText("0");
-		} else {
-			txfAntal.clear();
-		}
-	}
 
 }

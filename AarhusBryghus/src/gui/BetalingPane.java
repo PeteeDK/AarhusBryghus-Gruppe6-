@@ -21,12 +21,12 @@ public class BetalingPane extends GridPane {
 	private TextField txfSamletPris, txfIgnore;
 	private TextArea txaSalgsinfo;
 	private ListView<ProduktLinje> lvwProduktlinjer;
-	private Bestilling bestilling;
+	private BestillingPane bestilling;
 	private Label lblError;
 	//TODO Der skal evt. være en knap helt i starten der hedder "nyt salg", hvor man opretter et salg og gemmer det i storage
 	private Salg salg;
 	private double samletPris;
- 
+   
 
 	public BetalingPane() {
 		this.setPadding(new Insets(20));
@@ -108,7 +108,7 @@ public class BetalingPane extends GridPane {
 		
 		Controller.tømProduktlinjer();
 		
-		System.out.println(Controller.getProduktlinjer());
+		System.out.println("[BetalingsPane->nytSalg()]: "+Controller.getProduktlinjer());
 	}
 
 
@@ -157,6 +157,7 @@ public class BetalingPane extends GridPane {
 	private void opdater() {
 		salg = Controller.createSalg();
 
+		//TODO Denne kan også blot blive kaldt fra controlleren med salg som argument
 		for(ProduktLinje pl : Controller.getProduktlinjer()) {
 			salg.addProduktLinje(pl);
 		}

@@ -8,7 +8,6 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import model.Salg;
 
 public class MainApp extends Application {
 
@@ -48,7 +47,7 @@ public class MainApp extends Application {
 		Tab tabButiksSalg = new Tab("Bestilling");
 		tabPane.getTabs().add(tabButiksSalg);
 
-		Bestilling bestilling = new Bestilling();
+		BestillingPane bestilling = new BestillingPane();
 		tabButiksSalg.setContent(bestilling);
 		tabButiksSalg.setOnSelectionChanged(event -> bestilling.updateControls());
 

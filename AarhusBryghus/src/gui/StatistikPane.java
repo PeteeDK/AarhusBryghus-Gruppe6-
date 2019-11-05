@@ -4,34 +4,17 @@ package gui;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import controller.Controller;
-import javafx.beans.value.ChangeListener;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.geometry.VPos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBoxBase;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
-import model.Pris;
-import model.ProduktLinje;
-import model.Rundvisning;
-import model.Salg;
 
 public class StatistikPane extends GridPane {
 
 
 	private Label lblError;
-	private LocalDate ld;
-	private DatePicker dp = new DatePicker();	
 	private LocalDate startDato;
 	private LocalDate slutDato;
 	private GridPane root;
@@ -42,7 +25,7 @@ public class StatistikPane extends GridPane {
 	
 	public StatistikPane() { 
 		this.setPadding(new Insets(20));
-		this.setHgap(20);
+		this.setHgap(20); 
 		this.setVgap(10);
 		this.setGridLinesVisible(false);
 		

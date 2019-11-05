@@ -1,53 +1,30 @@
 package gui;
 
-import controller.Controller;
-import model.Rundvisning;
 import model.Salg;
-import model.betalingsform.*;
 import model.rabat.AftaltPrisRabat;
 import model.rabat.ProcentvisRabat;
 import model.rabat.Rabat;
-import model.rabat.StudieRabat;
-import model.Pris;
-import model.Produkt;
-import model.Produkt.*;
-import model.ProduktLinje;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
-import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import java.time.LocalDate;
 
 public class RabatWindow extends Stage {
     private Salg salg;
     private TextField txfBeløb;
     private Label lblError;
-    private LocalDate ld;
-	private TextField txfDato;
 	private ToggleGroup rabatform;
-	private Labeled lblTxt;
 	private Rabat rabat = null;
-	private ListView<Produkt> lvwKlippekort;
-	private TextField txfResterendeBeløb;
-	private double resterendeBeløb;
-	private double beløb;
+	private TextField txfResterendeBeløb; 
 	private TextField txfFratrækkePris;
 	private TextField txfProcentvisRabat; 
 
@@ -151,7 +128,7 @@ public class RabatWindow extends Stage {
     	
     	System.out.println("BetalingsformWindow -> registrerBetaling(): "+salg.getFuldBeløb());
 
-    	//det er ikke strategy pattern, det er polymorfi
+    	//det er ikke strategy pattern, det er polymorfi, men det virker lige så godt
     	salg.setRabat(rabat);
     	
 		this.hide();

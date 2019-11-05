@@ -1,32 +1,23 @@
 package gui;
 
 import controller.Controller;
-import model.Rundvisning;
 import model.Salg;
 import model.betalingsform.*;
-import model.rabat.StudieRabat;
 import model.Pris;
 import model.Produkt;
-import model.Produkt.*;
 import model.ProduktLinje;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -37,16 +28,14 @@ public class BetalingsformWindow extends Stage {
     private TextField txfBeløb;
     private Label lblError;
     private LocalDate ld;
-	private TextField txfDato;
 	private ToggleGroup betalingsform;
 	private Labeled lblTxt;
 	private IBetalingsform ib = null;
 	private ListView<Produkt> lvwKlippekort;
 	private TextField txfResterendeBeløb;
-	private double resterendeBeløb; 
 	private double beløb; 
 
-
+ 
 	
     public BetalingsformWindow(String title, Salg salg) {
         this.initStyle(StageStyle.UTILITY);
@@ -137,7 +126,7 @@ public class BetalingsformWindow extends Stage {
     }
 
     
-	
+
 	private void toggleRadioButton() {
 		RadioButton rb = (RadioButton) betalingsform.getSelectedToggle();
 		
@@ -173,6 +162,7 @@ public class BetalingsformWindow extends Stage {
     	
     	System.out.println("BetalingsformWindow -> registrerBetaling(): "+salg.getFuldBeløb());
 
+    	//TODO Skal det grønne text med eller ej
 //    	if(resterendeBeløb < 0) {
 //        	lblError.setText("Man kan ikke betale over det resterende beløb");
 //            return;
@@ -184,51 +174,10 @@ public class BetalingsformWindow extends Stage {
 		this.hide();
 		
     }
-
     
+	
 	private void initControls() {
-    }
+	}
 
-    // -------------------------------------------------------------------------
-
-    private void cancelAction() {
-    	this.hide();
-    }
-
-    private void okAction() {
-
-        int antalStuderende = 0;
-        
-        try {
-            antalStuderende = Integer.parseInt(txfBeløb.getText().trim());
-        } catch (NumberFormatException ex) {
-            // do nothing
-        }
-
-//        if (antalStuderende < 0 || antalStuderende > salg.getAntal()) {
-//            lblError.setText("Antallet af studerende kan ikke være negativt eller kan ikke være større end antallet af alle til rundvisningen");
-//            return;
-//        }
-        
-        double rabatProcent = 0;
-        
-//        try {
-//        	rabatProcent = Double.parseDouble(txfStudierabat.getText().trim());
-//        } catch (NumberFormatException ex) {
-//            // do nothing
-//        }
-//        if (rabatProcent < 0 || rabatProcent > 100) {
-//            lblError.setText("Studierabatprocenten kan ikke være negativ eller over 100%");
-//            return;
-//        }
-
-
-        // Call controller methods
-//        if (salg != null && antalStuderende > 0) {
-//        	Controller.createStudieRabat(salg, antalStuderende, rabatProcent);	
-//        }
-
-        this.hide();
-    }
 
 }

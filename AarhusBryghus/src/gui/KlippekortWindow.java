@@ -1,38 +1,23 @@
 package gui;
 
 import controller.Controller;
-import model.Rundvisning;
-import model.rabat.StudieRabat;
-import model.Pris;
 import model.Produkt;
-import model.ProduktLinje;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.TilePane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.time.LocalDate;
 
 public class KlippekortWindow extends Stage {
-    private TextField txfAntalStuderende;
     private Label lblError;
     private LocalDate ld;
-	private TextField txfDato;
-	private DatePicker dp = new DatePicker();
-	private TextField txfStudierabat;
 	private LocalDate startDato;
 	private LocalDate slutDato;
-	private ListView<Produkt> lvwKlippekort;
+	private ListView<Produkt> lvwKlippekort; 
  
 	
     public KlippekortWindow(String title, LocalDate startDato, LocalDate slutDato) {

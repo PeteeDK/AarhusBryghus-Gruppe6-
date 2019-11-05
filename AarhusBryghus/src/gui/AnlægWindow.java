@@ -2,24 +2,14 @@ package gui;
 
 import controller.Controller;
 import model.*;
-import model.rabat.AftaltPrisRabat;
-import model.rabat.ProcentvisRabat;
-import model.rabat.StudieRabat;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -28,12 +18,8 @@ import java.time.LocalDate;
 
 public class AnlægWindow extends Stage {
     private ProduktLinje anlæg;
-    private TextField txfAntalStuderende;
     private Label lblError;
     private LocalDate ld;
-	private TextField txfDato;  
-	private DatePicker dp = new DatePicker();
-	private TextField txfStudierabat; 
 	private ListView<Pris> lvwKulsyre;
 	private ListView<Pris> lvwFustage;
 	private ListView<Produkt> lvwTilbehør;

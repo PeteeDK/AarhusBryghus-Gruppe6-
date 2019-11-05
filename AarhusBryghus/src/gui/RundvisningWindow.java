@@ -3,9 +3,6 @@ package gui;
 import controller.Controller;
 import model.Rundvisning;
 import model.rabat.StudieRabat;
-import model.Anlæg;
-import model.Pris;
-import model.Produkt;
 import model.ProduktLinje;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -13,15 +10,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -32,13 +25,12 @@ public class RundvisningWindow extends Stage {
     private TextField txfAntalStuderende;
     private Label lblError;
     private LocalDate ld;
-	private TextField txfDato;
 	private DatePicker dp = new DatePicker();
 	private TextField txfStudierabat;
 	private ToggleGroup rundvisningsStatus;
 	private RadioButton rb;
-	private boolean erBetalt;
-
+	private boolean erBetalt; 
+ 
 	
     public RundvisningWindow(String title, ProduktLinje rundvisning) {
         this.initStyle(StageStyle.UTILITY);

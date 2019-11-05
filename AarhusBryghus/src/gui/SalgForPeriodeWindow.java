@@ -1,37 +1,20 @@
 package gui;
 
 import controller.Controller;
-import model.Rundvisning;
 import model.Salg;
-import model.rabat.StudieRabat;
-import model.Pris;
-import model.Produkt;
-import model.ProduktLinje;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.TilePane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.time.LocalDate;
 
 public class SalgForPeriodeWindow extends Stage {
-    private TextField txfAntalStuderende;
-    private Label lblError;
-    private LocalDate ld;
-	private TextField txfDato;
-	private DatePicker dp = new DatePicker();
-	private TextField txfStudierabat;
-	private LocalDate startDato;
+    private Label lblError; 
+    private LocalDate startDato;
 	private LocalDate slutDato;
 	private ListView<Salg> lvwSalg;
 
@@ -39,7 +22,7 @@ public class SalgForPeriodeWindow extends Stage {
     public SalgForPeriodeWindow(String title, LocalDate startDato, LocalDate slutDato) {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL); 
-        this.setResizable(false); 
+        this.setResizable(false);  
   
         this.startDato = startDato;
         this.slutDato = slutDato;

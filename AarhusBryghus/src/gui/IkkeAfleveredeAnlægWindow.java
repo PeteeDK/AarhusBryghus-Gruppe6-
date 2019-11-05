@@ -24,15 +24,11 @@ import javafx.stage.StageStyle;
 import java.time.LocalDate;
 
 public class IkkeAfleveredeAnlægWindow extends Stage {
-    private TextField txfAntalStuderende;
     private Label lblError;
-    private LocalDate ld;
-	private TextField txfDato;
 	private DatePicker dp = new DatePicker();
-	private TextField txfStudierabat;
 	private LocalDate startDato;
 	private LocalDate slutDato;
-	private ListView<Produkt> lvwIkkeAfleveredeAnlæg;
+	private ListView<Produkt> lvwIkkeAfleveredeAnlæg; 
 
 	
     public IkkeAfleveredeAnlægWindow(String title, LocalDate startDato, LocalDate slutDato) {
@@ -80,7 +76,7 @@ public class IkkeAfleveredeAnlægWindow extends Stage {
 
         this.initControls();
     }
-
+ 
     private void initControls() {
     }
 

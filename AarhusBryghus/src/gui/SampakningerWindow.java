@@ -27,7 +27,7 @@ public class SampakningerWindow extends Stage {
         this.produkt = produkt;
 
         //opretter sampakninger og gemmer i storage
-        
+         
         this.setTitle(title);
         GridPane pane = new GridPane();
         this.initContent(pane);
