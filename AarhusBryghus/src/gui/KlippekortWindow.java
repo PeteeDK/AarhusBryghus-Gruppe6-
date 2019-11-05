@@ -33,7 +33,7 @@ public class KlippekortWindow extends Stage {
 	private LocalDate startDato;
 	private LocalDate slutDato;
 	private ListView<Produkt> lvwKlippekort;
-
+ 
 	
     public KlippekortWindow(String title, LocalDate startDato, LocalDate slutDato) {
         this.initStyle(StageStyle.UTILITY);

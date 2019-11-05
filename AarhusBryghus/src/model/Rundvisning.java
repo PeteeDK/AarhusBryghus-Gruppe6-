@@ -21,7 +21,7 @@ public class Rundvisning extends Produkt {
 	public Rundvisning(String kategori, String produktNavn) { 
 		super(kategori, produktNavn);
 	}
- 
+  
 	/**
 	 * I dette projekt er det muligt at foretage betalingen af rundvisningen efter datoen for rundvisningen. I oplægget
 	 * var dette begrænset til kun at omhandle dagen efter datoen for rundvisningen

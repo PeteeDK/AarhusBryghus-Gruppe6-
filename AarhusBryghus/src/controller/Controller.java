@@ -389,6 +389,25 @@ public class Controller{
 		return solgteAnlæg;
 	}
 
+	
+	public static ArrayList<ProduktLinje> getSolgteRundvisningerEfterDagensDato(LocalDate now) {
+		ArrayList<ProduktLinje> solgteRundvisninger = new ArrayList<>();
+		for(Salg s : Storage.getSalgsenheder()) {
+			for(ProduktLinje pl : s.getProduktLinjer()) {
+				if(pl.getPrisObj().getProdukt().getKategori().equals("rundvisning")) {
+					Rundvisning rundvisning = ((Rundvisning) pl.getPrisObj().getProdukt());
+					if(rundvisning.getDato().isBefore(now) && !rundvisning.isBetalt()) {
+						solgteRundvisninger.add(pl);
+					}
+				}
+			}
+		}
+		return solgteRundvisninger;
+	}
+
+	public static void addProduktLinje(ProduktLinje produktlinje) {
+		Storage.addProduktLinje(produktlinje);
+	}
 
 
 	public static ArrayList<Produkt> getSolgteKlippekortMellemStartOgSlut(LocalDate startdato, LocalDate slutdato) {
@@ -453,6 +472,8 @@ public class Controller{
 		}
 		return dagensSalg;
 	}
+	
+	
 	
 		
 	
@@ -700,13 +721,27 @@ public class Controller{
     	
     	// --------------------- Salg ---------------------------------------
     	
+    		//for klippekort
     	Salg salg1 = createSalg();
     	salg1.createProduktLinje(bp47, 2);
     	
+    		//for rundvisning
+    	Rundvisning rundvisning2 = new Rundvisning("rundvisning","19v");
+    	rundvisning2.setDato(LocalDate.now().minusDays(1));
+    	Pris rPris1 = new Pris(rundvisning2,100);
+    	ProduktLinje rProduktlinje1 = new ProduktLinje(rPris1,10);
+    	salg1.addProduktLinje(rProduktlinje1);
+    	
+    		//for klippekort
        	Salg salg2 = createSalg();
     	salg1.createProduktLinje(bp48, 1);
     	
-    	
+    		//for rundvisning
+    	Rundvisning rundvisning3 = new Rundvisning("rundvisning","18v");
+    	rundvisning3.setDato(LocalDate.now().minusDays(1));    	
+    	Pris rPris2 = new Pris(rundvisning3,100);
+    	ProduktLinje rProduktlinje2 = new ProduktLinje(rPris2,15);
+    	salg2.addProduktLinje(rProduktlinje2);
     	
     	
     	 

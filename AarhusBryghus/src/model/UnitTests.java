@@ -628,7 +628,7 @@ public class UnitTests {
 		assertEquals(sampakninger1.getAntalGlas(),1);
 	}
 
-	
+	 
 	
 	
 }

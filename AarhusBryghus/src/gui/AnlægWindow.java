@@ -33,7 +33,7 @@ public class AnlægWindow extends Stage {
     private LocalDate ld;
 	private TextField txfDato;  
 	private DatePicker dp = new DatePicker();
-	private TextField txfStudierabat;
+	private TextField txfStudierabat; 
 	private ListView<Pris> lvwKulsyre;
 	private ListView<Pris> lvwFustage;
 	private ListView<Produkt> lvwTilbehør;

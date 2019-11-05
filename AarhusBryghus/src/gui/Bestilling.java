@@ -1,5 +1,7 @@
 package gui;
 
+import java.time.LocalDate;
+
 import controller.Controller;
 import model.*;
 import model.produkter.Sampakninger;
@@ -30,6 +32,7 @@ public class Bestilling extends GridPane {
 	private TextArea txaDescription;
 	private ComboBox cmbKategoriLister;
 	private TextArea txaAnlæg;
+	private ListView<ProduktLinje> lvwRundvisninger;
 	
 	 
 	
@@ -65,6 +68,21 @@ public class Bestilling extends GridPane {
 		this.add(btnKurv, 2, 6);
 		btnKurv.setOnAction(event -> this.tilføjTilKurv());
 
+		
+		Label lblTilbehør = new Label("Rundvisninger der er blevet afholdt:");
+		this.add(lblTilbehør, 2, 8);
+		
+		lvwRundvisninger = new ListView<>();
+		this.add(lvwRundvisninger, 2, 9, 1, 5);
+		lvwRundvisninger.setPrefWidth(200);
+		lvwRundvisninger.setPrefHeight(200);
+		lvwRundvisninger.getItems().setAll(Controller.getSolgteRundvisningerEfterDagensDato(LocalDate.now()));
+		
+		Button btnAfregnRundvisning = new Button("Afregn rundvisning:");
+		this.add(btnAfregnRundvisning, 3, 10);
+		btnAfregnRundvisning.setOnAction(event -> this.afregnRundvisning());
+		
+		
 		
 		//ComboBox - PrisListe 
 		// - https://www.geeksforgeeks.org/javafx-combobox-with-examples/
@@ -152,6 +170,25 @@ public class Bestilling extends GridPane {
 
 	
    
+
+	private void afregnRundvisning() {
+		ProduktLinje pl = lvwRundvisninger.getSelectionModel().getSelectedItem();
+		if (pl == null) {
+			return;
+		}
+
+		((Rundvisning) pl.getPrisObj().getProdukt()).setBetalt(true, LocalDate.now());
+		
+		Controller.addProduktLinje(pl);
+	
+		infoUpdate();
+		
+		lvwRundvisninger.getItems().setAll(Controller.getSolgteRundvisningerEfterDagensDato(LocalDate.now()));
+		
+	}
+
+
+
 
 	private void opretRundvisningMedStudierabat() {
 		Pris pris = lvsProduktliste.getSelectionModel().getSelectedItem();
@@ -269,9 +306,6 @@ public class Bestilling extends GridPane {
 		infoUpdate();
 		
 	}
-
-	
-	
 	
 	private void fjernFraKurv() {
 		ProduktLinje produktlinje = lvwKurveliste.getSelectionModel().getSelectedItem();
@@ -325,6 +359,7 @@ public class Bestilling extends GridPane {
 
 	private void tilføjTilKurv() {
 		Pris pris = lvsProduktliste.getSelectionModel().getSelectedItem();
+
 		if (pris == null) {
 			return;
 		}else if(pris.getProdukt().getKategori().equals("rundvisning")) {
@@ -353,6 +388,7 @@ public class Bestilling extends GridPane {
         	Controller.createProduktLinje(pris, antal);
         } 
         
+       
         infoUpdate();
 
 	}

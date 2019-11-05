@@ -3,7 +3,9 @@ package gui;
 import controller.Controller;
 import model.Rundvisning;
 import model.rabat.StudieRabat;
+import model.Anlæg;
 import model.Pris;
+import model.Produkt;
 import model.ProduktLinje;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -11,11 +13,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -29,6 +35,10 @@ public class RundvisningWindow extends Stage {
 	private TextField txfDato;
 	private DatePicker dp = new DatePicker();
 	private TextField txfStudierabat;
+	private ToggleGroup rundvisningsStatus;
+	private RadioButton rb;
+	private boolean erBetalt;
+
 	
     public RundvisningWindow(String title, ProduktLinje rundvisning) {
         this.initStyle(StageStyle.UTILITY);
@@ -38,7 +48,7 @@ public class RundvisningWindow extends Stage {
         this.rundvisning = rundvisning; 
 
         this.setTitle(title);
-        GridPane pane = new GridPane();
+        GridPane pane = new GridPane(); 
         this.initContent(pane);
 
         Scene scene = new Scene(pane);
@@ -58,35 +68,40 @@ public class RundvisningWindow extends Stage {
         pane.setVgap(10);
         pane.setGridLinesVisible(false);
 
+        Label lblBookRundvisning = new Label("Book rundvisning:");
+        pane.add(lblBookRundvisning, 0, 0);
+
+        
         Label lblAntalStuderende = new Label("Angiv antal studerende:");
-        pane.add(lblAntalStuderende, 0, 0);
+        pane.add(lblAntalStuderende, 0, 1);
 
         txfAntalStuderende = new TextField();
-        pane.add(txfAntalStuderende, 0, 1);
+        pane.add(txfAntalStuderende, 0, 2);
         txfAntalStuderende.setPrefWidth(200);
  
         Label lblStudieRabat = new Label("Angiv studierabat:");
-        pane.add(lblStudieRabat, 0, 2);
+        pane.add(lblStudieRabat, 0, 3);
 
         txfStudierabat = new TextField();
-        pane.add(txfStudierabat, 0, 3);
+        pane.add(txfStudierabat, 0, 4);
         txfStudierabat.setPrefWidth(200);
 
         Label lblDato = new Label("Vælg dato:");
-        pane.add(lblDato, 0, 4);
+        pane.add(lblDato, 0, 5);
         
         Button btnDato = new Button("Sæt dato");
-        pane.add(btnDato, 0, 5);
+        pane.add(btnDato, 0, 6);
         GridPane.setHalignment(btnDato, HPos.LEFT);
         btnDato.setOnAction(event -> this.kalender());
         
         Button btnOK = new Button("OK");
-        pane.add(btnOK, 0, 6);
+        pane.add(btnOK, 0, 7);
         GridPane.setHalignment(btnOK, HPos.RIGHT);
         btnOK.setOnAction(event -> this.okAction());
-
+       
+        
         lblError = new Label();
-        pane.add(lblError, 0, 7);
+        pane.add(lblError, 0, 10);
         lblError.setStyle("-fx-text-fill: red");
 
         this.initControls();
@@ -112,6 +127,7 @@ public class RundvisningWindow extends Stage {
         btnCancel.setOnAction(event -> this.okAction());	
 	}
      
+   
 
     private void initControls() {
         if (rundvisning.getPrisObj().getProdukt() != null) {
