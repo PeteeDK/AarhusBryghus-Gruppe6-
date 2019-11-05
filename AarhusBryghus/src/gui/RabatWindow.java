@@ -49,7 +49,7 @@ public class RabatWindow extends Stage {
 	private double resterendeBeløb;
 	private double beløb;
 	private TextField txfFratrækkePris;
-	private TextField txfProcentvisRabat;
+	private TextField txfProcentvisRabat; 
 
 
 	
@@ -151,6 +151,7 @@ public class RabatWindow extends Stage {
     	
     	System.out.println("BetalingsformWindow -> registrerBetaling(): "+salg.getFuldBeløb());
 
+    	//det er ikke strategy pattern, det er polymorfi
     	salg.setRabat(rabat);
     	
 		this.hide();

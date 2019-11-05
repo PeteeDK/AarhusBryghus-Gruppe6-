@@ -5,7 +5,7 @@ import model.ProduktLinje;
 /**
  * Klassen StudieRabat dækker over den eneste rabat-type, der kun giver rabat til objekter af ProduktLinjer, der 
  * indeholder et objekt af Pris, der indeholder et objekt af eller en sub-klasse af super-klassen Produkt, hvis 
- * attribur "kategori" = "rundvisning". Derudover er klassen StudieRabat den eneste subklasse til Rabat, der indeholder
+ * attribur "kategori" = "rundvisning". StudieRabat er derudover den eneste rabattype, der indeholder
  * en association til klassen ProduktLinje. Denne association er nødvendig for at udregne prisen for en rundvisning 
  * med studierabat, og derfor beregnes prisen for rundvisningen med rabat i dette i klassen ProduktLinje
  * @author Erik Kato Ipsen
@@ -24,7 +24,6 @@ public class StudieRabat extends Rabat {
 		setRabatProcent(rabatProcent); 
 	} 
 	
-	@Override
 	public double tildelRabat(double pris) {
 		double oprindeligPris = pris/produktlinje.getAntal();
 		int ikkeStuderende = produktlinje.getAntal()-antalStuderende;	

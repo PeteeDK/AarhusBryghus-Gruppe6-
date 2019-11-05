@@ -6,7 +6,7 @@ import model.*;
 import model.betalingsform.*;
 import model.rabat.*;
 
-public class Storage {
+public class Storage { 
 
 	//TODO Overvej andre collection-frameworks(datastrukturer)
 	private static ArrayList<Produkt> produkter = new ArrayList<>();
@@ -31,7 +31,9 @@ public class Storage {
 		produktlinjer.remove(produktLinje);
 	}
 
-	
+	public static void tømProduktLinjer() {
+		produktlinjer.clear();
+	}
 	
 	// -------Produkt---------------------------------------------
 

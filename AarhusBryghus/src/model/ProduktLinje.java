@@ -47,7 +47,7 @@ public class ProduktLinje {
         		
     		case "rundvisning":
     			if(((Rundvisning)pris.getProdukt()).isBetalt()) {
-        			if(studierabat == null) {
+        			if(studierabat == null) { 
            	    		return pris.getPris() * antal;
            	    	}else {
            	    		return studierabat.tildelRabat(pris.getPris() * antal);

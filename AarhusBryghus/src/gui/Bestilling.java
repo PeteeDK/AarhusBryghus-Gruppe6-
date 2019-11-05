@@ -126,8 +126,8 @@ public class Bestilling extends GridPane {
 		
 		Button btnKurvFjern = new Button("Fjern fra kurv");
 		this.add(btnKurvFjern, 2, 5);
-		btnKurvFjern.setOnAction(event -> this.fjernFraKurv());
-		
+		btnKurvFjern.setOnAction(event -> this.fjernFraKurv()); 
+
 		Label lblSamletBeløb = new Label("Samlet beløb:");
 		this.add(lblSamletBeløb, 3, 6);
 
@@ -167,9 +167,7 @@ public class Bestilling extends GridPane {
 			lvsProduktliste.getSelectionModel().select(0);
 		}
 	}
-
 	
-   
 
 	private void afregnRundvisning() {
 		ProduktLinje pl = lvwRundvisninger.getSelectionModel().getSelectedItem();
@@ -374,7 +372,7 @@ public class Bestilling extends GridPane {
         }
 		
 		int antal = 0;
-		try {
+		try { 
 	        antal = Integer.parseInt(txfAntal.getText().trim());
 		} catch (NumberFormatException ex) {
 			   // do nothing

@@ -180,10 +180,10 @@ public class Test {
 		//2.del - rundvisning, 10 personer, 100 kr. pr. person, med studierabat til 9 af dem
 		
 		//lav en studierabat til 9 af personerne på 10%
-		Rabat rabat1 = new StudieRabat(produktlinje1,9,10);
+//		Rabat rabat1 = new StudieRabat(produktlinje1,9,10);
 		
 		//set rabat i salget fra 1.del
-		s1.setRabat(rabat1);
+//		s1.setRabat(rabat1);
 
 		
 		//beregn pris i produktlinje - 910
@@ -390,17 +390,23 @@ public class Test {
 
 	public static void testRandom() {
 		
-		Rundvisning rundvisning1 = new Rundvisning("rundvisning","");
-		Pris pris1 = new Pris(rundvisning1,100);
-		rundvisning1.setBetalt(true, LocalDate.now().plusDays(1));
-//		ProduktLinje produktlinje1 = new ProduktLinje(pris1,10);
-//		StudieRabat sr = new StudieRabat(produktlinje1, 9, 20);
-//		produktlinje1.setStudieRabat(sr);
-//		Salg salg1 = new Salg();
-//		salg1.addProduktLinje(produktlinje1);
-//		System.out.println(salg1.getPris());
+		Tilbehør produkt1 = new Tilbehør("fustage", "klosterbryg", 20);
+		Tilbehør produkt2 = new Tilbehør("kulsyre", "", 6);
+		Pris pris1 = new Pris(produkt1,(775.0));
+		Pris pris2 = new Pris(produkt2,(400.0));
+		Anlæg anlæg1 = new Anlæg("anlæg","1-hane");
+		anlæg1.addTilbehør(pris1);
+		anlæg1.addTilbehør(pris2);
+		assertEquals(anlæg1.beregnForbrug(),1200,2);
+		anlæg1.setBrugtFustagemængde(20);
+		anlæg1.setBrugtKulsyremængde(6);
+		anlæg1.setAfleveret(true);
+		System.out.println(anlæg1.beregnForbrug());
 
+//		assertEquals(Math.round(anlæg1.beregnForbrug()),-25,2);	//Det eksakte beløb af beregn forbrug er 24,98
 	}
+	
+	
 	
 	
 }

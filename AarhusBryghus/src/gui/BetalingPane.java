@@ -72,7 +72,7 @@ public class BetalingPane extends GridPane {
 		this.add(txaSalgsinfo, 2, 3);
 		txaSalgsinfo.setPrefWidth(200);
 		txaSalgsinfo.setPrefHeight(100);
-		txaSalgsinfo.setEditable(false);
+		txaSalgsinfo.setEditable(false); 
 
 		//TODO Kan ikke finde en måde at vise indholdet af kurven automatisk, når man åbner fanen
 		Button btnViskurv = new Button("Opdater");
@@ -87,6 +87,9 @@ public class BetalingPane extends GridPane {
 		this.add(btnAngivBetalingsform, 2, 5);
 		btnAngivBetalingsform.setOnAction(event -> this.angivBetalingsform());
 		
+		Button btnRegistrerSalg = new Button("Nyt salg");
+		this.add(btnRegistrerSalg, 2, 9);
+		btnRegistrerSalg.setOnAction(event -> this.nytSalg());
 		
 		
         lblError = new Label();
@@ -95,11 +98,20 @@ public class BetalingPane extends GridPane {
 
 
 		if (lvwProduktlinjer.getItems().size() > 0) {
-			lvwProduktlinjer.getSelectionModel().select(0);
+			lvwProduktlinjer.getSelectionModel().select(0); 
 		}
 	}
 
 	
+	private void nytSalg() {
+		salg = Controller.createSalg();
+		
+		Controller.tømProduktlinjer();
+		
+		System.out.println(Controller.getProduktlinjer());
+	}
+
+
 	private void angivBetalingsform() {
 
 		if (salg == null ) {
@@ -144,7 +156,7 @@ public class BetalingPane extends GridPane {
 
 	private void opdater() {
 		salg = Controller.createSalg();
-		//TODO Det er muligvis ikke her at produktlinjerne skal tilføjes til salg
+
 		for(ProduktLinje pl : Controller.getProduktlinjer()) {
 			salg.addProduktLinje(pl);
 		}
@@ -155,6 +167,8 @@ public class BetalingPane extends GridPane {
 
 		txfSamletPris.setText(""+salg.getFuldBeløb());
 
+		System.out.println("[BetalingsPane -> opdater()] Salgsenheder i storage:" + Controller.getSalgsEnheder());
+		System.out.println("[BetalingsPane -> opdater()] Produktlinjer i storage:" + Controller.getProduktlinjer());
 
 	}
 

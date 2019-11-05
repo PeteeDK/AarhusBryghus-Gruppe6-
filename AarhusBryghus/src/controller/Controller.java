@@ -474,6 +474,11 @@ public class Controller{
 	}
 	
 	
+	public static void tømProduktlinjer() {
+		Storage.tømProduktLinjer();
+	}
+
+	
 	
 		
 	
@@ -610,7 +615,7 @@ public class Controller{
     	
     	//kulsyre
     	
-    	Pris fp36 = fredagsbar.createPris(kulsyre1, 400.0/6);
+    	Pris fp36 = fredagsbar.createPris(kulsyre1, 400.0);
     	
     	//beklædning
     	
@@ -662,19 +667,19 @@ public class Controller{
     	
     	//fustage
     	
-    	Pris bp19 = butik.createPris(fustage1, 775.0/20);
-    	Pris bp20 = butik.createPris(fustage2, 625.0/25);
-    	Pris bp21 = butik.createPris(fustage3, 575.0/25);
-    	Pris bp22 = butik.createPris(fustage4, 775.0/20);
-    	Pris bp23 = butik.createPris(fustage5, 700.0/25);
-    	Pris bp24 = butik.createPris(fustage6, 775.0/20);
-    	Pris bp25 = butik.createPris(fustage7, 775.0/20);
-    	Pris bp26 = butik.createPris(fustage8, 775.0/20);
-    	Pris bp27 = butik.createPris(fustage9, 775.0/20);
+    	Pris bp19 = butik.createPris(fustage1, 775.0);
+    	Pris bp20 = butik.createPris(fustage2, 625.0);
+    	Pris bp21 = butik.createPris(fustage3, 575.0);
+    	Pris bp22 = butik.createPris(fustage4, 775.0);
+    	Pris bp23 = butik.createPris(fustage5, 700.0);
+    	Pris bp24 = butik.createPris(fustage6, 775.0);
+    	Pris bp25 = butik.createPris(fustage7, 775.0);
+    	Pris bp26 = butik.createPris(fustage8, 775.0);
+    	Pris bp27 = butik.createPris(fustage9, 775.0);
 
     	//kulsyre
     	
-    	Pris bp28 = butik.createPris(kulsyre1, 400.0/6);
+    	Pris bp28 = butik.createPris(kulsyre1, 400.0);
     	
     	//malt
     	
@@ -749,7 +754,6 @@ public class Controller{
     	// -------------------------------------------------------------------
     	 
     }
-
 
       
 }

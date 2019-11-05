@@ -96,7 +96,7 @@ public class AnlægWindow extends Stage {
 		pane.add(lblTilbehør, 5, 7);
 		
 		lvwTilbehør = new ListView<>();
-		pane.add(lvwTilbehør, 5, 8, 1, 5);
+		pane.add(lvwTilbehør, 5, 8, 1, 5); 
 		lvwTilbehør.setPrefWidth(200);
 		lvwTilbehør.setPrefHeight(200);
 		lvwTilbehør.getItems().setAll(((Anlæg) anlæg.getPrisObj().getProdukt()).getTilbehørsProdukter());

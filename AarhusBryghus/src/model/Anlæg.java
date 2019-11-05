@@ -16,7 +16,7 @@ import controller.Controller;
 
 public class Anlæg extends Produkt {
 
-	private boolean afleveret;
+	private boolean afleveret; 
 	private double brugtFustageLiter;
 	private double brugtKulsyreKg;
 	private ArrayList<Pris> tilbehørsPriser = new ArrayList<>();
@@ -32,7 +32,8 @@ public class Anlæg extends Produkt {
   
 	/**
 	 * Metoden kaldes i getPris() i klassen, når beløbet for pant af tilbehør som fustage og kulsyre skal gøres op
-	 * eller forbruget af disse varer 
+	 * eller forbruget af disse varer. Forbruget beregnes ved at finde kiloprisen eller literprisen for hhv. kulsyre
+	 * og fustage og gange det med den brugte mængde. 
 	 * @return ved aflevering returneres prisen af forbruget på kulsyrer og fustager og panten trækkes fra og ved udlejning (når alvering = false) returneres panten
 	 */
 	public double beregnForbrug() {
@@ -40,9 +41,11 @@ public class Anlæg extends Produkt {
 		if(afleveret) { 
 			for(Pris t : tilbehørsPriser) {
 				if(t.getProdukt().getKategori().equals("fustage")) {
-					pris += t.getPris() * brugtFustageLiter;	//t.getPris() er vel at mærke pris pr. liter
+					double unitPris = t.getPris()/((Tilbehør)t.getProdukt()).getMængde();
+					pris += unitPris * brugtFustageLiter;	//t.getPris() er vel at mærke pris pr. liter
 				}else if(t.getProdukt().getKategori().equals("kulsyre")) {
-					pris += t.getPris() * brugtKulsyreKg;	//t.getPris er vel at mærke pris pr. kg
+					double unitPris = t.getPris()/((Tilbehør)t.getProdukt()).getMængde();
+					pris += unitPris * brugtKulsyreKg;	//t.getPris er vel at mærke pris pr. kg
 				}
 			}
 			pris -= beregnPant();
