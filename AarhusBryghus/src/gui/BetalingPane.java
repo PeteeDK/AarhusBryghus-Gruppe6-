@@ -3,6 +3,7 @@ package gui;
 
 import controller.BetalingCtlr;
 import controller.Controller;
+import gui.window.BetalingsformWindow;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -25,11 +26,11 @@ public class BetalingPane extends GridPane {
 	private BestillingPane bestilling;
 	private Label lblError;
 	private Salg salg;
-	private double samletPris;
-   
+	private double samletPris; 
+    
 
 	public BetalingPane() {
-		this.setPadding(new Insets(20));
+		this.setPadding(new Insets(20)); 
 		this.setHgap(20);
 		this.setVgap(10);
 		this.setGridLinesVisible(false);
@@ -79,6 +80,11 @@ public class BetalingPane extends GridPane {
 		this.add(btnViskurv, 0, 5);
 		btnViskurv.setOnAction(event -> this.opdater());
 
+		Button btnBekræft = new Button("Bekræft varer i kurv");
+		this.add(btnBekræft, 0, 6);
+		btnBekræft.setOnAction(event -> this.bekræft());
+
+		
 		Button btnTildelRabat = new Button("Tildel rabat");
 		this.add(btnTildelRabat, 1, 5);
 		btnTildelRabat.setOnAction(event -> this.tildelRabat());
@@ -87,7 +93,7 @@ public class BetalingPane extends GridPane {
 		this.add(btnAngivBetalingsform, 2, 5);
 		btnAngivBetalingsform.setOnAction(event -> this.angivBetalingsform());
 		
-		Button btnRegistrerSalg = new Button("Nyt salg");
+		Button btnRegistrerSalg = new Button("Registrer salg");
 		this.add(btnRegistrerSalg, 2, 9);
 		btnRegistrerSalg.setOnAction(event -> this.nytSalg());
 		
@@ -103,12 +109,20 @@ public class BetalingPane extends GridPane {
 	}
 
 	
+
 	private void nytSalg() {
-		salg = BetalingCtlr.createSalg();
+		
+		if(salg == null) {
+			return;
+		}
+		
+		Salg tmpSalg = salg;
+		
+		BetalingCtlr.addSalg(tmpSalg);
 		
 		BetalingCtlr.tømProduktlinjer();
 		
-		System.out.println("[BetalingsPane->nytSalg()]: "+BetalingCtlr.getProduktlinjer());
+		System.out.println("[BetalingsPane->nytSalg()]Tjek at produktlinjer er lig nul: "+BetalingCtlr.getProduktlinjer());
 	}
 
 
@@ -155,41 +169,34 @@ public class BetalingPane extends GridPane {
 	// -------------------------------------------------------------------------
 
 	private void opdater() {
-		salg = Controller.createSalg();
 
-		//TODO Denne kan også blot blive kaldt fra controlleren med salg som argument
+		lvwProduktlinjer.getItems().setAll(BetalingCtlr.getProduktlinjer());
+	
+	}
+
+
+	private void bekræft() {
+		if(salg != null) {
+			return;
+		}
+		
+		salg = new Salg();
+		
 		for(ProduktLinje pl : BetalingCtlr.getProduktlinjer()) {
 			salg.addProduktLinje(pl);
 		}
 
 		samletPris = salg.getPris();
 
-		lvwProduktlinjer.getItems().setAll(BetalingCtlr.getProduktlinjer());
-
 		txfSamletPris.setText(""+salg.getFuldBeløb());
-
-		System.out.println("[BetalingsPane -> opdater()] Salgsenheder i storage:" + BetalingCtlr.getSalgsEnheder());
-		System.out.println("[BetalingsPane -> opdater()] Produktlinjer i storage:" + BetalingCtlr.getProduktlinjer());
-
 	}
 
-
-	// -------------------------------------------------------------------------
-
-
 	
-	
-	private void selectedBetalingChanged() {
-		this.updateControls();
-	}
+//	private void selectedBetalingChanged() {
+//		this.updateControls();
+//	}
 
 	public void updateControls() {
-		ProduktLinje produktlinje = lvwProduktlinjer.getSelectionModel().getSelectedItem();
-		if (produktlinje != null) {
-			
-		} else {
-			
-		}
 	}
 
 }

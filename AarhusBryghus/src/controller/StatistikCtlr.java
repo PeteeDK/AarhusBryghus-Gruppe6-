@@ -20,9 +20,9 @@ public class StatistikCtlr{
 			if(!((Anlæg) p).isAfleveret() && ((Anlæg) p).getKøbsdato().isAfter(startdato) && ((Anlæg) p).getKøbsdato().isBefore(slutdato)) {
 				ikkeAfleveredeAnlæg.add(p);
 			}
-		}
+		} 
 		return ikkeAfleveredeAnlæg;
-	}
+	} 
 
 	
 	public static ArrayList<Produkt> getSolgteAnlæg() {
@@ -35,7 +35,7 @@ public class StatistikCtlr{
 						solgteAnlæg.add(pl.getPrisObj().getProdukt());
 						i++;
 					}
-				}
+				} 
 			}
 		}
 		return solgteAnlæg;
@@ -44,18 +44,9 @@ public class StatistikCtlr{
 
 	public static ArrayList<Produkt> getSolgteKlippekortMellemStartOgSlut(LocalDate startdato, LocalDate slutdato) {
 		ArrayList<Produkt> solgteKlippekort = new ArrayList<>();
-		for(Salg s : Storage.getSalgsenheder()) {
-			for(ProduktLinje pl : s.getProduktLinjer()) {
-				if(pl.getPrisObj().getProdukt().getKategori().equals("klippekort")) {
-					Klippekort p = (Klippekort) pl.getPrisObj().getProdukt();
-					if(p.getKøbsdato().isAfter(startdato) && p.getKøbsdato().isBefore(slutdato)) {
-						int i = 0;
-						while(i < pl.getAntal()) {
-							solgteKlippekort.add(pl.getPrisObj().getProdukt());
-							i++;
-						}
-					}
-				}
+		for(Produkt p : BetalingCtlr.getSolgteKlippekortDerIkkeErOpbrugt()) {
+			if(((Klippekort)p).getKøbsdato().isAfter(startdato) && ((Klippekort)p).getKøbsdato().isBefore(slutdato)) {
+				solgteKlippekort.add(p);
 			}
 		}
 		return solgteKlippekort;

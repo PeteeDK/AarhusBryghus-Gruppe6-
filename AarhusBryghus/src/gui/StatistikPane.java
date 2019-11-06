@@ -4,6 +4,10 @@ package gui;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import gui.window.IkkeAfleveredeAnlægWindow;
+import gui.window.KlipWindow;
+import gui.window.KlippekortWindow;
+import gui.window.SalgForPeriodeWindow;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;

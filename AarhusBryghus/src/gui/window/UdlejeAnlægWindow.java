@@ -1,4 +1,4 @@
-package gui;
+package gui.window;
 
 import controller.AnlægCtlr;
 import model.*;
@@ -16,18 +16,18 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.time.LocalDate;
 
-public class AnlægWindow extends Stage {
-    private ProduktLinje anlæg;
+public class UdlejeAnlægWindow extends Stage {
+    private Pris anlæg;
     private Label lblError;
     private LocalDate ld;
 	private ListView<Pris> lvwKulsyre;
 	private ListView<Pris> lvwFustage;
 	private ListView<Produkt> lvwTilbehør;
 	private ToggleGroup udlejningsStatus;
-	private boolean afleveret;
+	private boolean levering;
 	private RadioButton rb;
 	
-    public AnlægWindow(String title, ProduktLinje anlæg) {
+    public UdlejeAnlægWindow(String title, Pris anlæg) {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
@@ -43,7 +43,7 @@ public class AnlægWindow extends Stage {
         
     }
 
-    public AnlægWindow(String title) {
+    public UdlejeAnlægWindow(String title) {
         this(title, null);
     }
 
@@ -85,7 +85,7 @@ public class AnlægWindow extends Stage {
 		pane.add(lvwTilbehør, 5, 8, 1, 5); 
 		lvwTilbehør.setPrefWidth(200);
 		lvwTilbehør.setPrefHeight(200);
-		lvwTilbehør.getItems().setAll(((Anlæg) anlæg.getPrisObj().getProdukt()).getTilbehørsProdukter());
+		lvwTilbehør.getItems().setAll(((Anlæg) anlæg.getProdukt()).getTilbehørsProdukter());
         
         Button btnTilføjKulsyre = new Button("Tilføj kulsyre");
         pane.add(btnTilføjKulsyre, 3, 1);
@@ -102,26 +102,10 @@ public class AnlægWindow extends Stage {
         Button btnOk = new Button("Ok");
         pane.add(btnOk, 3, 5);
         btnOk.setOnAction(event -> this.okAction());
+
         
-      //------radiobuttons------------------------------------
         
-   		VBox box = new VBox();
-   		udlejningsStatus = new ToggleGroup();
-   		String[] betalingsformer = { "" , "Udlejet", "Afleveret" };
-   		RadioButton rb;
-   		for (int i = 0; i < betalingsformer.length; i++) {
-   			rb = new RadioButton();
-   			rb.setToggleGroup(udlejningsStatus);
-   			rb.setText(betalingsformer[i]);
-   			box.getChildren().add(rb);
-   		}
-   		pane.add(box, 3, 6, 4, 1);
-   		udlejningsStatus.getToggles().get(0).setSelected(true);
-
-   		udlejningsStatus.selectedToggleProperty().addListener(event -> toggleRadioButton());
-
-   		//--------------------------------------------------------
-
+        //TODO Skal kunden også angive sine info her
         
         lblError = new Label();
         pane.add(lblError, 0, 7);
@@ -130,36 +114,18 @@ public class AnlægWindow extends Stage {
         this.initControls();
     }
 
-    
-
+	
     private void fjernTilbehør() {
     	Pris tilbehør = lvwFustage.getSelectionModel().getSelectedItem();
 		if (tilbehør == null) {
 			return;
 		}
 
-		((Anlæg) anlæg.getPrisObj().getProdukt()).removeTilbehør(tilbehør);
+		((Anlæg) anlæg.getProdukt()).removeTilbehør(tilbehør);
 
-		lvwTilbehør.getItems().setAll(((Anlæg) anlæg.getPrisObj().getProdukt()).getTilbehørsProdukter());
+		lvwTilbehør.getItems().setAll(((Anlæg) anlæg.getProdukt()).getTilbehørsProdukter());
     }
 
-	private void toggleRadioButton() {
-		rb = (RadioButton) udlejningsStatus.getSelectedToggle();
-		
-		switch(rb.getText()){
-			case "Udlejet":
-				afleveret = false;
-				break;
-			case "Afleveret":
-				afleveret = true;
-				break;
-			case "":
-				rb = null;
-				break;
-			default:
-		}
-		
-	}
 
 	private void tilføjFustage() {
     	Pris fustage = lvwFustage.getSelectionModel().getSelectedItem();
@@ -167,9 +133,9 @@ public class AnlægWindow extends Stage {
 			return;
 		}
 
-		((Anlæg) anlæg.getPrisObj().getProdukt()).addTilbehør(fustage);
+		((Anlæg) anlæg.getProdukt()).addTilbehør(fustage);
 
-		lvwTilbehør.getItems().setAll(((Anlæg) anlæg.getPrisObj().getProdukt()).getTilbehørsProdukter());
+		lvwTilbehør.getItems().setAll(((Anlæg) anlæg.getProdukt()).getTilbehørsProdukter());
 
     }
 
@@ -179,9 +145,9 @@ public class AnlægWindow extends Stage {
 			return;
 		}
 
-		((Anlæg) anlæg.getPrisObj().getProdukt()).addTilbehør(kulsyre);
+		((Anlæg) anlæg.getProdukt()).addTilbehør(kulsyre);
 
-		lvwTilbehør.getItems().setAll(((Anlæg) anlæg.getPrisObj().getProdukt()).getTilbehørsProdukter());
+		lvwTilbehør.getItems().setAll(((Anlæg) anlæg.getProdukt()).getTilbehørsProdukter());
 
 	}
 
@@ -191,19 +157,9 @@ public class AnlægWindow extends Stage {
 
     // -------------------------------------------------------------------------
 
-    private void cancelAction() {
-    	this.hide();
-    }
 
     private void okAction() {
     	
-    	//tjek på om afleveret eller udlejet er sat
-    	if(rb == null) {
-    		return;
-    	}
-    	
-    	((Anlæg) anlæg.getPrisObj().getProdukt()).setAfleveret(afleveret);
-
         this.hide();
     }
 

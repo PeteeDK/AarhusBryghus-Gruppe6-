@@ -1,4 +1,4 @@
-package gui;
+package gui.window;
 
 import controller.Controller;
 import model.Rundvisning;
@@ -156,7 +156,7 @@ public class RundvisningWindow extends Stage {
         }
         
         double rabatProcent = 0;
-        
+         
         try {
         	rabatProcent = Double.parseDouble(txfStudierabat.getText().trim());
         } catch (NumberFormatException ex) {

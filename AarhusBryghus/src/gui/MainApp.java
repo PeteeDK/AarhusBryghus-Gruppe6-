@@ -44,12 +44,26 @@ public class MainApp extends Application {
 	private void initTabPane(TabPane tabPane) {
 		tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 
-		Tab tabButiksSalg = new Tab("Bestilling");
-		tabPane.getTabs().add(tabButiksSalg);
+		Tab tabBestilling = new Tab("Bestilling");
+		tabPane.getTabs().add(tabBestilling);
 
 		BestillingPane bestilling = new BestillingPane();
-		tabButiksSalg.setContent(bestilling);
-		tabButiksSalg.setOnSelectionChanged(event -> bestilling.updateControls());
+		tabBestilling.setContent(bestilling);
+		tabBestilling.setOnSelectionChanged(event -> bestilling.updateControls());
+
+		Tab tabAnlæg = new Tab("Udleje/aflever anlæg");
+		tabPane.getTabs().add(tabAnlæg);
+ 
+		AnlægPane anlægsPane = new AnlægPane();
+		tabAnlæg.setContent(anlægsPane);
+		tabAnlæg.setOnSelectionChanged(event -> anlægsPane.updateControls());
+
+		Tab tabRundvisning = new Tab("Book/betal rundvisning");
+		tabPane.getTabs().add(tabRundvisning);
+ 
+		RundvisningPane rundvisningPane = new RundvisningPane();
+		tabRundvisning.setContent(rundvisningPane);
+		tabRundvisning.setOnSelectionChanged(event -> rundvisningPane.updateControls());
 
 		
 		Tab tabBetaling = new Tab("Betaling");

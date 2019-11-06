@@ -159,7 +159,7 @@ public class Salg {
 			betalingsformer.add(betalingsform.registrerBetaling()+", beløb: "+beløb);
 			fuldBeløb -= beløb;
 			if(fuldBeløb == 0) {
-				erbetalt = true;
+				erbetalt = true; 
 			} 
 		}else {
 			throw new ArithmeticException("Beløb kan ikke være mindre end det fulde beløb/resterende beløb");

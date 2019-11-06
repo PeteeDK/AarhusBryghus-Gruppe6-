@@ -3,6 +3,9 @@ package gui;
 import java.time.LocalDate;
 
 import controller.BestillingCtlr;
+import gui.window.AnlægWindow;
+import gui.window.RundvisningWindow;
+import gui.window.SampakningerWindow;
 import model.*;
 import model.produkter.Sampakninger;
 import javafx.collections.FXCollections;
@@ -26,13 +29,13 @@ public class BestillingPane extends GridPane {
 	private ListView<ProduktLinje> lvwKurveliste;
 	private String arrangement, kategori;
 	private ComboBox cmbPrisLister;
-	private Label selected;
+	private Label selected; 
 	private Label lblError;  
 	private TextArea txaDescription;
 	private ComboBox cmbKategoriLister;
 	private TextArea txaAnlæg;
 	private ListView<ProduktLinje> lvwRundvisninger;
-	
+	 
 	 
 	
 	public BestillingPane() {
@@ -60,7 +63,7 @@ public class BestillingPane extends GridPane {
 		txfAntal.setPrefWidth(50);
 		txfAntal.setEditable(true);
 
-		
+	 	
 		Button btnKurv = new Button("Tiføj til kurv");
 		this.add(btnKurv, 2, 6);
 		btnKurv.setOnAction(event -> this.tilføjTilKurv());
@@ -316,7 +319,7 @@ public class BestillingPane extends GridPane {
 		for(ProduktLinje pl : BestillingCtlr.getProduktlinjer()) {
 			samletPris += pl.getPris();
 		}
-		
+		 
 		txfSamletBeløb.setText(""+samletPris);
 
 	}
@@ -388,7 +391,7 @@ public class BestillingPane extends GridPane {
 
 	}
 	
-
+ 
 	private void infoUpdate() {
 		double samletPris = 0;
 

@@ -1,4 +1,4 @@
-package gui;
+package gui.window;
 
 import controller.BetalingCtlr;
 import controller.Controller;
@@ -90,9 +90,9 @@ public class BetalingsformWindow extends Stage {
         
 		lvwKlippekort = new ListView<>();
 		pane.add(lvwKlippekort, 0, 5, 1, 3);
-		lvwKlippekort.setPrefWidth(100);
-		lvwKlippekort.setPrefHeight(100);
-		lvwKlippekort.getItems().setAll(BetalingCtlr.getSolgteKlippekort());
+		lvwKlippekort.setMaxWidth(150);
+		lvwKlippekort.setMaxHeight(150);
+		lvwKlippekort.getItems().setAll(BetalingCtlr.getSolgteKlippekortDerIkkeErOpbrugt());
 
 	
 		
@@ -172,6 +172,8 @@ public class BetalingsformWindow extends Stage {
 //			salg.setErBetalt(true);
 //		}
 		
+    	txfResterendeBeløb.setText(""+0);
+    	
 		this.hide();
 		
     }

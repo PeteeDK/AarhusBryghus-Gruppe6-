@@ -19,11 +19,11 @@ import model.betalingsform.IBetalingsform;
 public class Klippekort extends Produkt implements IBetalingsform {
 
 	private int antalKlip;
-	private final ArrayList<Klip> klipEnheder = new ArrayList<>();
+	private ArrayList<Klip> klipEnheder = new ArrayList<>();
 	private LocalDate købsdato;
 	private boolean opbrugt;
 	private int id = 1; 
-	
+	 
 	public Klippekort(String kategori, String produktNavn) {
 		super(kategori, produktNavn);
 		setId(getId() + Controller.getSolgteKlippekort().size());	
@@ -31,6 +31,16 @@ public class Klippekort extends Produkt implements IBetalingsform {
 		this.antalKlip = klipEnheder.size(); 
 		købsdato = LocalDate.now();
 	}
+	
+	//copy constructor til BetalingsformWindow
+	public Klippekort(Klippekort k) {
+		super(k.getKategori(), k.getProduktNavn());
+		antalKlip = k.antalKlip;
+		klipEnheder = k.klipEnheder;
+		købsdato = k.købsdato;
+		id = k.id;	
+	}
+	
 	
 	private void initKlip() {
 		int i = 1; 

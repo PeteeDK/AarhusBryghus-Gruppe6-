@@ -23,7 +23,7 @@ public class BestillingCtlr{
         				priser.add(p);
     				}
     			}
-    		}
+    		} 
     	}
     	return priser;
     }
@@ -93,7 +93,7 @@ public class BestillingCtlr{
     	return arrangementer;
     }
     
-	//get
+	//get 
     public static ArrayList<PrisListe> getPrislister() {
     	return Storage.getPrislister();
     }

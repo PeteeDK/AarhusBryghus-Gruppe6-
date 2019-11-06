@@ -12,8 +12,24 @@ import model.rabat.*;
 import storage.Storage;
 import model.produkter.*;
 
-public class AnlægCtlr{
+public class RundvisningCtlr{
 
+	public static ArrayList<ProduktLinje> getSolgteRundvisningerEfterDagensDato(LocalDate now) {
+		ArrayList<ProduktLinje> solgteRundvisninger = new ArrayList<>();
+		for(Salg s : Storage.getSalgsenheder()) {
+			for(ProduktLinje pl : s.getProduktLinjer()) {
+				if(pl.getPrisObj().getProdukt().getKategori().equals("rundvisning")) {
+					Rundvisning rundvisning = ((Rundvisning) pl.getPrisObj().getProdukt());
+					if(rundvisning.getDato().isBefore(now) && !rundvisning.isBetalt()) {
+						solgteRundvisninger.add(pl);
+					}
+				}
+			}
+		}
+		return solgteRundvisninger;
+	}
+	
+	
     public static ArrayList<Pris> getPriserEfterArrangementOgKategori(String arrangement, String kategori){
     	ArrayList<Pris> priser = new ArrayList<>();
     	for(PrisListe pl : getPrislister()) {

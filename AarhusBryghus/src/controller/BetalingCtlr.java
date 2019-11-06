@@ -24,7 +24,7 @@ public class BetalingCtlr{
     	Salg salg = new Salg();
     	Storage.addSalg(salg);
     	return salg;
-    }
+    } 
 
 	public static void tømProduktlinjer() {
 		Storage.tømProduktLinjer();
@@ -36,28 +36,30 @@ public class BetalingCtlr{
     	return Storage.getSalgsenheder();
     }
     
+	public static void addSalg(Salg salg) {
+		Storage.addSalg(salg);
+	}
 
-	public static ArrayList<Produkt> getSolgteKlippekort() {
+	
+	public static ArrayList<Produkt> getSolgteKlippekortDerIkkeErOpbrugt() {
 		ArrayList<Produkt> solgteKlippekort = new ArrayList<>();
 		for(Salg s : Storage.getSalgsenheder()) {
 			for(ProduktLinje pl : s.getProduktLinjer()) {
 				if(pl.getPrisObj().getProdukt().getKategori().equals("klippekort")) {
-					int i = 0;
-					while(i < pl.getAntal()) {
-						solgteKlippekort.add(pl.getPrisObj().getProdukt());
-						i++;
+					Klippekort p = (Klippekort) pl.getPrisObj().getProdukt();
+					if(!p.isOpbrugt()) {
+						int i = 0;
+						//TODO Virker ikke rigtig
+						while(i < pl.getAntal()) {
+							solgteKlippekort.add(pl.getPrisObj().getProdukt());
+							i++;
+						}
 					}
-				}else {
-					solgteKlippekort.add(pl.getPrisObj().getProdukt());
 				}
 			}
 		}
 		return solgteKlippekort;
-	} 
-
-
+	}
 	
 
-	
-      
 }

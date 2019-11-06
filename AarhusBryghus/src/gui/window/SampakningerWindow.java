@@ -1,4 +1,4 @@
-package gui;
+package gui.window;
 
 import controller.BestillingCtlr;
 import controller.Controller;

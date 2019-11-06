@@ -1,5 +1,7 @@
 package controller;
 
+import static org.junit.Assert.assertEquals;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -430,7 +432,21 @@ public class Controller{
     	salg2.addProduktLinje(rProduktlinje2);
     	
     	
-    	 
+    	//for anlæg
+		Tilbehør produkt1 = new Tilbehør("fustage", "klosterbryg", 20);
+		Tilbehør produkt2 = new Tilbehør("kulsyre", "", 6);
+		Pris pris1 = new Pris(produkt1,(775.0));
+		Pris pris2 = new Pris(produkt2,(400.0));
+		Anlæg anlæg6 = createAnlæg("anlæg","1-hane");
+		anlæg6.addTilbehør(pris1);
+		anlæg6.addTilbehør(pris2);
+		Pris pris3 = new Pris(anlæg6,250);
+		
+		Salg salg3 = createSalg();
+		salg3.createProduktLinje(pris3, 1);
+    	
+    	
+    	
     	
     	// -------------------------------------------------------------------
     	 
