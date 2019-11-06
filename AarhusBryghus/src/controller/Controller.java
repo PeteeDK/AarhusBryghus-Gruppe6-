@@ -233,7 +233,7 @@ public class Controller{
     	Anlæg anlæg4 = createAnlæg("anlæg", "levering");
     	Anlæg anlæg5 = createAnlæg("anlæg", "krus");
     	
-    	Glas glas1 = createGlas("glas", "");
+    	Glas glas1 = createGlas("glas", "glas");
     	
     	Sampakninger sampakninger1 = createSampakninger("sampakninger", "gaveæske 2 øl, 2 glas",2,2);
     	Sampakninger sampakninger2 = createSampakninger("sampakninger", "gaveæske 4 øl",4,0);
@@ -257,7 +257,7 @@ public class Controller{
     	Pris fp1 = fredagsbar.createPris(flaske1, 50);
     	Pris fp2 = fredagsbar.createPris(flaske2, 50);
     	Pris fp3 = fredagsbar.createPris(flaske3, 50);
-    	Pris fp4 = fredagsbar.createPris(flaske4, 50);
+    	Pris fp4 = fredagsbar.createPris(flaske4, 50); 
     	Pris fp5 = fredagsbar.createPris(flaske5, 50);
     	Pris fp6 = fredagsbar.createPris(flaske6, 50);
     	Pris fp7 = fredagsbar.createPris(flaske7, 50);

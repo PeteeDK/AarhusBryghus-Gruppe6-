@@ -3,7 +3,6 @@ package gui;
 import java.time.LocalDate;
 
 import controller.BestillingCtlr;
-import gui.window.AnlægWindow;
 import gui.window.RundvisningWindow;
 import gui.window.SampakningerWindow;
 import model.*;
@@ -88,7 +87,7 @@ public class BestillingPane extends GridPane {
 
 		//ComboBox - Kategori 
 		
-		String kategoriliste[] = BestillingCtlr.getKategorier();
+		String kategoriliste[] = BestillingCtlr.getKategorierUdenRundvisningOgAnlæg();
 		cmbKategoriLister = new ComboBox(FXCollections.observableArrayList(kategoriliste));
 		selected = new Label(""); 
 		
@@ -131,106 +130,6 @@ public class BestillingPane extends GridPane {
 		if (lvsProduktliste.getItems().size() > 0) {
 			lvsProduktliste.getSelectionModel().select(0);
 		}
-	}
-	
-
-	private void afregnRundvisning() {
-		ProduktLinje pl = lvwRundvisninger.getSelectionModel().getSelectedItem();
-		if (pl == null) {
-			return;
-		}
-
-		((Rundvisning) pl.getPrisObj().getProdukt()).setBetalt(true, LocalDate.now());
-		
-		BestillingCtlr.addProduktLinje(pl);
-	
-		infoUpdate();
-		
-		lvwRundvisninger.getItems().setAll(BestillingCtlr.getSolgteRundvisningerEfterDagensDato(LocalDate.now()));
-		
-	}
-
-
-
-
-	private void opretRundvisningMedStudierabat() {
-		Pris pris = lvsProduktliste.getSelectionModel().getSelectedItem();
-		if (pris == null || !pris.getProdukt().getKategori().equals("rundvisning")) {
-			return;
-		}
-
-		int antal = 0;
-		try {
-	        antal = Integer.parseInt(txfAntal.getText().trim());
-		} catch (NumberFormatException ex) {
-			   // do nothing
-        }
-        if (antal < 0) {
-        	lblError.setText("Antal skal være et positivt tal");
-            return;
-        }
- 		
-		ProduktLinje rundvisning = BestillingCtlr.createProduktLinje(pris, antal);
-		
-		RundvisningWindow dia = new RundvisningWindow("Specifikationer til rundvisning", rundvisning);
-		dia.showAndWait();
- 
-		
-        StringBuilder sb = new StringBuilder();
-        sb.append("Kategori: " + rundvisning.getPrisObj().getProdukt().getKategori()+"\n");
-        sb.append("Pris pr. person" + rundvisning.getPrisObj().getPris()+"\n");
-        sb.append("Totale antal: " + rundvisning.getAntal()+"\n"); 
-		
-		txaDescription.setText(sb.toString());
-
-		infoUpdate();
-		
-	}
-
- 
-	private void opretAnlægMedTilbehør() {
-		Pris pris = lvsProduktliste.getSelectionModel().getSelectedItem();
-		if (pris == null || !pris.getProdukt().getKategori().equals("anlæg")) {
-			return;
-		}
-
-		int antal = 0;
-		try {
-	        antal = Integer.parseInt(txfAntal.getText().trim());
-		} catch (NumberFormatException ex) {
-			   // do nothing
-        }
-        if (antal < 1) {
-        	lblError.setText("Antal skal være lig eller over 1");
-            return;
-        }
-        
-        //TODO Levering skal muligvis være en tilvalgsydelse, der tilføjes i AnlægWindow i stedet for at være et produkt i prislisten
-		
-		ProduktLinje anlæg = BestillingCtlr.createProduktLinje(pris, antal);
-		
-		//det er kun muligt at tilføje fustager og kulsyrer til følgende produkter
-		if(anlæg.getPrisObj().getProdukt().getProduktNavn().equals("1-hane") || anlæg.getPrisObj().getProdukt().getProduktNavn().equals("2-haner") ||
-			anlæg.getPrisObj().getProdukt().getProduktNavn().equals("bar med flere haner")) {
-
-			AnlægWindow dia = new AnlægWindow("Specifikationer til anlæg", anlæg);
-			dia.showAndWait(); 
-			
-		}
-
-		
-        StringBuilder sb = new StringBuilder();
-        sb.append("Kategori: " + anlæg.getPrisObj().getProdukt().getKategori()+"\n");
-        sb.append("Pris på anlæg: " + anlæg.getPrisObj().getPris()+"\n");
-        sb.append("Beregn forbrug/pant: " + ((Anlæg)anlæg.getPrisObj().getProdukt()).beregnForbrug()+"\n");
-        sb.append("Tilføjede pris-enheder: " + ((Anlæg)anlæg.getPrisObj().getProdukt()).getTilbehør()+"\n");
-        sb.append("Pris-enheder omsat til produkter: " + ((Anlæg)anlæg.getPrisObj().getProdukt()).getTilbehørsProdukter()+"\n");
-        sb.append("Afleveret: " + ((Anlæg)anlæg.getPrisObj().getProdukt()).isAfleveret()+"\n");
-		
-        txaAnlæg.setText(sb.toString());
-
-		infoUpdate();
-		
 	}
 	
 	private void opretSampakninger() {
@@ -325,12 +224,6 @@ public class BestillingPane extends GridPane {
 
 		if (pris == null) {
 			return;
-		}else if(pris.getProdukt().getKategori().equals("rundvisning")) {
-        	opretRundvisningMedStudierabat();
-        	return;
-        }else if(pris.getProdukt().getKategori().equals("anlæg")) {
-        	opretAnlægMedTilbehør();
-        	return;
         }else if(pris.getProdukt().getKategori().equals("sampakninger")) {
         	opretSampakninger();
         	return;

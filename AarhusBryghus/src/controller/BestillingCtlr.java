@@ -67,17 +67,25 @@ public class BestillingCtlr{
 	}
 
 	
-    public static String[] getKategorier(){
+    public static String[] getKategorierUdenRundvisningOgAnlæg(){
     	Set<String> kategorierSet = new HashSet<String>();
+    	Set<String> discard = new HashSet<String>();
     	for(Produkt p : Storage.getProdukter()) {
-    		kategorierSet.add(p.getKategori());
+    		//det var den eneste måde der virkede...
+    		if(p.getKategori().equals("anlæg")||p.getKategori().equals("rundvisning")) {
+    			discard.add(p.getKategori());
+    		}else {
+          		kategorierSet.add(p.getKategori());
+    		}
     	}
+    	
     	String[] kategorier = new String[kategorierSet.size()];
     	int i = 0;
     	for(String k : kategorierSet) {
     		kategorier[i] = k;
     		i++;
     	}
+    	
      	return kategorier;
     }
 

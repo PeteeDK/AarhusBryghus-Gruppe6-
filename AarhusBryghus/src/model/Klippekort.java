@@ -32,14 +32,6 @@ public class Klippekort extends Produkt implements IBetalingsform {
 		købsdato = LocalDate.now();
 	}
 	
-	//copy constructor til BetalingsformWindow
-	public Klippekort(Klippekort k) {
-		super(k.getKategori(), k.getProduktNavn());
-		antalKlip = k.antalKlip;
-		klipEnheder = k.klipEnheder;
-		købsdato = k.købsdato;
-		id = k.id;	
-	}
 	
 	
 	private void initKlip() {

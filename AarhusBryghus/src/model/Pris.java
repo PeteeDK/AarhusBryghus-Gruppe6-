@@ -18,7 +18,7 @@ public class Pris {
 			throw new IllegalArgumentException("Produktet kan ikke være null eller prisen kan ikke være negativ");
 		}
 		this.produkt = produkt;
-		this.pris = pris;
+		this.pris = pris; 
 	}
 
 	public double getPris() {
@@ -46,9 +46,12 @@ public class Pris {
 	public String toString() {
 		if(getProdukt().getProduktNavn().equals("") && !getProdukt().getKategori().equals("kulsyre")) {
 			return getProdukt().getKategori() + "\t\t" + getPris() + "kr.";
-		}else if(getProdukt().getKategori().equals("fustage") || getProdukt().getKategori().equals("kulsyre")) {
-			return ((Tilbehør)getProdukt()).getKategori() + ", " + ((Tilbehør)getProdukt()).getProduktNavn() + ", " 
-					+ ((Tilbehør)getProdukt()).getMængde() + ", " + ((Tilbehør)getProdukt()).getPant();
+		}else if(getProdukt().getKategori().equals("fustage")) {
+			return "Kategori: " + ((Tilbehør)getProdukt()).getKategori() + ", produkt: " + ((Tilbehør)getProdukt()).getProduktNavn() + ", " 
+					+ ", mængde: " + ((Tilbehør)getProdukt()).getMængde() + ", pant: " + ((Tilbehør)getProdukt()).getPant();
+		}else if(getProdukt().getKategori().equals("kulsyre")) {
+			return "Kategori: " + ((Tilbehør)getProdukt()).getKategori() + ", mængde: " + ((Tilbehør)getProdukt()).getMængde() + ", pant: "
+					+ ((Tilbehør)getProdukt()).getPant();
 		}
 		return getProdukt().getProduktNavn() + "\t\t" + getPris() + "kr.";
 	}
