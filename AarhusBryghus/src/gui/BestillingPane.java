@@ -69,21 +69,6 @@ public class BestillingPane extends GridPane {
 		btnKurv.setOnAction(event -> this.tilføjTilKurv());
 
 		
-		Label lblTilbehør = new Label("Rundvisninger der er blevet afholdt:");
-		this.add(lblTilbehør, 2, 8);
-		
-		lvwRundvisninger = new ListView<>();
-		this.add(lvwRundvisninger, 2, 9, 1, 5);
-		lvwRundvisninger.setPrefWidth(200);
-		lvwRundvisninger.setPrefHeight(200);
-		lvwRundvisninger.getItems().setAll(BestillingCtlr.getSolgteRundvisningerEfterDagensDato(LocalDate.now()));
-		
-		Button btnAfregnRundvisning = new Button("Afregn rundvisning:");
-		this.add(btnAfregnRundvisning, 3, 10);
-		btnAfregnRundvisning.setOnAction(event -> this.afregnRundvisning());
-		
-		
-		
 		//ComboBox - PrisListe 
 		// - https://www.geeksforgeeks.org/javafx-combobox-with-examples/
 		
@@ -137,26 +122,6 @@ public class BestillingPane extends GridPane {
 		txfSamletBeløb.setEditable(false);
 		
 
-		Label lblRundvisningsInfo = new Label("RundvisningsInfo:");
-		this.add(lblRundvisningsInfo, 0, 8); 
-
-        txaDescription = new TextArea();
-        this.add(txaDescription, 0, 9);
-        txaDescription.setPrefRowCount(7);
-        txaDescription.setPrefWidth(150);
-        txaDescription.setEditable(false);
-
-        
-		Label lblAnlægInfo = new Label("AnlægsInfo:");
-		this.add(lblAnlægInfo, 3, 8);
-        
-        txaAnlæg = new TextArea();
-        this.add(txaAnlæg, 3, 9);
-        txaAnlæg.setPrefRowCount(7);
-        txaAnlæg.setPrefWidth(150);
-        txaAnlæg.setEditable(false);
-
-        
         
         lblError = new Label();
         this.add(lblError, 0, 10);

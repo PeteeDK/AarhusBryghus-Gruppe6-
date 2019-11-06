@@ -1,4 +1,4 @@
-package gui;
+package gui.window;
 
 import controller.Controller;
 import controller.StatistikCtlr;
