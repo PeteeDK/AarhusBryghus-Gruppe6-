@@ -92,6 +92,7 @@ public class Sampakninger extends Produkt {
 	}
 	
 	public ArrayList<Produkt> getIndholdEnheder(){
+		
 		return new ArrayList<>(indholdsEnheder);
 	}
 	

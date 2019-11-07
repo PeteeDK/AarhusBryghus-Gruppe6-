@@ -6,7 +6,6 @@ import controller.AnlægCtlr;
 import controller.BestillingCtlr;
 import controller.RundvisningCtlr;
 import gui.window.AfleverAnlægWindow;
-import gui.window.AnlægWindow;
 import gui.window.RundvisningWindow;
 import gui.window.SampakningerWindow;
 import gui.window.UdlejeAnlægWindow;
