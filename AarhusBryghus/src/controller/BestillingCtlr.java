@@ -1,16 +1,17 @@
 package controller;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-
 import model.*;
-import model.betalingsform.*;
-import model.rabat.*;
 import storage.Storage;
-import model.produkter.*;
+
+/**
+ * Klassen indeholder funktionalitet for BestillingPane samt tilknyttede klasser i gui.window
+ * @author Erik Kato Ipsen
+ *
+ */
 
 public class BestillingCtlr{
 
@@ -66,7 +67,10 @@ public class BestillingCtlr{
 		Storage.addProduktLinje(produktlinje);
 	}
 
-	
+	/**
+	 * Henter et eksemplar af alle kategorierne fra produkterne i storage på nær rundvisning og anlæg	
+	 * @return arrayt med alle kategorierne på nær rundvisning og anlæg
+	 */
     public static String[] getKategorierUdenRundvisningOgAnlæg(){
     	Set<String> kategorierSet = new HashSet<String>();
     	Set<String> discard = new HashSet<String>();
@@ -90,7 +94,10 @@ public class BestillingCtlr{
     }
 
     
-    //get prisliste-arrangement - bruges i [Bestilling -> "comboBox"]
+    /**
+     * Henter alle arrangementer fra prislisterne i storage
+     * @return arrangementer på alle prislister og returnerer dem som et array
+     */
     public static String[] getArrangementer(){
     	String[] arrangementer = new String[getPrislister().size()];
     	int i = 0;
@@ -106,6 +113,11 @@ public class BestillingCtlr{
     	return Storage.getPrislister();
     }
 
+    /**
+     * Metoden returner alle priser, der er kynttet til en bestemt prisliste med det pågældende arrangement
+     * @param arrangementet for prislisten
+     * @return priserne tilknyttet prislisten med arrangementet i parameteren
+     */
     public static ArrayList<Pris> getPriser(String arg){
     	ArrayList<Pris> priser = new ArrayList<>();
     	for(PrisListe pl : getPrislister()) {

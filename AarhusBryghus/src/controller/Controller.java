@@ -1,18 +1,19 @@
 package controller;
 
-import static org.junit.Assert.assertEquals;
-
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
 import model.*;
 import model.betalingsform.*;
 import model.rabat.*;
 import storage.Storage;
 import model.produkter.*;
+
+/**
+ * Klassen indeholder funktionalitet til at oprette objekter af de repsektive produktkategorier, prislister og salg
+ * og gemme dem i storage og initialisere storage prislister, varer og tilknyttede priser 
+ * @author Erik Kato Ipsen
+ *
+ */
 
 public class Controller{
  

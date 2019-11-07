@@ -1,4 +1,4 @@
-package gui;
+package gui.window;
 
 import model.Salg;
 import model.rabat.AftaltPrisRabat;
@@ -33,7 +33,7 @@ public class RabatWindow extends Stage {
     public RabatWindow(String title, Salg salg) {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
-        this.setResizable(false);
+        this.setResizable(false); 
 
         this.salg = salg;
 
@@ -128,7 +128,6 @@ public class RabatWindow extends Stage {
     	
     	System.out.println("BetalingsformWindow -> registrerBetaling(): "+salg.getFuldBeløb());
 
-    	//det er ikke strategy pattern, det er polymorfi, men det virker lige så godt
     	salg.setRabat(rabat);
     	
 		this.hide();

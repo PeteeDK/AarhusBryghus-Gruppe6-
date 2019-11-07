@@ -1,16 +1,14 @@
 package controller;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
 import model.*;
-import model.betalingsform.*;
-import model.rabat.*;
 import storage.Storage;
-import model.produkter.*;
+
+/**
+ * Klassen indeholder funktionalitet for BetalingPane samt tilknyttede klasser i gui.window
+ * @author Erik Kato Ipsen
+ *
+ */
 
 public class BetalingCtlr{
 
@@ -39,8 +37,13 @@ public class BetalingCtlr{
 	public static void addSalg(Salg salg) {
 		Storage.addSalg(salg);
 	}
+ 
 
-	
+	/**
+	 * Metoden gemmer de klippekort, der er blevet solgt og som ikke er opbrugt. Ved hver produktlinjer skal metoden
+	 * oprette det antal unikke objekter af klassen Klippekort, som er angivet i produktlinjer ... virker ikke
+	 * @return
+	 */
 	public static ArrayList<Produkt> getSolgteKlippekortDerIkkeErOpbrugt() {
 		ArrayList<Produkt> solgteKlippekort = new ArrayList<>();
 		for(Salg s : Storage.getSalgsenheder()) {
