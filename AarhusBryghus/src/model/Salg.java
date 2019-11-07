@@ -18,7 +18,7 @@ import model.rabat.*;
  */
 
 public class Salg {
-  
+ 
 	private int id = 1; 
 	private ArrayList<ProduktLinje> produktLinjer = new ArrayList<>();
 	private ArrayList<String> betalingsformer = new ArrayList<>();
@@ -99,8 +99,7 @@ public class Salg {
 		this.salgsdato = salgsdato;
 	}
 	
-	//Under udførelse af programmet oprettes produktlinjerne uden for klassen salg og tilføjes efterfølgende
-	//dog er der nogle salg i Controller->initStorage(), der anvender denne metode ved opstart af programmet.
+	//TODO Skal lige overvejes om den kan udelades, produktlinjerne oprettes separat og senere bliver tilføjet til salg
 	public ProduktLinje createProduktLinje(Pris pris, int antal) {
 		if(pris == null || antal < 0) {
 			throw new IllegalArgumentException("prisen kan ikke være null eller antallet kan ikke være negativ");

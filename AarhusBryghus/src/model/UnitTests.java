@@ -149,7 +149,7 @@ public class UnitTests {
 		assertEquals(anlæg1.getBrugtKulsyremængde(),6,1);
 	}	 
 
-	 
+	
 	@Test
 	public void testAnlæg7() {
 		Tilbehør produkt1 = new Tilbehør("fustage", "klosterbryg", 20);
@@ -186,7 +186,7 @@ public class UnitTests {
 		ProduktLinje produktlinje1 = new ProduktLinje(pris1,0);
 		assertEquals(produktlinje1.getPrisObj(),pris1);
 		assertEquals(produktlinje1.getAntal(),0);
-	} 
+	}
 	
 	@Test
 	public void testProduktLinje4() {

@@ -1,15 +1,16 @@
 package controller;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
-import model.*;
-import storage.Storage;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * Klassen indeholder funktionalitet for StatistikPane samt tilknyttede klasser i gui.window
- * @author Erik Kato Ipsen
- *
- */
+import model.*;
+import model.betalingsform.*;
+import model.rabat.*;
+import storage.Storage;
+import model.produkter.*;
 
 public class StatistikCtlr{
 
@@ -40,7 +41,7 @@ public class StatistikCtlr{
 		return solgteAnlæg;
 	}
 
-	
+
 	public static ArrayList<Produkt> getSolgteKlippekortMellemStartOgSlut(LocalDate startdato, LocalDate slutdato) {
 		ArrayList<Produkt> solgteKlippekort = new ArrayList<>();
 		for(Produkt p : BetalingCtlr.getSolgteKlippekortDerIkkeErOpbrugt()) {
@@ -52,13 +53,6 @@ public class StatistikCtlr{
 	}
 	
 
-	/**
-	 * Tilgår alle solgte klip og hvilke klip der er hhv. brugte og ubrugte. 
-	 * @param startDato
-	 * @param slutDato
-	 * @param brugt, afhængig om brugt sættes til true returneres brugte klip og false returneres ubrugte klip
-	 * @return brugte/ubrugte klip mellem startdato og slutdato
-	 */
 	public static ArrayList<String> getBrugteKlipMellemStartOgSlut(LocalDate startDato, LocalDate slutDato, boolean brugt) {
 		ArrayList<String> brugteKlip = new ArrayList<>();
 		for(Produkt kk : getSolgteKlippekortMellemStartOgSlut(startDato, slutDato)) {
@@ -80,12 +74,7 @@ public class StatistikCtlr{
 	}
 
 	
-	/**
-	 * Salg der er oprettet mellem startdato og slutdato ligges i en liste og returneres
-	 * @param startdato
-	 * @param slutdato
-	 * @return arralist<Salg> med salg der er oprettet mellem startdato og slutdato
-	 */
+
 	public static ArrayList<Salg> getDagensSalgMellemStartOgSlut(LocalDate startdato, LocalDate slutdato){
 		ArrayList<Salg> dagensSalg = new ArrayList<>();
 		for(Salg s : getSalgsEnheder()) {
@@ -93,7 +82,7 @@ public class StatistikCtlr{
 				dagensSalg.add(s);
 			}
 		}
-		return dagensSalg; 
+		return dagensSalg;
 	}
 	
     //get

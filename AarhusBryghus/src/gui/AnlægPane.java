@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import controller.AnlægCtlr;
 import controller.BestillingCtlr;
 import gui.window.AfleverAnlægWindow;
+import gui.window.AnlægWindow;
 import gui.window.RundvisningWindow;
 import gui.window.SampakningerWindow;
 import gui.window.UdlejeAnlægWindow;
@@ -141,7 +142,7 @@ public class AnlægPane extends GridPane {
 			//åbne vindue
 
 			AfleverAnlægWindow dia = new AfleverAnlægWindow("Aflever anlæg", plAnlæg);
-			dia.showAndWait(); 
+			dia.showAndWait();
 	 		
 
 		((Anlæg) anlæg).setAfleveret(true);

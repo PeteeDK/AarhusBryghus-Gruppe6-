@@ -49,9 +49,10 @@ public class Tilbehør extends Produkt {
 
 	@Override
 	public String toString() {
-		return "Kategori: " + getKategori() + ", produkt: " + getProduktNavn() + ", " + ", mængde: " + mængde + ", pant: " + pant;
+		return "Tilbehør [mængde=" + mængde + ", pant=" + pant + ", getKategori()=" + getKategori()
+				+ ", getProduktNavn()=" + getProduktNavn() + "]";
 	}
- 
+
  		
 	
 }

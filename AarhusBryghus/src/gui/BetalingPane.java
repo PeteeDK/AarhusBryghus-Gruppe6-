@@ -4,7 +4,6 @@ package gui;
 import controller.BetalingCtlr;
 import controller.Controller;
 import gui.window.BetalingsformWindow;
-import gui.window.RabatWindow;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -34,7 +33,7 @@ public class BetalingPane extends GridPane {
 		this.setPadding(new Insets(20)); 
 		this.setHgap(20);
 		this.setVgap(10);
-		this.setGridLinesVisible(false); 
+		this.setGridLinesVisible(false);
 		
 		Label lblKurv = new Label("Kurv");
 		this.add(lblKurv, 0, 0);

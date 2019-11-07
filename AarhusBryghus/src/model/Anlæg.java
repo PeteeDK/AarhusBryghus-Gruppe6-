@@ -55,7 +55,7 @@ public class Anlæg extends Produkt {
 		return pris; 
 	}
 	
-	/** 
+	/**
 	 * Hjælpe metode til beregnForbrug()
 	 * @return returnerer beløbet af den samlede pant, der er tilføjet som priser i listen tilbehør
 	 */

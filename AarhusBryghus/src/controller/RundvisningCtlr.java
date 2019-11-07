@@ -1,15 +1,16 @@
 package controller;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
-import model.*;
-import storage.Storage;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * Klassen indeholder funktionalitet for RundvisningPane samt tilknyttede klasser i gui.window
- * @author Erik Kato Ipsen
- *
- */
+import model.*;
+import model.betalingsform.*;
+import model.rabat.*;
+import storage.Storage;
+import model.produkter.*;
 
 public class RundvisningCtlr{
 
@@ -73,6 +74,30 @@ public class RundvisningCtlr{
     	}
     	return priser;
     }
+
+	public static ArrayList<ProduktLinje> getIkkeAfleveredeAnlæg() {
+		ArrayList<ProduktLinje> ikkeAfleveredeAnlæg = new ArrayList<>();
+		for(ProduktLinje pl : getSolgteAnlæg()) {
+			if(!((Anlæg) pl.getPrisObj().getProdukt()).isAfleveret()) {
+				ikkeAfleveredeAnlæg.add(pl); 
+			} 
+		}
+		return ikkeAfleveredeAnlæg;
+	}
+	
+	
+	public static ArrayList<ProduktLinje> getSolgteAnlæg() {
+		ArrayList<ProduktLinje> solgteAnlæg = new ArrayList<>();
+		for(Salg s : Storage.getSalgsenheder()) {
+			for(ProduktLinje pl : s.getProduktLinjer()) {
+				if(pl.getPrisObj().getProdukt().getKategori().equals("anlæg") && (pl.getPrisObj().getProdukt().getProduktNavn().equals("1-hane") || pl.getPrisObj().getProdukt().getProduktNavn().equals("2-haner") || pl.getPrisObj().getProdukt().getProduktNavn().equals("bar med flere haner"))) {
+					solgteAnlæg.add(pl);
+				}
+			}
+		} 
+		return solgteAnlæg;
+	}
+
     
     public static ProduktLinje createProduktLinje(Pris pris, int antal) {
     	ProduktLinje produktLinje = new ProduktLinje(pris, antal);

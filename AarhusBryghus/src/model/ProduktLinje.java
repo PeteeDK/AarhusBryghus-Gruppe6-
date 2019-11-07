@@ -25,7 +25,7 @@ public class ProduktLinje {
     } 
      
     public void addPris(Pris pris) { 
-    	this.pris = pris;  
+    	this.pris = pris; 
     } 
     
     //TODO Man kan måske refakturere lidt her. Og er det alle produkter fra Anlæg, der skal beregnes på samme måde

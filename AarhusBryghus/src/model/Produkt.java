@@ -45,7 +45,7 @@ public class Produkt {
 
 	@Override
 	public String toString() {
-		return "Kategori: " + kategori + ", produkt: " + produktNavn;
+		return "Produkt [kategori=" + kategori + ", produktNavn=" + produktNavn + "]";
 	}
 
 	

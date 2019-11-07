@@ -9,7 +9,7 @@ import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class AarhusMainApp extends Application {
+public class MainApp extends Application {
 
 	
 	public static void main(String[] args) {

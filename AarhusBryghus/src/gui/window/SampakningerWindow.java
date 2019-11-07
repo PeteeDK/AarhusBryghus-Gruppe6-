@@ -55,7 +55,7 @@ public class SampakningerWindow extends Stage {
 		Label lblFlasker = new Label("Vælg flasker der skal i:");
 		pane.add(lblFlasker, 0, 0);
 
-		lvwFlasker = new ListView<>(); 
+		lvwFlasker = new ListView<>();
 		pane.add(lvwFlasker, 0, 1, 1, 5);
 		lvwFlasker.setPrefWidth(200);
 		lvwFlasker.setPrefHeight(200);									//TODO Skal arrangement fra comboboxen sætte arrangementet i stedet for at hard-coder det

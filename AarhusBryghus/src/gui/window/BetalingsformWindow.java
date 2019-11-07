@@ -94,7 +94,7 @@ public class BetalingsformWindow extends Stage {
 		lvwKlippekort.setMaxHeight(150);
 		lvwKlippekort.getItems().setAll(BetalingCtlr.getSolgteKlippekortDerIkkeErOpbrugt());
 
-	 
+	
 		
         Label lblBeløb = new Label("Beløb:");
         pane.add(lblBeløb, 3, 0);
